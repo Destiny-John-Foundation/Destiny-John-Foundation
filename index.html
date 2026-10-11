@@ -71,7 +71,7 @@
         .hero { color: white; text-align: center; padding: 150px 20px 100px; position: relative; min-height: 80vh; display: flex; align-items: center; justify-content: center; overflow: hidden; }
         .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 6px; background: linear-gradient(90deg, var(--secondary-color), var(--accent-sun), var(--secondary-color)); z-index: 10; }
         
-        .carousel-slide { 
+        .carousel-slide-bg { 
             position: absolute; 
             top: 0; 
             left: 0; 
@@ -82,10 +82,8 @@
             background-repeat: no-repeat;
             opacity: 0; 
             transition: opacity 1.5s ease-in-out; 
-            user-select: none;
-            -webkit-user-select: none;
         }
-        .carousel-slide.active { opacity: 1; }
+        .carousel-slide-bg.active { opacity: 1; }
         
         .carousel-protect-overlay {
             position: absolute;
@@ -242,41 +240,137 @@
         .news-content p { font-size: 0.95rem; margin-bottom: 20px; }
 
         /* =========================================
-           11. TESTIMONIALS SECTION (UPDATED FOR CLARITY)
+           11. TESTIMONIALS SECTION (CREATIVE SLIDER)
            ========================================= */
-        .testimonials-section { padding: 100px 20px; background: linear-gradient(135deg, var(--primary-color) 0%, #2c5282 100%); color: white; text-align: center; }
-        .testimonials-section h2 { color: white; margin-bottom: 60px; }
-        .testimonials-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
-        .testimonial-card { 
-            background: rgba(255, 255, 255, 0.2); /* Increased opacity for better readability */
-            backdrop-filter: blur(12px); 
-            padding: 40px 30px; 
-            border-radius: 15px; 
-            border: 1px solid rgba(255,255,255,0.3); 
-            transition: transform 0.3s; 
+        .testimonials-section { 
+            padding: 100px 20px; 
+            background: linear-gradient(135deg, var(--primary-color) 0%, #2c5282 100%); 
+            color: white; 
+            text-align: center; 
+            position: relative;
         }
-        .testimonial-card:hover { 
-            transform: translateY(-10px); 
-            background: rgba(255, 255, 255, 0.25); 
+        .testimonials-section h2 { color: white; margin-bottom: 50px; }
+        
+        .testimonial-slider-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
         }
+        
+        .testimonial-slider {
+            position: relative;
+            min-height: 320px;
+            overflow: hidden;
+        }
+        
+        .testimonial-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            opacity: 0;
+            transform: translateX(50px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            pointer-events: none;
+        }
+        
+        .testimonial-slide.active {
+            opacity: 1;
+            transform: translateX(0);
+            pointer-events: auto;
+        }
+        
+        .testimonial-image {
+            margin-bottom: 25px;
+        }
+        
+        .testimonial-image img {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--accent-sun);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+        
+        .testimonial-content {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(12px);
+            padding: 35px 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.25);
+            max-width: 700px;
+            width: 100%;
+        }
+        
         .testimonial-text { 
-            font-size: 1.05rem; 
+            font-size: 1.1rem; 
             font-style: italic; 
             margin-bottom: 25px; 
             line-height: 1.8; 
-            color: #FFFFFF; /* Pure white for maximum clarity */
-            text-shadow: 0 1px 3px rgba(0,0,0,0.3); /* Subtle shadow for readability */
+            color: #FFFFFF;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.3);
         }
         .testimonial-author { 
             font-weight: 700; 
-            font-size: 1.1rem; 
-            color: #FFD700; /* Brighter gold for better contrast */
+            font-size: 1.15rem; 
+            color: #FFD700;
         }
         .testimonial-role { 
-            font-size: 0.9rem; 
-            color: #E2E8F0; /* Lighter gray/white for better readability */
+            font-size: 0.95rem; 
+            color: #E2E8F0;
             margin-top: 5px; 
         }
+
+        .slider-nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(5px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .slider-nav-btn:hover {
+            background: var(--secondary-color);
+            border-color: var(--secondary-color);
+            transform: translateY(-50%) scale(1.1);
+        }
+        .slider-prev { left: -70px; }
+        .slider-next { right: -70px; }
+
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 30px;
+        }
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.4);
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            padding: 0;
+        }
+        .slider-dot:hover { background: rgba(255,255,255,0.7); }
+        .slider-dot.active { background: var(--secondary-color); transform: scale(1.3); }
 
         /* =========================================
            12. FAQ SECTION
@@ -443,7 +537,7 @@
             nav .btn-primary { width: 100%; display: block; }
             
             .stats-container { grid-template-columns: repeat(2, 1fr); }
-            .programs-grid, .news-grid, .testimonials-grid { grid-template-columns: 1fr; }
+            .programs-grid, .news-grid { grid-template-columns: 1fr; }
             .why-us-container { grid-template-columns: 1fr; }
             .why-us-content h2 { text-align: center; }
             .experience-badge { left: 50%; transform: translateX(-50%); }
@@ -472,6 +566,12 @@
                 width: 45px; height: 45px; 
             }
             .whatsapp-float svg { width: 24px; height: 24px; }
+
+            /* Mobile Testimonial Slider Adjustments */
+            .slider-prev { left: 0; }
+            .slider-next { right: 0; }
+            .testimonial-content { padding: 25px 20px; }
+            .testimonial-image img { width: 90px; height: 90px; }
         }
     </style>
 </head>
@@ -501,19 +601,19 @@
     <!-- HERO SECTION WITH CAROUSEL -->
     <section class="hero">
         <div class="carousel-container">
-            <div class="carousel-slide active" style="background-image: url('assets/project-djf-images/image14.jpeg');">
+            <div class="carousel-slide-bg active" style="background-image: url('assets/project-djf-images/image14.jpeg');">
                 <div class="carousel-protect-overlay"></div>
             </div>
-            <div class="carousel-slide" style="background-image: url('assets/project-djf-images/image22.jpeg');">
+            <div class="carousel-slide-bg" style="background-image: url('assets/project-djf-images/image22.jpeg');">
                 <div class="carousel-protect-overlay"></div>
             </div>
-            <div class="carousel-slide" style="background-image: url('assets/project-djf-images/image12.jpeg');">
+            <div class="carousel-slide-bg" style="background-image: url('assets/project-djf-images/image12.jpeg');">
                 <div class="carousel-protect-overlay"></div>
             </div>
-            <div class="carousel-slide" style="background-image: url('assets/project-djf-images/image20.jpeg');">
+            <div class="carousel-slide-bg" style="background-image: url('assets/project-djf-images/image20.jpeg');">
                 <div class="carousel-protect-overlay"></div>
             </div>
-            <div class="carousel-slide" style="background-image: url('assets/project-djf-images/image17.jpeg');">
+            <div class="carousel-slide-bg" style="background-image: url('assets/project-djf-images/image17.jpeg');">
                 <div class="carousel-protect-overlay"></div>
             </div>
         </div>
@@ -549,9 +649,9 @@
     <!-- IMPACT STATISTICS SECTION -->
     <section class="impact-stats">
         <div class="stats-container">
-            <div class="stat-item"><span class="stat-number">500+</span><span class="stat-label">Children Supported</span></div>
+            <div class="stat-item"><span class="stat-number">5,000+</span><span class="stat-label">Children Supported</span></div>
             <div class="stat-item"><span class="stat-number">50+</span><span class="stat-label">Healthcare Workers Trained</span></div>
-            <div class="stat-item"><span class="stat-number">20+</span><span class="stat-label">Communities Reached</span></div>
+            <div class="stat-item"><span class="stat-number">25+</span><span class="stat-label">Communities Reached</span></div>
             <div class="stat-item"><span class="stat-number">100%</span><span class="stat-label">Dedication to Change</span></div>
         </div>
     </section>
@@ -718,24 +818,59 @@
         </div>
     </section>
 
-    <!-- TESTIMONIALS SECTION -->
+    <!-- TESTIMONIALS SECTION (CREATIVE SLIDER WITH IMAGES) -->
     <section class="testimonials-section">
-        <h2>Stories of Hope & Impact</h2>
-        <div class="testimonials-grid">
-            <div class="testimonial-card">
-                <p class="testimonial-text">"Thanks to the Destiny John Foundation, my child received the medical care that saved their life. We are forever grateful."</p>
-                <div class="testimonial-author">Fatima K.</div>
-                <div class="testimonial-role">Mother from Freetown</div>
+        <div class="container">
+            <h2>Stories of Hope & Impact</h2>
+            
+            <div class="testimonial-slider-container">
+                <button class="slider-nav-btn slider-prev" id="testiPrev">&#10094;</button>
+                
+                <div class="testimonial-slider" id="testimonialSlider">
+                    <!-- Slide 1 -->
+                    <div class="testimonial-slide active">
+                        <div class="testimonial-image">
+                            <img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=200&q=80" alt="Fatima K.">
+                        </div>
+                        <div class="testimonial-content">
+                            <p class="testimonial-text">"Thanks to the Destiny John Foundation, my child received the medical care that saved their life. We are forever grateful."</p>
+                            <div class="testimonial-author">Fatima K.</div>
+                            <div class="testimonial-role">Mother from Freetown</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Slide 2 -->
+                    <div class="testimonial-slide">
+                        <div class="testimonial-image">
+                            <img src="https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f?auto=format&fit=crop&w=200&q=80" alt="Dr. Ibrahim S.">
+                        </div>
+                        <div class="testimonial-content">
+                            <p class="testimonial-text">"The training provided by the foundation has transformed how I care for my young patients. I now have the skills to make a real difference."</p>
+                            <div class="testimonial-author">Dr. Ibrahim S.</div>
+                            <div class="testimonial-role">Pediatric Nurse</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Slide 3 -->
+                    <div class="testimonial-slide">
+                        <div class="testimonial-image">
+                            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=200&q=80" alt="Sarah M.">
+                        </div>
+                        <div class="testimonial-content">
+                            <p class="testimonial-text">"This foundation doesn't just provide aid; they empower entire communities. Their holistic approach to child welfare is truly remarkable."</p>
+                            <div class="testimonial-author">Sarah M.</div>
+                            <div class="testimonial-role">Community Leader</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="slider-nav-btn slider-next" id="testiNext">&#10095;</button>
             </div>
-            <div class="testimonial-card">
-                <p class="testimonial-text">"The training provided by the foundation has transformed how I care for my young patients. I now have the skills to make a real difference."</p>
-                <div class="testimonial-author">Dr. Ibrahim S.</div>
-                <div class="testimonial-role">Pediatric Nurse</div>
-            </div>
-            <div class="testimonial-card">
-                <p class="testimonial-text">"This foundation doesn't just provide aid; they empower entire communities. Their holistic approach to child welfare is truly remarkable."</p>
-                <div class="testimonial-author">Sarah M.</div>
-                <div class="testimonial-role">Community Leader</div>
+            
+            <div class="slider-dots" id="testiDots">
+                <button class="slider-dot active" data-index="0"></button>
+                <button class="slider-dot" data-index="1"></button>
+                <button class="slider-dot" data-index="2"></button>
             </div>
         </div>
     </section>
@@ -891,7 +1026,7 @@
         document.querySelectorAll('#nav-list a').forEach(link => { link.addEventListener('click', () => { navList.classList.remove('active'); }); });
 
         // Hero Carousel Logic
-        const slides = document.querySelectorAll('.carousel-slide');
+        const slides = document.querySelectorAll('.carousel-slide-bg');
         const dots = document.querySelectorAll('.dot');
         const heroTitle = document.getElementById('hero-title');
         const heroDesc = document.getElementById('hero-desc');
@@ -1073,7 +1208,7 @@
         // ==========================================
         
         // Disable right-click on carousel slides
-        document.querySelectorAll('.carousel-slide').forEach(slide => {
+        document.querySelectorAll('.carousel-slide-bg').forEach(slide => {
             slide.addEventListener('contextmenu', (e) => {
                 e.preventDefault();
                 return false;
@@ -1129,9 +1264,69 @@
         });
 
         // Prevent image dragging on carousel
-        document.querySelectorAll('.carousel-slide').forEach(slide => {
+        document.querySelectorAll('.carousel-slide-bg').forEach(slide => {
             slide.setAttribute('draggable', 'false');
         });
+
+        // ==========================================
+        // TESTIMONIAL SLIDER LOGIC
+        // ==========================================
+        const testiSlides = document.querySelectorAll('.testimonial-slide');
+        const testiDots = document.querySelectorAll('.slider-dot');
+        const testiPrev = document.getElementById('testiPrev');
+        const testiNext = document.getElementById('testiNext');
+        let currentTesti = 0;
+        let testiInterval;
+
+        function showTestimonial(index) {
+            testiSlides.forEach(slide => slide.classList.remove('active'));
+            testiDots.forEach(dot => dot.classList.remove('active'));
+            
+            testiSlides[index].classList.add('active');
+            testiDots[index].classList.add('active');
+            currentTesti = index;
+        }
+
+        function nextTestimonial() {
+            let next = (currentTesti + 1) % testiSlides.length;
+            showTestimonial(next);
+        }
+
+        function prevTestimonial() {
+            let prev = (currentTesti - 1 + testiSlides.length) % testiSlides.length;
+            showTestimonial(prev);
+        }
+
+        function startTestiCarousel() {
+            testiInterval = setInterval(nextTestimonial, 6000); // Auto-play every 6 seconds
+        }
+
+        testiDots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                clearInterval(testiInterval);
+                showTestimonial(index);
+                startTestiCarousel();
+            });
+        });
+
+        testiPrev.addEventListener('click', () => {
+            clearInterval(testiInterval);
+            prevTestimonial();
+            startTestiCarousel();
+        });
+
+        testiNext.addEventListener('click', () => {
+            clearInterval(testiInterval);
+            nextTestimonial();
+            startTestiCarousel();
+        });
+
+        // Pause on hover for better UX
+        const testiContainer = document.querySelector('.testimonial-slider-container');
+        testiContainer.addEventListener('mouseenter', () => clearInterval(testiInterval));
+        testiContainer.addEventListener('mouseleave', startTestiCarousel);
+
+        startTestiCarousel();
     </script>
 
 </body>
