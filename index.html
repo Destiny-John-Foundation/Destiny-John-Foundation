@@ -152,7 +152,16 @@
             transition: all 0.3s ease; z-index: 11; text-decoration: none;
         }
         .whatsapp-float:hover { transform: translateY(-5px) scale(1.1); box-shadow: 0 8px 25px rgba(37, 211, 102, 0.6); }
-        .whatsapp-float svg { width: 30px; height: 30px; fill: white; }
+        
+        /* NEW: Spinning animation for the WhatsApp icon */
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .whatsapp-float svg { 
+            width: 30px; height: 30px; fill: white; 
+            animation: spin 4s linear infinite; 
+        }
 
         /* =========================================
            6. IMPACT STATISTICS SECTION
