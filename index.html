@@ -240,7 +240,7 @@
         .news-content p { font-size: 0.95rem; margin-bottom: 20px; }
 
         /* =========================================
-           11. TESTIMONIALS SECTION (CREATIVE SLIDER)
+           11. TESTIMONIALS SECTION (SEAMLESS CROSSFADE)
            ========================================= */
         .testimonials-section { 
             padding: 100px 20px; 
@@ -255,12 +255,7 @@
             max-width: 800px;
             margin: 0 auto;
             position: relative;
-        }
-        
-        .testimonial-slider {
-            position: relative;
-            min-height: 320px;
-            overflow: hidden;
+            min-height: 350px; /* Ensures consistent height */
         }
         
         .testimonial-slide {
@@ -269,8 +264,8 @@
             left: 0;
             width: 100%;
             opacity: 0;
-            transform: translateX(50px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
+            /* Pure fade transition, no sliding movement */
+            transition: opacity 0.8s ease-in-out; 
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -280,7 +275,6 @@
         
         .testimonial-slide.active {
             opacity: 1;
-            transform: translateX(0);
             pointer-events: auto;
         }
         
@@ -325,33 +319,6 @@
             color: #E2E8F0;
             margin-top: 5px; 
         }
-
-        .slider-nav-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(5px);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            color: white;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            font-size: 1.2rem;
-            cursor: pointer;
-            z-index: 10;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .slider-nav-btn:hover {
-            background: var(--secondary-color);
-            border-color: var(--secondary-color);
-            transform: translateY(-50%) scale(1.1);
-        }
-        .slider-prev { left: -70px; }
-        .slider-next { right: -70px; }
 
         .slider-dots {
             display: flex;
@@ -567,9 +534,7 @@
             }
             .whatsapp-float svg { width: 24px; height: 24px; }
 
-            /* Mobile Testimonial Slider Adjustments */
-            .slider-prev { left: 0; }
-            .slider-next { right: 0; }
+            /* Mobile Testimonial Adjustments */
             .testimonial-content { padding: 25px 20px; }
             .testimonial-image img { width: 90px; height: 90px; }
         }
@@ -818,14 +783,12 @@
         </div>
     </section>
 
-    <!-- TESTIMONIALS SECTION (CREATIVE SLIDER WITH IMAGES) -->
+    <!-- TESTIMONIALS SECTION (SEAMLESS CROSSFADE) -->
     <section class="testimonials-section">
         <div class="container">
             <h2>Stories of Hope & Impact</h2>
             
             <div class="testimonial-slider-container">
-                <button class="slider-nav-btn slider-prev" id="testiPrev">&#10094;</button>
-                
                 <div class="testimonial-slider" id="testimonialSlider">
                     <!-- Slide 1 -->
                     <div class="testimonial-slide active">
@@ -863,8 +826,6 @@
                         </div>
                     </div>
                 </div>
-                
-                <button class="slider-nav-btn slider-next" id="testiNext">&#10095;</button>
             </div>
             
             <div class="slider-dots" id="testiDots">
@@ -1269,12 +1230,10 @@
         });
 
         // ==========================================
-        // TESTIMONIAL SLIDER LOGIC
+        // TESTIMONIAL SLIDER LOGIC (SEAMLESS FADE)
         // ==========================================
         const testiSlides = document.querySelectorAll('.testimonial-slide');
         const testiDots = document.querySelectorAll('.slider-dot');
-        const testiPrev = document.getElementById('testiPrev');
-        const testiNext = document.getElementById('testiNext');
         let currentTesti = 0;
         let testiInterval;
 
@@ -1292,11 +1251,6 @@
             showTestimonial(next);
         }
 
-        function prevTestimonial() {
-            let prev = (currentTesti - 1 + testiSlides.length) % testiSlides.length;
-            showTestimonial(prev);
-        }
-
         function startTestiCarousel() {
             testiInterval = setInterval(nextTestimonial, 6000); // Auto-play every 6 seconds
         }
@@ -1307,18 +1261,6 @@
                 showTestimonial(index);
                 startTestiCarousel();
             });
-        });
-
-        testiPrev.addEventListener('click', () => {
-            clearInterval(testiInterval);
-            prevTestimonial();
-            startTestiCarousel();
-        });
-
-        testiNext.addEventListener('click', () => {
-            clearInterval(testiInterval);
-            nextTestimonial();
-            startTestiCarousel();
         });
 
         // Pause on hover for better UX
