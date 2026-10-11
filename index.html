@@ -303,9 +303,9 @@
         /* =========================================
            16. SCROLL TO TOP & WHATSAPP BUTTONS
            ========================================= */
-        /* UPDATED: Moved inward to right: 110px to avoid overlapping the Next button */
+        /* UPDATED: Aligned to the same right position as the Next button (40px) */
         .scroll-top-btn {
-            position: fixed; bottom: 30px; right: 110px; width: 50px; height: 50px; border-radius: 50%;
+            position: fixed; bottom: 30px; right: 40px; width: 50px; height: 50px; border-radius: 50%;
             background-color: var(--primary-color); color: white; border: none; cursor: pointer;
             display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2);
             opacity: 0; visibility: hidden; transform: translateY(20px); transition: all 0.3s ease; z-index: 999;
@@ -313,9 +313,9 @@
         .scroll-top-btn:hover { background-color: var(--secondary-color); transform: translateY(-5px); }
         .scroll-top-btn.show { opacity: 1; visibility: visible; transform: translateY(0); }
 
-        /* UPDATED: Moved inward to right: 110px to avoid overlapping the Next button */
+        /* UPDATED: Aligned to the same right position as the Next button (40px), stacked above the scroll-to-top button */
         .whatsapp-float {
-            position: fixed; bottom: 90px; right: 110px; width: 55px; height: 55px; border-radius: 50%;
+            position: fixed; bottom: 100px; right: 40px; width: 55px; height: 55px; border-radius: 50%;
             background-color: #25D366; color: white; border: none; cursor: pointer;
             display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
             transition: all 0.3s ease; z-index: 999; text-decoration: none;
@@ -430,9 +430,9 @@
             .prev-btn { left: 10px; }
             .next-btn { right: 10px; }
 
-            /* UPDATED: Adjusted mobile positioning to avoid overlap with smaller carousel buttons */
-            .scroll-top-btn { bottom: 20px; right: 80px; width: 45px; height: 45px; }
-            .whatsapp-float { bottom: 75px; right: 80px; width: 50px; height: 50px; }
+            /* UPDATED: Mobile alignment matches the mobile Next button position */
+            .scroll-top-btn { bottom: 20px; right: 15px; width: 45px; height: 45px; }
+            .whatsapp-float { bottom: 80px; right: 15px; width: 50px; height: 50px; }
             .whatsapp-float svg { width: 26px; height: 26px; }
         }
     </style>
