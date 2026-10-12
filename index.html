@@ -240,7 +240,7 @@
         .news-content p { font-size: 0.95rem; margin-bottom: 20px; }
 
         /* =========================================
-           11. TESTIMONIALS SECTION (SEAMLESS CROSSFADE)
+           11. TESTIMONIALS SECTION (SEAMLESS CROSSFADE - NO DOTS)
            ========================================= */
         .testimonials-section { 
             padding: 100px 20px; 
@@ -255,7 +255,7 @@
             max-width: 800px;
             margin: 0 auto;
             position: relative;
-            min-height: 350px; /* Ensures consistent height */
+            min-height: 350px;
         }
         
         .testimonial-slide {
@@ -264,7 +264,6 @@
             left: 0;
             width: 100%;
             opacity: 0;
-            /* Pure fade transition, no sliding movement */
             transition: opacity 0.8s ease-in-out; 
             display: flex;
             flex-direction: column;
@@ -319,25 +318,6 @@
             color: #E2E8F0;
             margin-top: 5px; 
         }
-
-        .slider-dots {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            margin-top: 30px;
-        }
-        .slider-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.4);
-            cursor: pointer;
-            transition: all 0.3s;
-            border: none;
-            padding: 0;
-        }
-        .slider-dot:hover { background: rgba(255,255,255,0.7); }
-        .slider-dot.active { background: var(--secondary-color); transform: scale(1.3); }
 
         /* =========================================
            12. FAQ SECTION
@@ -783,7 +763,7 @@
         </div>
     </section>
 
-    <!-- TESTIMONIALS SECTION (SEAMLESS CROSSFADE) -->
+    <!-- TESTIMONIALS SECTION (SEAMLESS CROSSFADE - NO DOTS) -->
     <section class="testimonials-section">
         <div class="container">
             <h2>Stories of Hope & Impact</h2>
@@ -826,12 +806,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            
-            <div class="slider-dots" id="testiDots">
-                <button class="slider-dot active" data-index="0"></button>
-                <button class="slider-dot" data-index="1"></button>
-                <button class="slider-dot" data-index="2"></button>
             </div>
         </div>
     </section>
@@ -1230,19 +1204,15 @@
         });
 
         // ==========================================
-        // TESTIMONIAL SLIDER LOGIC (SEAMLESS FADE)
+        // TESTIMONIAL SLIDER LOGIC (AUTO-PLAY ONLY - NO DOTS)
         // ==========================================
         const testiSlides = document.querySelectorAll('.testimonial-slide');
-        const testiDots = document.querySelectorAll('.slider-dot');
         let currentTesti = 0;
         let testiInterval;
 
         function showTestimonial(index) {
             testiSlides.forEach(slide => slide.classList.remove('active'));
-            testiDots.forEach(dot => dot.classList.remove('active'));
-            
             testiSlides[index].classList.add('active');
-            testiDots[index].classList.add('active');
             currentTesti = index;
         }
 
@@ -1254,14 +1224,6 @@
         function startTestiCarousel() {
             testiInterval = setInterval(nextTestimonial, 6000); // Auto-play every 6 seconds
         }
-
-        testiDots.forEach((dot, index) => {
-            dot.addEventListener('click', () => {
-                clearInterval(testiInterval);
-                showTestimonial(index);
-                startTestiCarousel();
-            });
-        });
 
         // Pause on hover for better UX
         const testiContainer = document.querySelector('.testimonial-slider-container');
