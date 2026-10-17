@@ -25,6 +25,7 @@
             --bg-white: #FFFFFF;
             --font-heading: 'Merriweather', serif;
             --font-body: 'Open Sans', sans-serif;
+            --fb-blue: #1877F2;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -238,6 +239,282 @@
         .news-content { padding: 15px 30px 30px; }
         .news-content h3 { font-size: 1.2rem; margin-bottom: 10px; line-height: 1.4; }
         .news-content p { font-size: 0.95rem; margin-bottom: 20px; }
+
+        /* =========================================
+           10.5 FACEBOOK LIVE POSTS SECTION (NEW)
+           ========================================= */
+        .fb-live-section { padding: 100px 20px; background-color: var(--bg-light); }
+        .fb-section-header { text-align: center; max-width: 700px; margin: 0 auto 50px; }
+        .fb-section-header h2 { color: var(--primary-color); margin-bottom: 15px; }
+        .fb-section-header p { color: var(--text-light); font-size: 1rem; }
+        
+        .fb-posts-grid { 
+            max-width: 1100px; 
+            margin: 0 auto; 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+            gap: 30px; 
+        }
+        
+        .fb-post-card {
+            background: var(--bg-white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(26, 54, 93, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #edf2f7;
+        }
+        .fb-post-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(26, 54, 93, 0.15);
+        }
+        
+        .fb-post-header {
+            display: flex;
+            align-items: center;
+            padding: 18px 20px;
+            border-bottom: 1px solid #edf2f7;
+        }
+        
+        .fb-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1rem;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+        
+        .fb-user-info { flex: 1; }
+        .fb-user-name {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--text-dark);
+            margin-bottom: 2px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .fb-verified {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 16px;
+            height: 16px;
+            background: var(--fb-blue);
+            border-radius: 50%;
+        }
+        .fb-verified svg {
+            width: 10px;
+            height: 10px;
+            fill: white;
+        }
+        
+        .fb-timestamp {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .fb-timestamp svg {
+            width: 12px;
+            height: 12px;
+            fill: var(--text-light);
+        }
+        
+        .fb-live-badge {
+            background: #E53935;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            animation: fbPulse 2s ease-in-out infinite;
+        }
+        
+        .fb-live-dot {
+            width: 6px;
+            height: 6px;
+            background: white;
+            border-radius: 50%;
+            animation: fbBlink 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes fbPulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(229, 57, 53, 0.4); }
+            50% { box-shadow: 0 0 0 6px rgba(229, 57, 53, 0); }
+        }
+        
+        @keyframes fbBlink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        
+        .fb-post-content {
+            padding: 0;
+        }
+        
+        .fb-post-text {
+            padding: 18px 20px 15px;
+            font-size: 0.95rem;
+            color: var(--text-dark);
+            line-height: 1.5;
+        }
+        .fb-post-text a {
+            color: var(--fb-blue);
+            font-weight: 600;
+        }
+        
+        .fb-post-image {
+            width: 100%;
+            height: 220px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            cursor: zoom-in;
+            transition: filter 0.3s ease;
+        }
+        .fb-post-image:hover { filter: brightness(1.1); }
+        
+        .fb-post-image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.3) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .fb-play-btn {
+            width: 60px;
+            height: 60px;
+            background: rgba(255,255,255,0.95);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s, background 0.3s;
+        }
+        .fb-play-btn:hover {
+            transform: scale(1.1);
+            background: var(--secondary-color);
+        }
+        .fb-play-btn svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--primary-color);
+            margin-left: 3px;
+        }
+        .fb-play-btn:hover svg { fill: white; }
+        
+        .fb-post-stats {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 20px;
+            border-top: 1px solid #edf2f7;
+            border-bottom: 1px solid #edf2f7;
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+        
+        .fb-reactions {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .fb-reaction-icons {
+            display: flex;
+        }
+        .fb-reaction-icon {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            margin-left: -4px;
+            border: 2px solid white;
+        }
+        .fb-reaction-icon:first-child { margin-left: 0; }
+        .fb-reaction-like { background: var(--fb-blue); color: white; }
+        .fb-reaction-love { background: #F44336; color: white; }
+        .fb-reaction-care { background: #FFEB3B; color: #333; }
+        
+        .fb-post-actions {
+            display: flex;
+            justify-content: space-around;
+            padding: 8px 15px;
+        }
+        
+        .fb-action-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+            background: transparent;
+        }
+        .fb-action-btn:hover {
+            background: #f0f2f5;
+            color: var(--fb-blue);
+        }
+        .fb-action-btn svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+        
+        .fb-follow-btn {
+            display: block;
+            width: calc(100% - 40px);
+            margin: 15px 20px 20px;
+            padding: 12px;
+            background: var(--fb-blue);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .fb-follow-btn:hover {
+            background: #166FE5;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(24, 119, 242, 0.3);
+        }
+        .fb-follow-btn svg {
+            width: 18px;
+            height: 18px;
+            fill: white;
+        }
 
         /* =========================================
            11. TESTIMONIALS SECTION (SEAMLESS CROSSFADE - NO DOTS)
@@ -500,7 +777,7 @@
             nav .btn-primary { width: 100%; display: block; }
             
             .stats-container { grid-template-columns: repeat(2, 1fr); }
-            .programs-grid, .news-grid { grid-template-columns: 1fr; }
+            .programs-grid, .news-grid, .fb-posts-grid { grid-template-columns: 1fr; }
             .why-us-container { grid-template-columns: 1fr; }
             .why-us-content h2 { text-align: center; }
             .experience-badge { left: 50%; transform: translateX(-50%); }
@@ -533,6 +810,11 @@
             /* Mobile Testimonial Adjustments */
             .testimonial-content { padding: 25px 20px; }
             .testimonial-image img { width: 90px; height: 90px; }
+            
+            /* Mobile FB Post Adjustments */
+            .fb-post-image { height: 200px; }
+            .fb-action-btn span { display: none; }
+            .fb-action-btn { padding: 8px 12px; }
         }
     </style>
 </head>
@@ -872,6 +1154,191 @@
         </div>
     </section>
 
+    <!-- FACEBOOK LIVE POSTS SECTION (NEW) -->
+    <section class="fb-live-section">
+        <div class="fb-section-header">
+            <h2>📺 Facebook Live & Updates</h2>
+            <p>Stay connected with our community! Watch our latest live streams, announcements, and behind-the-scenes moments from the field.</p>
+        </div>
+        
+        <div class="fb-posts-grid">
+            <!-- Facebook Post 1 - LIVE -->
+            <div class="fb-post-card">
+                <div class="fb-post-header">
+                    <div class="fb-avatar">DJF</div>
+                    <div class="fb-user-info">
+                        <div class="fb-user-name">
+                            Destiny John Foundation
+                            <span class="fb-verified">
+                                <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                            </span>
+                        </div>
+                        <div class="fb-timestamp">
+                            <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+                            2 hours ago · 🌍 Public
+                        </div>
+                    </div>
+                    <div class="fb-live-badge">
+                        <span class="fb-live-dot"></span>
+                        LIVE
+                    </div>
+                </div>
+                <div class="fb-post-content">
+                    <div class="fb-post-text">
+                        🔴 <strong>LIVE NOW:</strong> Join us as we visit the pediatric ward in Freetown to deliver medical supplies and meet the incredible children whose lives you've helped transform! <a href="#">#DestinyJohnFoundation</a> <a href="#">#HealthcareHeroes</a>
+                    </div>
+                    <div class="fb-post-image" style="background-image: url('assets/project-djf-images/image19.jpeg');">
+                        <div class="fb-post-image-overlay">
+                            <div class="fb-play-btn">
+                                <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="fb-post-stats">
+                    <div class="fb-reactions">
+                        <div class="fb-reaction-icons">
+                            <span class="fb-reaction-icon fb-reaction-like">👍</span>
+                            <span class="fb-reaction-icon fb-reaction-love">❤️</span>
+                            <span class="fb-reaction-icon fb-reaction-care">🤗</span>
+                        </div>
+                        <span>2.4K</span>
+                    </div>
+                    <span>347 Comments · 89 Shares</span>
+                </div>
+                <div class="fb-post-actions">
+                    <button class="fb-action-btn">
+                        <svg viewBox="0 0 24 24"><path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg>
+                        <span>Like</span>
+                    </button>
+                    <button class="fb-action-btn">
+                        <svg viewBox="0 0 24 24"><path d="M21.99 4c0-1.1-.89-2-1.99-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4-.01-18z"/></svg>
+                        <span>Comment</span>
+                    </button>
+                    <button class="fb-action-btn">
+                        <svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
+                        <span>Share</span>
+                    </button>
+                </div>
+                <button class="fb-follow-btn">
+                    <svg viewBox="0 0 24 24"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM8 4c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm6 16H6v-.99c0-2 4-3.08 6-3.08s6 1.08 6 3.08V20zm2-9h-4V4h4v7z"/></svg>
+                    Follow Page
+                </button>
+            </div>
+
+            <!-- Facebook Post 2 - Video -->
+            <div class="fb-post-card">
+                <div class="fb-post-header">
+                    <div class="fb-avatar">DJF</div>
+                    <div class="fb-user-info">
+                        <div class="fb-user-name">
+                            Destiny John Foundation
+                            <span class="fb-verified">
+                                <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                            </span>
+                        </div>
+                        <div class="fb-timestamp">
+                            <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+                            Yesterday at 3:00 PM · 🌍 Public
+                        </div>
+                    </div>
+                </div>
+                <div class="fb-post-content">
+                    <div class="fb-post-text">
+                        🎉 <strong>INCREDIBLE MILESTONE!</strong> Today we celebrated the graduation of 25 new community health workers who are now ready to serve rural villages across Sierra Leone. Your support made this possible! 🙏
+                    </div>
+                    <div class="fb-post-image" style="background-image: url('assets/project-djf-images/image33.jpeg');">
+                        <div class="fb-post-image-overlay">
+                            <div class="fb-play-btn">
+                                <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="fb-post-stats">
+                    <div class="fb-reactions">
+                        <div class="fb-reaction-icons">
+                            <span class="fb-reaction-icon fb-reaction-like">👍</span>
+                            <span class="fb-reaction-icon fb-reaction-love">❤️</span>
+                            <span class="fb-reaction-icon fb-reaction-care">🤗</span>
+                        </div>
+                        <span>1.8K</span>
+                    </div>
+                    <span>212 Comments · 156 Shares</span>
+                </div>
+                <div class="fb-post-actions">
+                    <button class="fb-action-btn">
+                        <svg viewBox="0 0 24 24"><path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg>
+                        <span>Like</span>
+                    </button>
+                    <button class="fb-action-btn">
+                        <svg viewBox="0 0 24 24"><path d="M21.99 4c0-1.1-.89-2-1.99-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4-.01-18z"/></svg>
+                        <span>Comment</span>
+                    </button>
+                    <button class="fb-action-btn">
+                        <svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
+                        <span>Share</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Facebook Post 3 - Announcement -->
+            <div class="fb-post-card">
+                <div class="fb-post-header">
+                    <div class="fb-avatar">DJF</div>
+                    <div class="fb-user-info">
+                        <div class="fb-user-name">
+                            Destiny John Foundation
+                            <span class="fb-verified">
+                                <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                            </span>
+                        </div>
+                        <div class="fb-timestamp">
+                            <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+                            October 12 at 10:00 AM · 🌍 Public
+                        </div>
+                    </div>
+                </div>
+                <div class="fb-post-content">
+                    <div class="fb-post-text">
+                        📚 <strong>BACK TO SCHOOL UPDATE:</strong> We've just completed distributing 1,200 school kits to children in 8 different districts! Thank you to every donor who made this possible. Every child deserves a chance to learn! ✏️📖
+                    </div>
+                    <div class="fb-post-image" style="background-image: url('assets/project-djf-images/image41.jpeg');">
+                    </div>
+                </div>
+                <div class="fb-post-stats">
+                    <div class="fb-reactions">
+                        <div class="fb-reaction-icons">
+                            <span class="fb-reaction-icon fb-reaction-like">👍</span>
+                            <span class="fb-reaction-icon fb-reaction-love">❤️</span>
+                            <span class="fb-reaction-icon fb-reaction-care">🤗</span>
+                        </div>
+                        <span>3.1K</span>
+                    </div>
+                    <span>489 Comments · 234 Shares</span>
+                </div>
+                <div class="fb-post-actions">
+                    <button class="fb-action-btn">
+                        <svg viewBox="0 0 24 24"><path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg>
+                        <span>Like</span>
+                    </button>
+                    <button class="fb-action-btn">
+                        <svg viewBox="0 0 24 24"><path d="M21.99 4c0-1.1-.89-2-1.99-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4-.01-18z"/></svg>
+                        <span>Comment</span>
+                    </button>
+                    <button class="fb-action-btn">
+                        <svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
+                        <span>Share</span>
+                    </button>
+                </div>
+                <button class="fb-follow-btn">
+                    <svg viewBox="0 0 24 24"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM8 4c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm6 16H6v-.99c0-2 4-3.08 6-3.08s6 1.08 6 3.08V20zm2-9h-4V4h4v7z"/></svg>
+                    Follow Page
+                </button>
+            </div>
+        </div>
+    </section>
+
     <!-- TESTIMONIALS SECTION (SEAMLESS CROSSFADE - NO DOTS) -->
     <section class="testimonials-section">
         <div class="container">
@@ -1199,13 +1666,15 @@
         const lightboxClose = lightbox.querySelector('.lightbox-close');
         const lightboxOverlay = lightbox.querySelector('.lightbox-protect-overlay');
 
-        // Add click event to cause and program images
-        document.querySelectorAll('.cause-image, .program-image').forEach(div => {
+        // Add click event to cause, program, AND Facebook post images
+        document.querySelectorAll('.cause-image, .program-image, .fb-post-image').forEach(div => {
             div.addEventListener('click', () => {
                 const bgImage = div.style.backgroundImage;
-                const imageUrl = bgImage.replace(/^url\(['"]?/, '').replace(/['"]?\)$/, '');
-                lightboxImg.src = imageUrl;
-                lightbox.classList.add('active');
+                if (bgImage) {
+                    const imageUrl = bgImage.replace(/^url\(['"]?/, '').replace(/['"]?\)$/, '');
+                    lightboxImg.src = imageUrl;
+                    lightbox.classList.add('active');
+                }
             });
         });
 
@@ -1340,6 +1809,29 @@
         testiContainer.addEventListener('mouseleave', startTestiCarousel);
 
         startTestiCarousel();
+        
+        // ==========================================
+        // FACEBOOK POST INTERACTIONS
+        // ==========================================
+        document.querySelectorAll('.fb-action-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const action = this.querySelector('span')?.textContent || 'Action';
+                alert(`Thank you for your interest! In a live implementation, this would ${action.toLowerCase()} the post on Facebook.`);
+            });
+        });
+        
+        document.querySelectorAll('.fb-follow-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                window.open('https://facebook.com', '_blank');
+            });
+        });
+        
+        document.querySelectorAll('.fb-play-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                alert('🎥 Video player would open here. Connect your Facebook Live stream or uploaded video URL to enable playback.');
+            });
+        });
     </script>
 
 </body>
