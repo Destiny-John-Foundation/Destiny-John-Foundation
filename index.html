@@ -197,7 +197,7 @@
            ========================================= */
         .programs-section { padding: 100px 20px; background-color: var(--bg-white); }
         .section-header { text-align: center; max-width: 700px; margin: 0 auto 60px; }
-        .programs-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .programs-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
         .program-card { background: var(--bg-white); border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(26, 54, 93, 0.1); transition: transform 0.3s, box-shadow 0.3s; border: 2px solid transparent; }
         .program-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(26, 54, 93, 0.15); border-color: var(--secondary-color); }
         .program-image { height: 220px; background-size: cover; background-position: center; cursor: zoom-in; transition: filter 0.3s ease; }
@@ -288,11 +288,9 @@
             object-fit: cover;
             border: 4px solid var(--accent-sun);
             box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-            /* NEW: Floating animation for the testimonial image */
             animation: testimonialFloat 3s ease-in-out infinite;
         }
         
-        /* NEW: Keyframes for the floating effect */
         @keyframes testimonialFloat {
             0% {
                 transform: translateY(0px);
@@ -619,7 +617,7 @@
         </div>
     </section>
 
-    <!-- SUPPORT OUR CAUSES SECTION -->
+    <!-- SUPPORT OUR CAUSES SECTION (6 CARDS) -->
     <section class="causes-section">
         <div class="container">
             <div class="section-header">
@@ -689,11 +687,74 @@
                         <a href="donate.html#donate-frequency" class="btn btn-primary cause-btn">Donate to this Cause</a>
                     </div>
                 </div>
+
+                <!-- NEW Cause 4 -->
+                <div class="cause-card">
+                    <div class="cause-image" style="background-image: url('assets/project-djf-images/image20.jpeg');">
+                        <span class="cause-badge">Critical</span>
+                    </div>
+                    <div class="cause-content">
+                        <h3>Clean Water Initiative</h3>
+                        <p>Provide access to safe, clean drinking water by building wells and water purification systems in rural communities.</p>
+                        <div class="progress-container">
+                            <div class="progress-labels">
+                                <span>Raised: Le 15,800</span>
+                                <span>Goal: Le 80,000</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 40%;"></div>
+                            </div>
+                        </div>
+                        <a href="donate.html#donate-frequency" class="btn btn-primary cause-btn">Donate to this Cause</a>
+                    </div>
+                </div>
+
+                <!-- NEW Cause 5 -->
+                <div class="cause-card">
+                    <div class="cause-image" style="background-image: url('assets/project-djf-images/image22.jpeg');">
+                        <span class="cause-badge">Ongoing</span>
+                    </div>
+                    <div class="cause-content">
+                        <h3>Nutrition & Food Security</h3>
+                        <p>Combat childhood malnutrition by providing daily meals, nutritional supplements, and family food support programs.</p>
+                        <div class="progress-container">
+                            <div class="progress-labels">
+                                <span>Raised: Le 9,400</span>
+                                <span>Goal: Le 60,000</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 45%;"></div>
+                            </div>
+                        </div>
+                        <a href="donate.html#donate-frequency" class="btn btn-primary cause-btn">Donate to this Cause</a>
+                    </div>
+                </div>
+
+                <!-- NEW Cause 6 -->
+                <div class="cause-card">
+                    <div class="cause-image" style="background-image: url('assets/project-djf-images/image12.jpeg');">
+                        <span class="cause-badge">Urgent</span>
+                    </div>
+                    <div class="cause-content">
+                        <h3>Emergency Relief Fund</h3>
+                        <p>Provide immediate assistance to families affected by natural disasters, health crises, and unexpected emergencies.</p>
+                        <div class="progress-container">
+                            <div class="progress-labels">
+                                <span>Raised: Le 22,100</span>
+                                <span>Goal: Le 150,000</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 35%;"></div>
+                            </div>
+                        </div>
+                        <a href="donate.html#donate-frequency" class="btn btn-primary cause-btn">Donate to this Cause</a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- PROGRAMS PREVIEW SECTION -->
+    <!-- PROGRAMS PREVIEW SECTION (6 CARDS) -->
     <section class="programs-section">
         <div class="section-header">
             <h2>Our Programs</h2>
@@ -721,6 +782,36 @@
                 <div class="program-content">
                     <h3>Community Engagement</h3>
                     <p>Working directly with families and communities to create sustainable, long-term positive change.</p>
+                    <a href="#" class="program-link">Learn More →</a>
+                </div>
+            </div>
+
+            <!-- NEW Program 4 -->
+            <div class="program-card">
+                <div class="program-image" style="background-image: url('assets/project-djf-images/image22.jpeg');"></div>
+                <div class="program-content">
+                    <h3>Mentorship Program</h3>
+                    <p>Pairing vulnerable youth with trained mentors who provide guidance, emotional support, and career development.</p>
+                    <a href="#" class="program-link">Learn More →</a>
+                </div>
+            </div>
+
+            <!-- NEW Program 5 -->
+            <div class="program-card">
+                <div class="program-image" style="background-image: url('assets/project-djf-images/image20.jpeg');"></div>
+                <div class="program-content">
+                    <h3>Nutrition & Wellness</h3>
+                    <p>Delivering balanced meals and nutrition education to fight childhood malnutrition and promote healthy growth.</p>
+                    <a href="#" class="program-link">Learn More →</a>
+                </div>
+            </div>
+
+            <!-- NEW Program 6 -->
+            <div class="program-card">
+                <div class="program-image" style="background-image: url('assets/project-djf-images/image14.jpeg');"></div>
+                <div class="program-content">
+                    <h3>Youth Empowerment</h3>
+                    <p>Equipping young people with vocational skills, leadership training, and entrepreneurship opportunities.</p>
                     <a href="#" class="program-link">Learn More →</a>
                 </div>
             </div>
