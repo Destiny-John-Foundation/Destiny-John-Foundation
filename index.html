@@ -82,7 +82,7 @@
         .hero { 
             color: white; 
             text-align: center; 
-            padding: 150px 110px 130px; /* side padding keeps text clear of the arrow/WhatsApp buttons; bottom padding adds space above the dots */ 
+            padding: 150px 20px 130px; /* bottom padding keeps space between the hero buttons and the controls row */
             position: relative; 
             height: 80vh;
             min-height: 560px;
@@ -185,28 +185,27 @@
         .dot:hover { background: rgba(255,255,255,0.7); }
         .dot.active { background: var(--secondary-color); transform: scale(1.3); }
 
-        /* CENTERED: Previous, Next and WhatsApp buttons are vertically centered in the banner */
+        /* CONTROLS: Previous / Next flank the dots at the bottom-center; WhatsApp sits in the bottom-right corner (nothing overlaps the banner text) */
         .carousel-btn {
-            position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(5px);
+            position: absolute; bottom: 22px; background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(5px);
             -webkit-backdrop-filter: blur(5px); border: 2px solid rgba(255, 255, 255, 0.3); color: white;
-            width: 55px; height: 55px; border-radius: 50%; font-size: 1.5rem; cursor: pointer; z-index: 10;
+            width: 48px; height: 48px; border-radius: 50%; font-size: 1.3rem; cursor: pointer; z-index: 10;
             transition: all 0.3s ease; display: flex; align-items: center; justify-content: center;
         }
-        .carousel-btn:hover { background: var(--secondary-color); border-color: var(--secondary-color); transform: translateY(-50%) scale(1.1); }
-        .prev-btn { left: 25px; }
-        .next-btn { right: 25px; top: calc(50% - 38px); } /* stacked above WhatsApp so they stay in the side margin */
+        .carousel-btn:hover { background: var(--secondary-color); border-color: var(--secondary-color); transform: scale(1.1); }
+        .prev-btn { left: calc(50% - 114px); }
+        .next-btn { left: calc(50% + 66px); }
 
         .whatsapp-float {
             position: absolute;
-            top: calc(50% + 38px);
-            transform: translateY(-50%);
-            right: 25px;
+            bottom: 28px;
+            right: 40px;
             width: 55px; height: 55px; border-radius: 50%;
             background-color: #25D366; color: white; border: none; cursor: pointer;
             display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
             transition: all 0.3s ease; z-index: 11; text-decoration: none;
         }
-        .whatsapp-float:hover { transform: translateY(calc(-50% - 5px)) scale(1.1); box-shadow: 0 8px 25px rgba(37, 211, 102, 0.6); }
+        .whatsapp-float:hover { transform: translateY(-5px) scale(1.1); box-shadow: 0 8px 25px rgba(37, 211, 102, 0.6); }
         
         @keyframes spin {
             from { transform: rotate(0deg); }
@@ -998,22 +997,18 @@
             .social-icons { justify-content: center; }
             .footer-bottom { flex-direction: column; text-align: center; }
 
-            /* Mobile: controls sit in the bottom margin so they never cover the banner text */
-            .carousel-btn { top: auto; bottom: 25px; transform: none; width: 40px; height: 40px; font-size: 1.2rem; }
-            .carousel-btn:hover { transform: scale(1.1); }
-            .prev-btn { left: 15px; }
-            .next-btn { right: 15px; top: auto; }
+            /* Mobile: arrows flank the dots, WhatsApp in the bottom-right corner */
+            .carousel-btn { bottom: 26px; width: 40px; height: 40px; font-size: 1.1rem; }
+            .prev-btn { left: calc(50% - 106px); }
+            .next-btn { left: calc(50% + 66px); }
 
             .scroll-top-btn { bottom: 20px; right: 20px; width: 45px; height: 45px; }
             .whatsapp-float { 
-                top: auto; 
-                bottom: 78px; 
-                right: 12px; 
-                transform: none; 
-                width: 45px; 
-                height: 45px; 
+                bottom: 25px; 
+                right: 10px; 
+                width: 42px; 
+                height: 42px; 
             }
-            .whatsapp-float:hover { transform: translateY(-5px) scale(1.1); }
             .whatsapp-float svg { width: 24px; height: 24px; }
 
             .testimonial-content { padding: 25px 20px; }
@@ -1038,6 +1033,8 @@
         /* EXTRA SMALL SCREENS */
         @media (max-width: 380px) {
             .hero { padding: 100px 10px 140px; min-height: 760px; }
+            .prev-btn { left: calc(50% - 100px); }
+            .next-btn { left: calc(50% + 60px); }
             .hero h1 { 
                 font-size: 1.7rem; 
                 min-height: 3rem;
