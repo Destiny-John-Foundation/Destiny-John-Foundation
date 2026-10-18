@@ -1066,6 +1066,31 @@
                 font-size: 0.85rem;
             }
         }
+
+        /* =========================================
+           19. EQUAL CARD SIZE: SUPPORT OUR CAUSES = OUR PROGRAMS
+           ========================================= */
+        /* Same grid width as Our Programs (removes the extra container padding) */
+        .causes-section .container { max-width: 1100px; padding: 0; }
+
+        /* Same corner radius, border and minimum height on both card types */
+        .cause-card,
+        .program-card {
+            border-radius: 15px;
+            border: 2px solid transparent;
+            display: flex;
+            flex-direction: column;
+            min-height: 560px;
+        }
+        .cause-content,
+        .program-content { flex: 1; display: flex; flex-direction: column; }
+        .cause-btn { margin-top: auto; }
+        .program-link { margin-top: auto; align-self: flex-start; }
+
+        @media (max-width: 768px) {
+            .cause-card,
+            .program-card { min-height: 0; }
+        }
     </style>
 </head>
 <body>
