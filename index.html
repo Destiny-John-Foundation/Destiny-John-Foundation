@@ -29,7 +29,11 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; overflow-x: hidden; }
+        html { 
+            scroll-behavior: smooth; 
+            overflow-x: hidden; 
+            overflow-y: scroll; /* FIXED: Always show scrollbar to prevent horizontal shift */
+        }
         body { 
             font-family: var(--font-body); 
             color: var(--text-dark); 
@@ -73,7 +77,7 @@
         nav .btn-primary { padding: 10px 24px; font-size: 0.9rem; color: white !important; }
 
         /* =========================================
-           5. HERO SECTION & CAROUSEL
+           5. HERO SECTION & CAROUSEL (FIXED: NO MORE SHAKING)
            ========================================= */
         .hero { 
             color: white; 
@@ -87,6 +91,7 @@
             justify-content: center; 
             overflow: hidden;
             contain: layout style paint;
+            isolation: isolate; /* FIXED: Creates new stacking context */
         }
         .hero::after { 
             content: ''; 
@@ -147,11 +152,13 @@
             pointer-events: none;
         }
         
+        /* FIXED: Hero content has fixed minimum height to prevent text change reflow */
         .hero-content { 
             position: relative; 
             z-index: 2; 
             max-width: 800px;
             width: 100%;
+            min-height: 280px; /* FIXED: Prevents height changes when text updates */
         }
         
         .hero h1 { 
@@ -160,6 +167,7 @@
             margin-bottom: 20px; 
             line-height: 1.2; 
             text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            min-height: 4.4rem; /* FIXED: Prevents layout shift when title text changes */
         }
         .hero p { 
             color: rgba(255,255,255,0.95); 
@@ -167,6 +175,7 @@
             max-width: 750px; 
             margin: 0 auto 35px auto; 
             text-shadow: 0 1px 5px rgba(0,0,0,0.3);
+            min-height: 3.5rem; /* FIXED: Prevents layout shift when description text changes */
         }
         .hero-buttons { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
 
@@ -206,7 +215,7 @@
         }
 
         /* =========================================
-           6. IMPACT STATISTICS SECTION (FIXED)
+           6. IMPACT STATISTICS SECTION (FIXED: COMPLETELY ISOLATED)
            ========================================= */
         .impact-stats { 
             background: linear-gradient(135deg, var(--secondary-color) 0%, #ff7676 100%); 
@@ -214,9 +223,10 @@
             color: white; 
             position: relative; 
             overflow: hidden;
-            contain: layout style paint; /* FIXED: Isolates from hero transitions */
-            will-change: transform; /* FIXED: Optimizes rendering */
-            transform: translateZ(0); /* FIXED: Forces hardware acceleration */
+            contain: layout paint style; /* FIXED: Isolates from hero transitions */
+            isolation: isolate; /* FIXED: Creates independent stacking context */
+            transform: translate3d(0, 0, 0); /* FIXED: Forces own GPU layer */
+            backface-visibility: hidden; /* FIXED: Prevents rendering flicker */
         }
         .impact-stats::before { 
             content: ''; 
@@ -226,7 +236,8 @@
             width: 400px; 
             height: 400px; 
             background: rgba(255,255,255,0.1); 
-            border-radius: 50%; 
+            border-radius: 50%;
+            pointer-events: none; /* FIXED: Prevents interaction issues */
         }
         .stats-container { 
             max-width: 1100px; 
@@ -236,7 +247,8 @@
             gap: 30px; 
             position: relative; 
             z-index: 1;
-            min-width: 0; /* FIXED: Prevents grid overflow */
+            min-width: 0;
+            contain: layout paint style; /* FIXED: Further isolation */
         }
         .stat-item { 
             text-align: center; 
@@ -245,7 +257,8 @@
             border-radius: 15px; 
             backdrop-filter: blur(10px); 
             transition: transform 0.3s;
-            min-width: 0; /* FIXED: Prevents content overflow */
+            min-width: 0;
+            contain: layout paint style; /* FIXED: Prevents internal reflow from cascading */
         }
         .stat-item:hover { transform: translateY(-10px); }
         .stat-number { 
@@ -254,12 +267,12 @@
             font-family: var(--font-heading); 
             margin-bottom: 10px; 
             display: block;
-            word-break: break-word; /* FIXED: Prevents number overflow on mobile */
+            word-break: break-word;
         }
         .stat-label { 
             font-size: 1.1rem; 
             opacity: 0.95;
-            word-break: break-word; /* FIXED: Prevents label overflow */
+            word-break: break-word;
         }
 
         /* =========================================
@@ -886,7 +899,7 @@
         }
 
         /* =========================================
-           18. MOBILE RESPONSIVENESS
+           18. MOBILE RESPONSIVENESS (IMPROVED)
            ========================================= */
         @media (max-width: 768px) {
             h1 { font-size: 2rem; } 
@@ -896,8 +909,17 @@
                 min-height: 80vh; 
                 padding: 120px 15px 80px;
             }
-            .hero h1 { font-size: 2rem; }
-            .hero p { font-size: 1.05rem; }
+            .hero h1 { 
+                font-size: 2rem; 
+                min-height: 3.5rem; /* FIXED: Mobile-specific min-height */
+            }
+            .hero p { 
+                font-size: 1.05rem; 
+                min-height: 3rem; /* FIXED: Mobile-specific min-height */
+            }
+            .hero-content {
+                min-height: 220px; /* FIXED: Mobile-specific min-height */
+            }
             .logo img { height: 70px; }
             .menu-toggle { display: block; }
             nav ul { 
@@ -918,7 +940,7 @@
             nav ul.active { display: flex; }
             nav .btn-primary { width: 100%; display: block; }
             
-            /* IMPROVED IMPACT STATISTICS MOBILE */
+            /* IMPACT STATISTICS - PERFECT MOBILE DISPLAY */
             .stats-container { 
                 grid-template-columns: repeat(2, 1fr); 
                 gap: 15px;
@@ -926,16 +948,16 @@
             }
             
             .stat-item {
-                padding: 20px 10px; /* Reduced padding for mobile */
+                padding: 20px 10px;
                 min-width: 0;
             }
             
             .stat-number {
-                font-size: 2.5rem; /* Smaller on mobile */
+                font-size: 2.5rem;
             }
             
             .stat-label {
-                font-size: 0.95rem; /* Smaller on mobile */
+                font-size: 0.95rem;
             }
             
             .causes-grid,
@@ -1008,14 +1030,22 @@
         /* EXTRA SMALL SCREENS */
         @media (max-width: 380px) {
             .hero { padding: 100px 10px 60px; }
-            .hero h1 { font-size: 1.7rem; }
-            .hero p { font-size: 0.95rem; }
+            .hero h1 { 
+                font-size: 1.7rem; 
+                min-height: 3rem;
+            }
+            .hero p { 
+                font-size: 0.95rem; 
+                min-height: 2.5rem;
+            }
+            .hero-content {
+                min-height: 180px;
+            }
             .cause-content, .program-content { padding: 20px; }
             .progress-labels { flex-direction: column; gap: 4px; }
             
-            /* Extra small Impact Stats */
             .stats-container {
-                grid-template-columns: 1fr; /* Single column on very small screens */
+                grid-template-columns: 1fr;
                 gap: 10px;
             }
             
