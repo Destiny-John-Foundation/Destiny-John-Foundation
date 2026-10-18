@@ -64,8 +64,8 @@
         .section-header { text-align: center; max-width: 700px; margin: 0 auto 50px; }
         .section-header h2 { margin-bottom: 15px; }
         .section-header p { font-size: 1.1rem; }
-        .causes-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
-        .cause-card { background: var(--bg-white); border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(26, 54, 93, 0.08); transition: transform 0.3s, box-shadow 0.3s; }
+        .causes-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .cause-card { background: var(--bg-white); border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(26, 54, 93, 0.08); transition: transform 0.3s, box-shadow 0.3s; width: 100%; max-width: 100%; }
         .cause-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(26, 54, 93, 0.15); }
         .cause-image { height: 220px; background-size: cover; background-position: center; position: relative; }
         .cause-badge { position: absolute; top: 20px; right: 20px; background: var(--secondary-color); color: white; padding: 6px 14px; border-radius: 50px; font-weight: 600; font-size: 0.8rem; }
@@ -77,6 +77,18 @@
         .progress-bar { height: 10px; background: #e2e8f0; border-radius: 10px; overflow: hidden; }
         .progress-fill { height: 100%; background: linear-gradient(90deg, var(--secondary-color), var(--accent-sun)); border-radius: 10px; transition: width 1.5s ease; }
         .cause-btn { width: 100%; text-align: center; }
+
+        /* SAME CAUSE CARD SIZE AS THE HOME PAGE */
+        .causes-section .container { max-width: 1100px; padding: 0; }
+        .cause-card {
+            border-radius: 15px;
+            border: 2px solid transparent;
+            display: flex;
+            flex-direction: column;
+            min-height: 560px;
+        }
+        .cause-content { flex: 1; display: flex; flex-direction: column; }
+        .cause-btn { margin-top: auto; }
 
         /* DONATION SECTION */
         .donation-section { padding: 80px 20px 100px; background-color: var(--bg-white); }
@@ -274,7 +286,8 @@
             nav ul.active { display: flex; }
             nav .btn-primary { width: 100%; display: block; }
             
-            .causes-grid { grid-template-columns: 1fr; }
+            .causes-grid { grid-template-columns: 1fr; gap: 20px; }
+            .cause-card { min-height: 0; margin: 0; }
             
             .donation-layout { grid-template-columns: 1fr; gap: 40px; }
             .donation-impact { position: static; }
@@ -336,7 +349,7 @@
         </div>
     </section>
 
-    <!-- SUPPORT OUR CAUSES SECTION -->
+    <!-- SUPPORT OUR CAUSES SECTION (SAME 6 CARDS AS HOME PAGE) -->
     <section class="causes-section">
         <div class="container">
             <div class="section-header">
@@ -344,8 +357,9 @@
                 <p>Choose a specific project to support, or make a general donation to help us where it's needed most.</p>
             </div>
             <div class="causes-grid">
+                <!-- Cause 1 -->
                 <div class="cause-card">
-                    <div class="cause-image" style="background-image: url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=800&q=80');">
+                    <div class="cause-image" style="background-image: url('assets/project-djf-images/image19.jpeg');">
                         <span class="cause-badge">Urgent</span>
                     </div>
                     <div class="cause-content">
@@ -354,7 +368,7 @@
                         <div class="progress-container">
                             <div class="progress-labels">
                                 <span>Raised: Le 12,450</span>
-                                <span>Goal: Le 25,000</span>
+                                <span>Goal: Le 120,000</span>
                             </div>
                             <div class="progress-bar">
                                 <div class="progress-fill" style="width: 50%;"></div>
@@ -364,8 +378,9 @@
                     </div>
                 </div>
 
+                <!-- Cause 2 -->
                 <div class="cause-card">
-                    <div class="cause-image" style="background-image: url('https://images.unsplash.com/photo-1509099836639-18ba1795216d?auto=format&fit=crop&w=800&q=80');">
+                    <div class="cause-image" style="background-image: url('assets/project-djf-images/image41.jpeg');">
                         <span class="cause-badge">Ongoing</span>
                     </div>
                     <div class="cause-content">
@@ -374,7 +389,7 @@
                         <div class="progress-container">
                             <div class="progress-labels">
                                 <span>Raised: Le 8,200</span>
-                                <span>Goal: Le 15,000</span>
+                                <span>Goal: Le 50,000</span>
                             </div>
                             <div class="progress-bar">
                                 <div class="progress-fill" style="width: 55%;"></div>
@@ -384,8 +399,9 @@
                     </div>
                 </div>
 
+                <!-- Cause 3 -->
                 <div class="cause-card">
-                    <div class="cause-image" style="background-image: url('https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=800&q=80');">
+                    <div class="cause-image" style="background-image: url('assets/project-djf-images/image35.jpeg');">
                         <span class="cause-badge">New</span>
                     </div>
                     <div class="cause-content">
@@ -394,10 +410,73 @@
                         <div class="progress-container">
                             <div class="progress-labels">
                                 <span>Raised: Le 5,600</span>
-                                <span>Goal: Le 20,000</span>
+                                <span>Goal: Le 200,000</span>
                             </div>
                             <div class="progress-bar">
                                 <div class="progress-fill" style="width: 28%;"></div>
+                            </div>
+                        </div>
+                        <a href="#donate-frequency" class="btn btn-primary cause-btn">Donate to this Cause</a>
+                    </div>
+                </div>
+
+                <!-- Cause 4 -->
+                <div class="cause-card">
+                    <div class="cause-image" style="background-image: url('assets/project-djf-images/image39.jpeg');">
+                        <span class="cause-badge">Critical</span>
+                    </div>
+                    <div class="cause-content">
+                        <h3>Clean Water Initiative</h3>
+                        <p>Provide access to safe, clean drinking water by building wells and water purification systems in rural communities.</p>
+                        <div class="progress-container">
+                            <div class="progress-labels">
+                                <span>Raised: Le 15,800</span>
+                                <span>Goal: Le 80,000</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 40%;"></div>
+                            </div>
+                        </div>
+                        <a href="#donate-frequency" class="btn btn-primary cause-btn">Donate to this Cause</a>
+                    </div>
+                </div>
+
+                <!-- Cause 5 -->
+                <div class="cause-card">
+                    <div class="cause-image" style="background-image: url('assets/project-djf-images/image37.jpeg');">
+                        <span class="cause-badge">Ongoing</span>
+                    </div>
+                    <div class="cause-content">
+                        <h3>Nutrition & Food Security</h3>
+                        <p>Combat childhood malnutrition by providing daily meals, nutritional supplements, and family food support programs.</p>
+                        <div class="progress-container">
+                            <div class="progress-labels">
+                                <span>Raised: Le 9,400</span>
+                                <span>Goal: Le 60,000</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 45%;"></div>
+                            </div>
+                        </div>
+                        <a href="#donate-frequency" class="btn btn-primary cause-btn">Donate to this Cause</a>
+                    </div>
+                </div>
+
+                <!-- Cause 6 -->
+                <div class="cause-card">
+                    <div class="cause-image" style="background-image: url('assets/project-djf-images/image12.jpeg');">
+                        <span class="cause-badge">Urgent</span>
+                    </div>
+                    <div class="cause-content">
+                        <h3>Emergency Relief Fund</h3>
+                        <p>Provide immediate assistance to families affected by natural disasters, health crises, and unexpected emergencies.</p>
+                        <div class="progress-container">
+                            <div class="progress-labels">
+                                <span>Raised: Le 22,100</span>
+                                <span>Goal: Le 150,000</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 35%;"></div>
                             </div>
                         </div>
                         <a href="#donate-frequency" class="btn btn-primary cause-btn">Donate to this Cause</a>
