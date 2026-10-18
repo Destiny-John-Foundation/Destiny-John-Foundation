@@ -35,7 +35,7 @@
             color: var(--text-dark); 
             line-height: 1.7; 
             background-color: var(--bg-white); 
-            overflow-x: hidden; /* FIXED: Prevents horizontal shaking during carousel transitions */
+            overflow-x: hidden;
         }
         img { max-width: 100%; height: auto; display: block; }
         a { text-decoration: none; color: inherit; }
@@ -73,20 +73,20 @@
         nav .btn-primary { padding: 10px 24px; font-size: 0.9rem; color: white !important; }
 
         /* =========================================
-           5. HERO SECTION & CAROUSEL (FIXED: NO SHAKING)
+           5. HERO SECTION & CAROUSEL
            ========================================= */
         .hero { 
             color: white; 
             text-align: center; 
             padding: 150px 20px 100px; 
             position: relative; 
-            height: 80vh; /* FIXED: Changed from min-height to fixed height to prevent layout shift */
-            min-height: 500px; /* Ensures minimum height on all screens */
+            height: 80vh;
+            min-height: 500px;
             display: flex; 
             align-items: center; 
             justify-content: center; 
-            overflow: hidden; /* FIXED: Prevents any content from escaping and causing layout shift */
-            contain: layout style paint; /* FIXED: Browser optimization to isolate layout calculations */
+            overflow: hidden;
+            contain: layout style paint;
         }
         .hero::after { 
             content: ''; 
@@ -99,7 +99,6 @@
             z-index: 10; 
         }
         
-        /* FIXED: Carousel container now properly positioned and sized */
         .carousel-container {
             position: absolute;
             top: 0;
@@ -121,9 +120,9 @@
             background-repeat: no-repeat;
             opacity: 0; 
             transition: opacity 1.5s ease-in-out;
-            will-change: opacity; /* FIXED: GPU acceleration prevents repaints from affecting page layout */
-            transform: translateZ(0); /* FIXED: Forces hardware acceleration layer */
-            backface-visibility: hidden; /* FIXED: Prevents flickering during transitions */
+            will-change: opacity;
+            transform: translateZ(0);
+            backface-visibility: hidden;
         }
         .carousel-slide-bg.active { opacity: 1; }
         
@@ -186,7 +185,6 @@
         .prev-btn { left: 40px; }
         .next-btn { right: 40px; }
 
-        /* WhatsApp button positioned absolutely inside hero, with gap above Next button */
         .whatsapp-float {
             position: absolute;
             top: 280px;
@@ -208,15 +206,61 @@
         }
 
         /* =========================================
-           6. IMPACT STATISTICS SECTION
+           6. IMPACT STATISTICS SECTION (FIXED)
            ========================================= */
-        .impact-stats { background: linear-gradient(135deg, var(--secondary-color) 0%, #ff7676 100%); padding: 80px 20px; color: white; position: relative; overflow: hidden; }
-        .impact-stats::before { content: ''; position: absolute; top: -50%; right: -10%; width: 400px; height: 400px; background: rgba(255,255,255,0.1); border-radius: 50%; }
-        .stats-container { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; position: relative; z-index: 1; }
-        .stat-item { text-align: center; padding: 30px 20px; background: rgba(255,255,255,0.15); border-radius: 15px; backdrop-filter: blur(10px); transition: transform 0.3s; }
+        .impact-stats { 
+            background: linear-gradient(135deg, var(--secondary-color) 0%, #ff7676 100%); 
+            padding: 80px 20px; 
+            color: white; 
+            position: relative; 
+            overflow: hidden;
+            contain: layout style paint; /* FIXED: Isolates from hero transitions */
+            will-change: transform; /* FIXED: Optimizes rendering */
+            transform: translateZ(0); /* FIXED: Forces hardware acceleration */
+        }
+        .impact-stats::before { 
+            content: ''; 
+            position: absolute; 
+            top: -50%; 
+            right: -10%; 
+            width: 400px; 
+            height: 400px; 
+            background: rgba(255,255,255,0.1); 
+            border-radius: 50%; 
+        }
+        .stats-container { 
+            max-width: 1100px; 
+            margin: 0 auto; 
+            display: grid; 
+            grid-template-columns: repeat(4, 1fr); 
+            gap: 30px; 
+            position: relative; 
+            z-index: 1;
+            min-width: 0; /* FIXED: Prevents grid overflow */
+        }
+        .stat-item { 
+            text-align: center; 
+            padding: 30px 20px; 
+            background: rgba(255,255,255,0.15); 
+            border-radius: 15px; 
+            backdrop-filter: blur(10px); 
+            transition: transform 0.3s;
+            min-width: 0; /* FIXED: Prevents content overflow */
+        }
         .stat-item:hover { transform: translateY(-10px); }
-        .stat-number { font-size: 3.5rem; font-weight: 700; font-family: var(--font-heading); margin-bottom: 10px; display: block; }
-        .stat-label { font-size: 1.1rem; opacity: 0.95; }
+        .stat-number { 
+            font-size: 3.5rem; 
+            font-weight: 700; 
+            font-family: var(--font-heading); 
+            margin-bottom: 10px; 
+            display: block;
+            word-break: break-word; /* FIXED: Prevents number overflow on mobile */
+        }
+        .stat-label { 
+            font-size: 1.1rem; 
+            opacity: 0.95;
+            word-break: break-word; /* FIXED: Prevents label overflow */
+        }
 
         /* =========================================
            7. SUPPORT OUR CAUSES SECTION
@@ -235,7 +279,7 @@
             overflow: hidden; 
             box-shadow: 0 10px 30px rgba(26, 54, 93, 0.08); 
             transition: transform 0.3s, box-shadow 0.3s;
-            width: 100%; /* FIXED: Ensures cards don't overflow on mobile */
+            width: 100%;
             max-width: 100%;
         }
         .cause-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(26, 54, 93, 0.15); }
@@ -272,7 +316,7 @@
             box-shadow: 0 10px 30px rgba(26, 54, 93, 0.1); 
             transition: transform 0.3s, box-shadow 0.3s; 
             border: 2px solid transparent;
-            width: 100%; /* FIXED: Ensures cards don't overflow on mobile */
+            width: 100%;
             max-width: 100%;
         }
         .program-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(26, 54, 93, 0.15); border-color: var(--secondary-color); }
@@ -842,7 +886,7 @@
         }
 
         /* =========================================
-           18. MOBILE RESPONSIVENESS (IMPROVED CARD DISPLAY)
+           18. MOBILE RESPONSIVENESS
            ========================================= */
         @media (max-width: 768px) {
             h1 { font-size: 2rem; } 
@@ -874,8 +918,25 @@
             nav ul.active { display: flex; }
             nav .btn-primary { width: 100%; display: block; }
             
-            /* FIXED: All grids now use single column on mobile for perfect card display */
-            .stats-container { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+            /* IMPROVED IMPACT STATISTICS MOBILE */
+            .stats-container { 
+                grid-template-columns: repeat(2, 1fr); 
+                gap: 15px;
+                min-width: 0;
+            }
+            
+            .stat-item {
+                padding: 20px 10px; /* Reduced padding for mobile */
+                min-width: 0;
+            }
+            
+            .stat-number {
+                font-size: 2.5rem; /* Smaller on mobile */
+            }
+            
+            .stat-label {
+                font-size: 0.95rem; /* Smaller on mobile */
+            }
             
             .causes-grid,
             .programs-grid,
@@ -886,7 +947,6 @@
                 padding: 0;
             }
             
-            /* FIXED: Cards now have perfect width control on mobile */
             .cause-card,
             .program-card,
             .news-card,
@@ -926,16 +986,13 @@
             }
             .whatsapp-float svg { width: 24px; height: 24px; }
 
-            /* Mobile Testimonial Adjustments */
             .testimonial-content { padding: 25px 20px; }
             .testimonial-image img { width: 90px; height: 90px; }
             
-            /* Mobile FB Post Adjustments */
             .fb-post-image { height: 200px; }
             .fb-action-btn span { display: none; }
             .fb-action-btn { padding: 8px 12px; }
             
-            /* FIXED: Improved padding for all sections on mobile */
             .causes-section,
             .programs-section,
             .news-section,
@@ -948,13 +1005,31 @@
             }
         }
         
-        /* EXTRA SMALL SCREENS (phones under 380px) */
+        /* EXTRA SMALL SCREENS */
         @media (max-width: 380px) {
             .hero { padding: 100px 10px 60px; }
             .hero h1 { font-size: 1.7rem; }
             .hero p { font-size: 0.95rem; }
             .cause-content, .program-content { padding: 20px; }
             .progress-labels { flex-direction: column; gap: 4px; }
+            
+            /* Extra small Impact Stats */
+            .stats-container {
+                grid-template-columns: 1fr; /* Single column on very small screens */
+                gap: 10px;
+            }
+            
+            .stat-item {
+                padding: 15px 10px;
+            }
+            
+            .stat-number {
+                font-size: 2rem;
+            }
+            
+            .stat-label {
+                font-size: 0.85rem;
+            }
         }
     </style>
 </head>
