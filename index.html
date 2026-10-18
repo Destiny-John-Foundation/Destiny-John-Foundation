@@ -29,8 +29,14 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body { font-family: var(--font-body); color: var(--text-dark); line-height: 1.7; background-color: var(--bg-white); }
+        html { scroll-behavior: smooth; overflow-x: hidden; }
+        body { 
+            font-family: var(--font-body); 
+            color: var(--text-dark); 
+            line-height: 1.7; 
+            background-color: var(--bg-white); 
+            overflow-x: hidden; /* FIXED: Prevents horizontal shaking during carousel transitions */
+        }
         img { max-width: 100%; height: auto; display: block; }
         a { text-decoration: none; color: inherit; }
 
@@ -67,10 +73,42 @@
         nav .btn-primary { padding: 10px 24px; font-size: 0.9rem; color: white !important; }
 
         /* =========================================
-           5. HERO SECTION & CAROUSEL
+           5. HERO SECTION & CAROUSEL (FIXED: NO SHAKING)
            ========================================= */
-        .hero { color: white; text-align: center; padding: 150px 20px 100px; position: relative; min-height: 80vh; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-        .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 6px; background: linear-gradient(90deg, var(--secondary-color), var(--accent-sun), var(--secondary-color)); z-index: 10; }
+        .hero { 
+            color: white; 
+            text-align: center; 
+            padding: 150px 20px 100px; 
+            position: relative; 
+            height: 80vh; /* FIXED: Changed from min-height to fixed height to prevent layout shift */
+            min-height: 500px; /* Ensures minimum height on all screens */
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            overflow: hidden; /* FIXED: Prevents any content from escaping and causing layout shift */
+            contain: layout style paint; /* FIXED: Browser optimization to isolate layout calculations */
+        }
+        .hero::after { 
+            content: ''; 
+            position: absolute; 
+            bottom: 0; 
+            left: 0; 
+            right: 0; 
+            height: 6px; 
+            background: linear-gradient(90deg, var(--secondary-color), var(--accent-sun), var(--secondary-color)); 
+            z-index: 10; 
+        }
+        
+        /* FIXED: Carousel container now properly positioned and sized */
+        .carousel-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
         
         .carousel-slide-bg { 
             position: absolute; 
@@ -82,7 +120,10 @@
             background-position: 50% 20%; 
             background-repeat: no-repeat;
             opacity: 0; 
-            transition: opacity 1.5s ease-in-out; 
+            transition: opacity 1.5s ease-in-out;
+            will-change: opacity; /* FIXED: GPU acceleration prevents repaints from affecting page layout */
+            transform: translateZ(0); /* FIXED: Forces hardware acceleration layer */
+            backface-visibility: hidden; /* FIXED: Prevents flickering during transitions */
         }
         .carousel-slide-bg.active { opacity: 1; }
         
@@ -107,7 +148,12 @@
             pointer-events: none;
         }
         
-        .hero-content { position: relative; z-index: 2; max-width: 800px; }
+        .hero-content { 
+            position: relative; 
+            z-index: 2; 
+            max-width: 800px;
+            width: 100%;
+        }
         
         .hero h1 { 
             color: white; 
@@ -176,8 +222,22 @@
            7. SUPPORT OUR CAUSES SECTION
            ========================================= */
         .causes-section { padding: 100px 20px; background-color: var(--bg-light); }
-        .causes-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
-        .cause-card { background: var(--bg-white); border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(26, 54, 93, 0.08); transition: transform 0.3s, box-shadow 0.3s; }
+        .causes-grid { 
+            max-width: 1100px; 
+            margin: 0 auto; 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 30px; 
+        }
+        .cause-card { 
+            background: var(--bg-white); 
+            border-radius: 20px; 
+            overflow: hidden; 
+            box-shadow: 0 10px 30px rgba(26, 54, 93, 0.08); 
+            transition: transform 0.3s, box-shadow 0.3s;
+            width: 100%; /* FIXED: Ensures cards don't overflow on mobile */
+            max-width: 100%;
+        }
         .cause-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(26, 54, 93, 0.15); }
         .cause-image { height: 220px; background-size: cover; background-position: center; position: relative; cursor: zoom-in; transition: filter 0.3s ease; }
         .cause-image:hover { filter: brightness(1.15); }
@@ -198,8 +258,23 @@
            ========================================= */
         .programs-section { padding: 100px 20px; background-color: var(--bg-white); }
         .section-header { text-align: center; max-width: 700px; margin: 0 auto 60px; }
-        .programs-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
-        .program-card { background: var(--bg-white); border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(26, 54, 93, 0.1); transition: transform 0.3s, box-shadow 0.3s; border: 2px solid transparent; }
+        .programs-grid { 
+            max-width: 1100px; 
+            margin: 0 auto; 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 30px; 
+        }
+        .program-card { 
+            background: var(--bg-white); 
+            border-radius: 15px; 
+            overflow: hidden; 
+            box-shadow: 0 10px 30px rgba(26, 54, 93, 0.1); 
+            transition: transform 0.3s, box-shadow 0.3s; 
+            border: 2px solid transparent;
+            width: 100%; /* FIXED: Ensures cards don't overflow on mobile */
+            max-width: 100%;
+        }
         .program-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(26, 54, 93, 0.15); border-color: var(--secondary-color); }
         .program-image { height: 220px; background-size: cover; background-position: center; cursor: zoom-in; transition: filter 0.3s ease; }
         .program-image:hover { filter: brightness(1.15); }
@@ -241,7 +316,7 @@
         .news-content p { font-size: 0.95rem; margin-bottom: 20px; }
 
         /* =========================================
-           10.5 FACEBOOK LIVE POSTS SECTION (NEW)
+           10.5 FACEBOOK LIVE POSTS SECTION
            ========================================= */
         .fb-live-section { padding: 100px 20px; background-color: var(--bg-light); }
         .fb-section-header { text-align: center; max-width: 700px; margin: 0 auto 50px; }
@@ -252,7 +327,7 @@
             max-width: 1100px; 
             margin: 0 auto; 
             display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
             gap: 30px; 
         }
         
@@ -263,6 +338,8 @@
             box-shadow: 0 10px 30px rgba(26, 54, 93, 0.08);
             transition: transform 0.3s, box-shadow 0.3s;
             border: 1px solid #edf2f7;
+            width: 100%;
+            max-width: 100%;
         }
         .fb-post-card:hover {
             transform: translateY(-8px);
@@ -488,7 +565,7 @@
         }
         
         .fb-follow-btn {
-            display: block;
+            display: flex;
             width: calc(100% - 40px);
             margin: 15px 20px 20px;
             padding: 12px;
@@ -500,7 +577,6 @@
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
-            display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
@@ -517,7 +593,7 @@
         }
 
         /* =========================================
-           11. TESTIMONIALS SECTION (SEAMLESS CROSSFADE - NO DOTS)
+           11. TESTIMONIALS SECTION
            ========================================= */
         .testimonials-section { 
             padding: 100px 20px; 
@@ -766,18 +842,60 @@
         }
 
         /* =========================================
-           18. MOBILE RESPONSIVENESS
+           18. MOBILE RESPONSIVENESS (IMPROVED CARD DISPLAY)
            ========================================= */
         @media (max-width: 768px) {
-            h1 { font-size: 2rem; } h2 { font-size: 1.75rem; } .hero h1 { font-size: 2.25rem; }
-            .logo img { height: 80px; }
+            h1 { font-size: 2rem; } 
+            h2 { font-size: 1.75rem; } 
+            .hero { 
+                height: auto; 
+                min-height: 80vh; 
+                padding: 120px 15px 80px;
+            }
+            .hero h1 { font-size: 2rem; }
+            .hero p { font-size: 1.05rem; }
+            .logo img { height: 70px; }
             .menu-toggle { display: block; }
-            nav ul { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background-color: var(--bg-white); box-shadow: 0 10px 20px rgba(0,0,0,0.1); padding: 20px; gap: 20px; text-align: center; border-top: 1px solid #eee; }
+            nav ul { 
+                display: none; 
+                flex-direction: column; 
+                position: absolute; 
+                top: 100%; 
+                left: 0; 
+                right: 0; 
+                background-color: var(--bg-white); 
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1); 
+                padding: 20px; 
+                gap: 20px; 
+                text-align: center; 
+                border-top: 1px solid #eee; 
+                z-index: 999;
+            }
             nav ul.active { display: flex; }
             nav .btn-primary { width: 100%; display: block; }
             
-            .stats-container { grid-template-columns: repeat(2, 1fr); }
-            .programs-grid, .news-grid, .fb-posts-grid { grid-template-columns: 1fr; }
+            /* FIXED: All grids now use single column on mobile for perfect card display */
+            .stats-container { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+            
+            .causes-grid,
+            .programs-grid,
+            .news-grid,
+            .fb-posts-grid { 
+                grid-template-columns: 1fr; 
+                gap: 20px;
+                padding: 0;
+            }
+            
+            /* FIXED: Cards now have perfect width control on mobile */
+            .cause-card,
+            .program-card,
+            .news-card,
+            .fb-post-card {
+                width: 100%;
+                max-width: 100%;
+                margin: 0;
+            }
+            
             .why-us-container { grid-template-columns: 1fr; }
             .why-us-content h2 { text-align: center; }
             .experience-badge { left: 50%; transform: translateX(-50%); }
@@ -790,20 +908,21 @@
             .newsletter-image img { max-width: 180px; }
             
             .main-footer { padding-top: 70px; }
-            .footer-grid { grid-template-columns: 1fr 1fr; gap: 30px; }
-            .footer-brand { grid-column: 1 / -1; text-align: center; }
+            .footer-grid { grid-template-columns: 1fr; gap: 30px; }
+            .footer-brand { text-align: center; }
             .social-icons { justify-content: center; }
             .footer-bottom { flex-direction: column; text-align: center; }
 
-            .carousel-btn { top: 250px; width: 40px; height: 40px; font-size: 1.2rem; }
+            .carousel-btn { top: 40%; width: 40px; height: 40px; font-size: 1.2rem; }
             .prev-btn { left: 10px; }
             .next-btn { right: 10px; }
 
             .scroll-top-btn { bottom: 20px; right: 20px; width: 45px; height: 45px; }
             .whatsapp-float { 
-                top: 190px; 
+                top: 30%; 
                 right: 10px; 
-                width: 45px; height: 45px; 
+                width: 45px; 
+                height: 45px; 
             }
             .whatsapp-float svg { width: 24px; height: 24px; }
 
@@ -815,6 +934,27 @@
             .fb-post-image { height: 200px; }
             .fb-action-btn span { display: none; }
             .fb-action-btn { padding: 8px 12px; }
+            
+            /* FIXED: Improved padding for all sections on mobile */
+            .causes-section,
+            .programs-section,
+            .news-section,
+            .fb-live-section,
+            .why-us-section,
+            .testimonials-section,
+            .faq-section,
+            .cta-section {
+                padding: 60px 15px;
+            }
+        }
+        
+        /* EXTRA SMALL SCREENS (phones under 380px) */
+        @media (max-width: 380px) {
+            .hero { padding: 100px 10px 60px; }
+            .hero h1 { font-size: 1.7rem; }
+            .hero p { font-size: 0.95rem; }
+            .cause-content, .program-content { padding: 20px; }
+            .progress-labels { flex-direction: column; gap: 4px; }
         }
     </style>
 </head>
@@ -970,7 +1110,7 @@
                     </div>
                 </div>
 
-                <!-- NEW Cause 4 -->
+                <!-- Cause 4 -->
                 <div class="cause-card">
                     <div class="cause-image" style="background-image: url('assets/project-djf-images/image39.jpeg');">
                         <span class="cause-badge">Critical</span>
@@ -991,7 +1131,7 @@
                     </div>
                 </div>
 
-                <!-- NEW Cause 5 -->
+                <!-- Cause 5 -->
                 <div class="cause-card">
                     <div class="cause-image" style="background-image: url('assets/project-djf-images/image37.jpeg');">
                         <span class="cause-badge">Ongoing</span>
@@ -1012,7 +1152,7 @@
                     </div>
                 </div>
 
-                <!-- NEW Cause 6 -->
+                <!-- Cause 6 -->
                 <div class="cause-card">
                     <div class="cause-image" style="background-image: url('assets/project-djf-images/image12.jpeg');">
                         <span class="cause-badge">Urgent</span>
@@ -1068,7 +1208,7 @@
                 </div>
             </div>
 
-            <!-- NEW Program 4 -->
+            <!-- Program 4 -->
             <div class="program-card">
                 <div class="program-image" style="background-image: url('assets/project-djf-images/image44.jpeg');"></div>
                 <div class="program-content">
@@ -1078,7 +1218,7 @@
                 </div>
             </div>
 
-            <!-- NEW Program 5 -->
+            <!-- Program 5 -->
             <div class="program-card">
                 <div class="program-image" style="background-image: url('assets/project-djf-images/image20.jpeg');"></div>
                 <div class="program-content">
@@ -1088,7 +1228,7 @@
                 </div>
             </div>
 
-            <!-- NEW Program 6 -->
+            <!-- Program 6 -->
             <div class="program-card">
                 <div class="program-image" style="background-image: url('assets/project-djf-images/image42.jpeg');"></div>
                 <div class="program-content">
@@ -1154,7 +1294,7 @@
         </div>
     </section>
 
-    <!-- FACEBOOK LIVE POSTS SECTION (NEW) -->
+    <!-- FACEBOOK LIVE POSTS SECTION -->
     <section class="fb-live-section">
         <div class="fb-section-header">
             <h2>📺 Facebook Live & Updates</h2>
@@ -1339,14 +1479,13 @@
         </div>
     </section>
 
-    <!-- TESTIMONIALS SECTION (SEAMLESS CROSSFADE - NO DOTS) -->
+    <!-- TESTIMONIALS SECTION -->
     <section class="testimonials-section">
         <div class="container">
             <h2>Stories of Hope & Impact</h2>
             
             <div class="testimonial-slider-container">
                 <div class="testimonial-slider" id="testimonialSlider">
-                    <!-- Slide 1 -->
                     <div class="testimonial-slide active">
                         <div class="testimonial-image">
                             <img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=200&q=80" alt="Fatima K.">
@@ -1358,7 +1497,6 @@
                         </div>
                     </div>
                     
-                    <!-- Slide 2 -->
                     <div class="testimonial-slide">
                         <div class="testimonial-image">
                             <img src="https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f?auto=format&fit=crop&w=200&q=80" alt="Dr. Ibrahim S.">
@@ -1370,7 +1508,6 @@
                         </div>
                     </div>
                     
-                    <!-- Slide 3 -->
                     <div class="testimonial-slide">
                         <div class="testimonial-image">
                             <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=200&q=80" alt="Sarah M.">
@@ -1421,7 +1558,7 @@
         </div>
     </section>
 
-    <!-- FLOATING NEWSLETTER SECTION (COMPACT) -->
+    <!-- FLOATING NEWSLETTER SECTION -->
     <div class="newsletter-wrapper">
         <div class="newsletter-card">
             <div class="newsletter-image">
@@ -1434,7 +1571,6 @@
                     <input type="email" placeholder="Enter your email address" required>
                     <button type="submit">Subscribe</button>
                 </form>
-                
             </div>
         </div>
     </div>
@@ -1647,9 +1783,7 @@
             });
         });
 
-        // ==========================================
         // CREATIVE & PROTECTED LIGHTBOX LOGIC
-        // ==========================================
         const lightbox = document.createElement('div');
         lightbox.id = 'lightbox';
         lightbox.className = 'lightbox-modal';
@@ -1666,7 +1800,6 @@
         const lightboxClose = lightbox.querySelector('.lightbox-close');
         const lightboxOverlay = lightbox.querySelector('.lightbox-protect-overlay');
 
-        // Add click event to cause, program, AND Facebook post images
         document.querySelectorAll('.cause-image, .program-image, .fb-post-image').forEach(div => {
             div.addEventListener('click', () => {
                 const bgImage = div.style.backgroundImage;
@@ -1678,31 +1811,26 @@
             });
         });
 
-        // Close on X button click
         lightboxClose.addEventListener('click', (e) => {
             e.stopPropagation();
             lightbox.classList.remove('active');
         });
 
-        // Close on background click
         lightbox.addEventListener('click', () => {
             lightbox.classList.remove('active');
         });
 
-        // Close on Escape key
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && lightbox.classList.contains('active')) {
                 lightbox.classList.remove('active');
             }
         });
 
-        // PREVENT DOWNLOADING (Right-click and Drag) on lightbox
         lightboxImg.addEventListener('contextmenu', (e) => e.preventDefault());
         lightboxImg.addEventListener('dragstart', (e) => e.preventDefault());
         lightboxOverlay.addEventListener('contextmenu', (e) => e.preventDefault());
         lightboxOverlay.addEventListener('dragstart', (e) => e.preventDefault());
 
-        // PREVENT SCREENSHOTS (Print Screen Key Detection) for lightbox
         document.addEventListener('keyup', (e) => {
             if (e.key === 'PrintScreen') {
                 lightboxImg.style.filter = 'blur(30px) brightness(0.2)';
@@ -1716,25 +1844,19 @@
             }
         });
 
-        // ==========================================
         // BANNER CAROUSEL PROTECTION
-        // ==========================================
-        
-        // Disable right-click on carousel slides
         document.querySelectorAll('.carousel-slide-bg').forEach(slide => {
             slide.addEventListener('contextmenu', (e) => {
                 e.preventDefault();
                 return false;
             });
             
-            // Disable dragging
             slide.addEventListener('dragstart', (e) => {
                 e.preventDefault();
                 return false;
             });
         });
 
-        // Disable right-click on carousel protect overlays
         document.querySelectorAll('.carousel-protect-overlay').forEach(overlay => {
             overlay.addEventListener('contextmenu', (e) => {
                 e.preventDefault();
@@ -1747,7 +1869,6 @@
             });
         });
 
-        // Disable right-click on entire hero section (optional, but good for safety)
         const heroSection = document.querySelector('.hero');
         heroSection.addEventListener('contextmenu', (e) => {
             if (e.target.closest('.carousel-container')) {
@@ -1756,10 +1877,8 @@
             }
         });
 
-        // Blur carousel slides on Print Screen
         document.addEventListener('keyup', (e) => {
             if (e.key === 'PrintScreen') {
-                // Blur all carousel slides
                 slides.forEach(slide => {
                     slide.style.filter = 'blur(30px) brightness(0.2)';
                 });
@@ -1776,14 +1895,11 @@
             }
         });
 
-        // Prevent image dragging on carousel
         document.querySelectorAll('.carousel-slide-bg').forEach(slide => {
             slide.setAttribute('draggable', 'false');
         });
 
-        // ==========================================
-        // TESTIMONIAL SLIDER LOGIC (AUTO-PLAY ONLY - NO DOTS)
-        // ==========================================
+        // TESTIMONIAL SLIDER LOGIC
         const testiSlides = document.querySelectorAll('.testimonial-slide');
         let currentTesti = 0;
         let testiInterval;
@@ -1800,19 +1916,16 @@
         }
 
         function startTestiCarousel() {
-            testiInterval = setInterval(nextTestimonial, 6000); // Auto-play every 6 seconds
+            testiInterval = setInterval(nextTestimonial, 6000);
         }
 
-        // Pause on hover for better UX
         const testiContainer = document.querySelector('.testimonial-slider-container');
         testiContainer.addEventListener('mouseenter', () => clearInterval(testiInterval));
         testiContainer.addEventListener('mouseleave', startTestiCarousel);
 
         startTestiCarousel();
         
-        // ==========================================
         // FACEBOOK POST INTERACTIONS
-        // ==========================================
         document.querySelectorAll('.fb-action-btn').forEach(btn => {
             btn.addEventListener('click', function() {
                 const action = this.querySelector('span')?.textContent || 'Action';
