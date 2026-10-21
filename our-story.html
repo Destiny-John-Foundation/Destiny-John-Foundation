@@ -407,16 +407,28 @@
             margin-top: 50px;
         }
 
-        /* ========== NEW TIMELINE DESIGN - MILESTONES ========== */
+        /* ========== NEW PROFESSIONAL TIMELINE DESIGN ========== */
         .timeline-section {
-            padding: 120px 20px;
-            background: var(--bg-cream);
+            padding: 140px 20px;
+            background: linear-gradient(180deg, var(--bg-cream) 0%, var(--bg-white) 100%);
             position: relative;
+            overflow: hidden;
+        }
+        .timeline-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 200px;
+            background: linear-gradient(180deg, var(--bg-cream), transparent);
         }
         .timeline-header {
             text-align: center;
             max-width: 700px;
-            margin: 0 auto 80px;
+            margin: 0 auto 100px;
+            position: relative;
+            z-index: 1;
         }
         .timeline-header .chapter-marker {
             justify-content: center;
@@ -425,154 +437,130 @@
         }
         .timeline-header h2 {
             font-family: var(--font-editorial);
-            font-size: 3rem;
+            font-size: 3.5rem;
             font-weight: 400;
+            margin-bottom: 20px;
         }
         .timeline-header h2 em {
             font-style: italic;
             color: var(--secondary-color);
         }
         .timeline-header p {
-            font-size: 1.1rem;
+            font-size: 1.15rem;
+            color: var(--text-light);
         }
         
-        /* NEW: Horizontal Scroll Timeline */
-        .milestones-container {
-            max-width: 1200px;
+        /* NEW: Vertical Journey Timeline */
+        .journey-timeline {
+            max-width: 1000px;
             margin: 0 auto;
             position: relative;
         }
-        .milestones-wrapper {
+        .journey-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, var(--accent-sun) 0%, var(--secondary-color) 50%, var(--primary-color) 100%);
+            transform: translateX(-50%);
+            box-shadow: 0 0 20px rgba(255, 138, 128, 0.3);
+        }
+        .journey-item {
             display: flex;
-            gap: 40px;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            padding: 40px 20px;
-            scrollbar-width: thin;
-            scrollbar-color: var(--secondary-color) var(--bg-cream);
-        }
-        .milestones-wrapper::-webkit-scrollbar {
-            height: 8px;
-        }
-        .milestones-wrapper::-webkit-scrollbar-track {
-            background: var(--bg-cream);
-            border-radius: 4px;
-        }
-        .milestones-wrapper::-webkit-scrollbar-thumb {
-            background: var(--secondary-color);
-            border-radius: 4px;
-        }
-        .milestone-card {
-            flex: 0 0 350px;
-            scroll-snap-align: center;
-            background: white;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 15px 40px rgba(26, 54, 93, 0.1);
-            transition: all 0.4s ease;
+            align-items: center;
+            justify-content: flex-end;
+            margin-bottom: 100px;
+            position: relative;
             opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 0.8s ease forwards;
+            transform: translateX(-50px);
+            transition: all 0.8s ease;
         }
-        .milestone-card:nth-child(1) { animation-delay: 0.1s; }
-        .milestone-card:nth-child(2) { animation-delay: 0.2s; }
-        .milestone-card:nth-child(3) { animation-delay: 0.3s; }
-        .milestone-card:nth-child(4) { animation-delay: 0.4s; }
-        .milestone-card:nth-child(5) { animation-delay: 0.5s; }
-        .milestone-card:nth-child(6) { animation-delay: 0.6s; }
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .journey-item.visible {
+            opacity: 1;
+            transform: translateX(0);
         }
-        .milestone-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 25px 50px rgba(26, 54, 93, 0.2);
+        .journey-item:nth-child(even) {
+            justify-content: flex-start;
+            transform: translateX(50px);
         }
-        .milestone-image {
-            height: 200px;
+        .journey-item:nth-child(even).visible {
+            transform: translateX(0);
+        }
+        .journey-content {
+            width: 45%;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(26, 54, 93, 0.1);
+            position: relative;
+            transition: all 0.4s ease;
+        }
+        .journey-content:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(26, 54, 93, 0.15);
+        }
+        .journey-item:nth-child(odd) .journey-content {
+            margin-right: 50px;
+            text-align: right;
+        }
+        .journey-item:nth-child(even) .journey-content {
+            margin-left: 50px;
+            text-align: left;
+        }
+        .journey-number {
+            position: absolute;
+            width: 70px;
+            height: 70px;
             background: linear-gradient(135deg, var(--secondary-color), var(--accent-sun));
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 4rem;
-            position: relative;
-            overflow: hidden;
-        }
-        .milestone-image::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.2) 1px, transparent 1px);
-            background-size: 20px 20px;
-            opacity: 0.3;
-        }
-        .milestone-year-badge {
-            position: absolute;
-            bottom: 15px;
-            right: 15px;
-            background: white;
-            color: var(--primary-color);
-            padding: 8px 16px;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 0.9rem;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-        .milestone-content {
-            padding: 30px;
-        }
-        .milestone-number {
             font-family: var(--font-editorial);
-            font-size: 3rem;
-            color: var(--accent-sun);
-            opacity: 0.4;
-            line-height: 1;
-            margin-bottom: -20px;
-            font-style: italic;
+            font-size: 2rem;
+            font-weight: 700;
+            color: white;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 8px 25px rgba(255, 138, 128, 0.4);
+            border: 5px solid white;
+            z-index: 2;
         }
-        .milestone-title {
+        .journey-year {
+            font-family: var(--font-editorial);
+            font-size: 1.1rem;
+            color: var(--secondary-color);
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        .journey-title {
             font-family: var(--font-heading);
-            font-size: 1.3rem;
+            font-size: 1.5rem;
             color: var(--primary-color);
-            margin-bottom: 12px;
+            margin-bottom: 15px;
             font-weight: 700;
         }
-        .milestone-text {
-            font-size: 0.95rem;
+        .journey-text {
+            font-size: 1rem;
             color: var(--text-light);
             line-height: 1.7;
             margin: 0;
         }
-        .milestone-connector {
-            display: none;
+        .journey-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            display: block;
         }
-        
-        /* Timeline Navigation Dots */
-        .timeline-nav {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            margin-top: 40px;
+        .journey-item:nth-child(odd) .journey-icon {
+            float: right;
+            margin-left: 15px;
         }
-        .timeline-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: #e2e8f0;
-            cursor: pointer;
-            transition: all 0.3s;
-            border: 2px solid transparent;
-        }
-        .timeline-dot.active {
-            background: var(--secondary-color);
-            transform: scale(1.3);
-            border-color: white;
-            box-shadow: 0 0 0 3px var(--secondary-color);
+        .journey-item:nth-child(even) .journey-icon {
+            float: left;
+            margin-right: 15px;
         }
 
         /* ========== VALUES ========== */
@@ -955,18 +943,30 @@
             .turning-point-text { font-size: 1.05rem; }
             
             /* NEW: Mobile Timeline */
-            .milestones-wrapper {
-                flex-direction: column;
-                overflow-x: hidden;
-                overflow-y: visible;
+            .journey-line { left: 30px; }
+            .journey-item,
+            .journey-item:nth-child(even) {
+                justify-content: flex-start;
+                padding-left: 80px;
             }
-            .milestone-card {
-                flex: 0 0 auto;
+            .journey-content,
+            .journey-item:nth-child(even) .journey-content {
                 width: 100%;
-                max-width: 400px;
-                margin: 0 auto;
+                margin: 0;
+                text-align: left;
             }
-            .timeline-nav { display: none; }
+            .journey-number {
+                left: 30px;
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+            .journey-item:nth-child(odd) .journey-icon,
+            .journey-item:nth-child(even) .journey-icon {
+                float: none;
+                margin: 0 0 15px 0;
+                display: block;
+            }
             
             .values-grid { grid-template-columns: 1fr; gap: 25px; }
             .values-header h2, .timeline-header h2 { font-size: 2rem; }
@@ -1070,7 +1070,7 @@
                         <div class="attribute-label">Light</div>
                     </div>
                     <div class="attribute">
-                        <div class="attribute-icon">💫</div>
+                        <div class="attribute-icon"></div>
                         <div class="attribute-label">Hope</div>
                     </div>
                     <div class="attribute">
@@ -1093,7 +1093,7 @@
         </div>
     </section>
 
-    <!-- NEW TIMELINE - MILESTONES OF HOPE -->
+    <!-- NEW PROFESSIONAL TIMELINE - MILESTONES OF HOPE -->
     <section class="timeline-section">
         <div class="timeline-header reveal">
             <div class="chapter-marker">
@@ -1104,88 +1104,67 @@
             <p>From a single family's promise to a nationwide movement — here are the moments that defined us.</p>
         </div>
 
-        <div class="milestones-container reveal">
-            <div class="milestones-wrapper">
-                <div class="milestone-card">
-                    <div class="milestone-image">
-                        ️
-                        <span class="milestone-year-badge">The Beginning</span>
-                    </div>
-                    <div class="milestone-content">
-                        <div class="milestone-number">01</div>
-                        <h3 class="milestone-title">A Promise Made</h3>
-                        <p class="milestone-text">In the wake of losing Destiny John, his family made a sacred vow: to honor his life by protecting the lives of other children.</p>
-                    </div>
-                </div>
-
-                <div class="milestone-card">
-                    <div class="milestone-image">
-                        
-                        <span class="milestone-year-badge">Year One</span>
-                    </div>
-                    <div class="milestone-content">
-                        <div class="milestone-number">02</div>
-                        <h3 class="milestone-title">First Medical Outreach</h3>
-                        <p class="milestone-text">Partnering with local clinics in Freetown, we provided free pediatric care to over 200 children — the first of many to come.</p>
-                    </div>
-                </div>
-
-                <div class="milestone-card">
-                    <div class="milestone-image">
-                        📚
-                        <span class="milestone-year-badge">Year Two</span>
-                    </div>
-                    <div class="milestone-content">
-                        <div class="milestone-number">03</div>
-                        <h3 class="milestone-title">Education Initiative Launched</h3>
-                        <p class="milestone-text">We expanded beyond healthcare, distributing school kits and scholarships to 500 underprivileged children across three districts.</p>
-                    </div>
-                </div>
-
-                <div class="milestone-card">
-                    <div class="milestone-image">
-                        
-                        <span class="milestone-year-badge">Year Three</span>
-                    </div>
-                    <div class="milestone-content">
-                        <div class="milestone-number">04</div>
-                        <h3 class="milestone-title">Healthcare Worker Training</h3>
-                        <p class="milestone-text">Launched our landmark program training 50+ frontline healthcare workers in pediatric care — multiplying our impact exponentially.</p>
-                    </div>
-                </div>
-
-                <div class="milestone-card">
-                    <div class="milestone-image">
-                        💧
-                        <span class="milestone-year-badge">Year Four</span>
-                    </div>
-                    <div class="milestone-content">
-                        <div class="milestone-number">05</div>
-                        <h3 class="milestone-title">Clean Water Initiative</h3>
-                        <p class="milestone-text">Built our first community wells, bringing safe drinking water to rural villages and reducing waterborne illness among children.</p>
-                    </div>
-                </div>
-
-                <div class="milestone-card">
-                    <div class="milestone-image">
-                        🌍
-                        <span class="milestone-year-badge">Today</span>
-                    </div>
-                    <div class="milestone-content">
-                        <div class="milestone-number">06</div>
-                        <h3 class="milestone-title">25+ Communities Reached</h3>
-                        <p class="milestone-text">5,000+ children supported, 50+ healthcare workers trained, and a movement growing stronger every day — all in Destiny's name.</p>
-                    </div>
+        <div class="journey-timeline">
+            <div class="journey-line"></div>
+            
+            <div class="journey-item">
+                <div class="journey-number">01</div>
+                <div class="journey-content">
+                    <span class="journey-year">The Beginning</span>
+                    <span class="journey-icon">️</span>
+                    <h3 class="journey-title">A Promise Made</h3>
+                    <p class="journey-text">In the wake of losing Destiny John, his family made a sacred vow: to honor his life by protecting the lives of other children.</p>
                 </div>
             </div>
-            
-            <div class="timeline-nav">
-                <div class="timeline-dot active" onclick="scrollToMilestone(0)"></div>
-                <div class="timeline-dot" onclick="scrollToMilestone(1)"></div>
-                <div class="timeline-dot" onclick="scrollToMilestone(2)"></div>
-                <div class="timeline-dot" onclick="scrollToMilestone(3)"></div>
-                <div class="timeline-dot" onclick="scrollToMilestone(4)"></div>
-                <div class="timeline-dot" onclick="scrollToMilestone(5)"></div>
+
+            <div class="journey-item">
+                <div class="journey-number">02</div>
+                <div class="journey-content">
+                    <span class="journey-year">Year One</span>
+                    <span class="journey-icon">🏥</span>
+                    <h3 class="journey-title">First Medical Outreach</h3>
+                    <p class="journey-text">Partnering with local clinics in Freetown, we provided free pediatric care to over 200 children — the first of many to come.</p>
+                </div>
+            </div>
+
+            <div class="journey-item">
+                <div class="journey-number">03</div>
+                <div class="journey-content">
+                    <span class="journey-year">Year Two</span>
+                    <span class="journey-icon">📚</span>
+                    <h3 class="journey-title">Education Initiative Launched</h3>
+                    <p class="journey-text">We expanded beyond healthcare, distributing school kits and scholarships to 500 underprivileged children across three districts.</p>
+                </div>
+            </div>
+
+            <div class="journey-item">
+                <div class="journey-number">04</div>
+                <div class="journey-content">
+                    <span class="journey-year">Year Three</span>
+                    <span class="journey-icon">🤝</span>
+                    <h3 class="journey-title">Healthcare Worker Training</h3>
+                    <p class="journey-text">Launched our landmark program training 50+ frontline healthcare workers in pediatric care — multiplying our impact exponentially.</p>
+                </div>
+            </div>
+
+            <div class="journey-item">
+                <div class="journey-number">05</div>
+                <div class="journey-content">
+                    <span class="journey-year">Year Four</span>
+                    <span class="journey-icon">💧</span>
+                    <h3 class="journey-title">Clean Water Initiative</h3>
+                    <p class="journey-text">Built our first community wells, bringing safe drinking water to rural villages and reducing waterborne illness among children.</p>
+                </div>
+            </div>
+
+            <div class="journey-item">
+                <div class="journey-number">06</div>
+                <div class="journey-content">
+                    <span class="journey-year">Today</span>
+                    <span class="journey-icon">🌍</span>
+                    <h3 class="journey-title">25+ Communities Reached</h3>
+                    <p class="journey-text">5,000+ children supported, 50+ healthcare workers trained, and a movement growing stronger every day — all in Destiny's name.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -1251,7 +1230,7 @@
         <div class="founder-container">
             <div class="founder-image reveal">
                 <div class="founder-badge">Founder</div>
-                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80" alt="Founder of Destiny John Foundation">
+                <img src="assets/project-djf-images/image9.jpg" alt="Founder of Destiny John Foundation speaking at community event">
             </div>
             <div class="founder-content reveal">
                 <div class="chapter-marker">
@@ -1376,7 +1355,7 @@
             });
         }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
 
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        document.querySelectorAll('.reveal, .journey-item').forEach(el => observer.observe(el));
 
         // Animated Counters
         const counterObserver = new IntersectionObserver((entries) => {
@@ -1416,48 +1395,6 @@
                 hero.style.backgroundPositionY = `${scrolled * 0.5}px`;
             }
         });
-
-        // NEW: Horizontal Timeline Navigation
-        function scrollToMilestone(index) {
-            const wrapper = document.querySelector('.milestones-wrapper');
-            const cards = document.querySelectorAll('.milestone-card');
-            const dots = document.querySelectorAll('.timeline-dot');
-            
-            if (cards[index]) {
-                const cardOffset = cards[index].offsetLeft - (wrapper.offsetWidth / 2) + (cards[index].offsetWidth / 2);
-                wrapper.scrollTo({ left: cardOffset, behavior: 'smooth' });
-            }
-            
-            dots.forEach((dot, i) => {
-                dot.classList.toggle('active', i === index);
-            });
-        }
-
-        // Update active dot on scroll
-        const wrapper = document.querySelector('.milestones-wrapper');
-        if (wrapper) {
-            wrapper.addEventListener('scroll', () => {
-                const cards = document.querySelectorAll('.milestone-card');
-                const dots = document.querySelectorAll('.timeline-dot');
-                const center = wrapper.scrollLeft + wrapper.offsetWidth / 2;
-                
-                let closestIndex = 0;
-                let closestDistance = Infinity;
-                
-                cards.forEach((card, index) => {
-                    const cardCenter = card.offsetLeft + card.offsetWidth / 2;
-                    const distance = Math.abs(cardCenter - center);
-                    if (distance < closestDistance) {
-                        closestDistance = distance;
-                        closestIndex = index;
-                    }
-                });
-                
-                dots.forEach((dot, i) => {
-                    dot.classList.toggle('active', i === closestIndex);
-                });
-            });
-        }
     </script>
 </body>
 </html>
