@@ -57,15 +57,20 @@
         nav a:hover, nav a.active { color: var(--secondary-color); }
         nav .btn-primary { padding: 10px 24px; font-size: 0.9rem; color: white !important; }
 
-        /* HERO - ENHANCED VISIBILITY */
+        /* HERO - FULL IMAGE DISPLAY */
         .page-hero { 
             background: linear-gradient(135deg, rgba(26, 54, 93, 0.65) 0%, rgba(44, 82, 130, 0.60) 100%),  
-                        url('assets/project-djf-images/image56.jpeg') center/cover; 
+                        url('assets/project-djf-images/image56.jpeg') center/contain; 
+            background-repeat: no-repeat;
             color: white; 
             text-align: center; 
             padding: 140px 20px 100px; 
             position: relative; 
             overflow: hidden;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .page-hero h1 { 
             font-size: 3.5rem; 
@@ -929,7 +934,7 @@
                 <div class="impact-card"><h3>Make an Immediate Impact</h3><p>Le 25 provides a school kit. Le 50 funds a medical checkup. Le 100 supplies a family with a month of nutritional support.</p></div>
                 <div class="trust-badges">
                     <div class="trust-item"><div class="trust-icon">🔒</div><span>100% Secure & Encrypted</span></div>
-                    <div class="trust-item"><div class="trust-icon">📜</div><span>Tax-Deductible Receipt</span></div>
+                    <div class="trust-item"><div class="trust-icon"></div><span>Tax-Deductible Receipt</span></div>
                     <div class="trust-item"><div class="trust-icon">🤝</div><span>Transparent Operations</span></div>
                     <div class="trust-item"><div class="trust-icon">📊</div><span>Annual Impact Reports</span></div>
                 </div>
@@ -959,7 +964,7 @@
                 <div class="donation-frequency" id="donate-frequency">
                     <div class="frequency-label">Choose Donation Frequency</div>
                     <div class="frequency-toggle">
-                        <button class="freq-btn active" data-freq="onetime" onclick="setFrequency('onetime')"><span>💝</span> One-Time</button>
+                        <button class="freq-btn active" data-freq="onetime" onclick="setFrequency('onetime')"><span></span> One-Time</button>
                         <button class="freq-btn" data-freq="monthly" onclick="setFrequency('monthly')"><span></span> Monthly <span class="freq-save">Save 20%</span></button>
                     </div>
                     <!-- NEW: Monthly benefits tooltip -->
@@ -989,10 +994,10 @@
                         <label class="quick-amount-label">💰 Select Donation Amount (New Leone)</label>
                         <div class="amount-grid">
                             <button class="amount-btn" data-amount="10" onclick="selectAmount(10, this)">Le 10<span class="amount-impact-preview">🌱 Seed of hope</span></button>
-                            <button class="amount-btn active" data-amount="25" onclick="selectAmount(25, this)">Le 25<span class="amount-impact-preview">🎒 School kit</span></button>
+                            <button class="amount-btn active" data-amount="25" onclick="selectAmount(25, this)">Le 25<span class="amount-impact-preview"> School kit</span></button>
                             <button class="amount-btn" data-amount="50" onclick="selectAmount(50, this)">Le 50<span class="amount-impact-preview">🩺 Medical checkup</span></button>
                             <button class="amount-btn" data-amount="100" onclick="selectAmount(100, this)">Le 100<span class="amount-impact-preview">🍎 Family nutrition</span></button>
-                            <button class="amount-btn" data-amount="250" onclick="selectAmount(250, this)">Le 250<span class="amount-impact-preview">💉 5 vaccines</span></button>
+                            <button class="amount-btn" data-amount="250" onclick="selectAmount(250, this)">Le 250<span class="amount-impact-preview"> 5 vaccines</span></button>
                             <button class="amount-btn" data-amount="500" onclick="selectAmount(500, this)">Le 500<span class="amount-impact-preview">👩‍⚕️ Train worker</span></button>
                             <button class="amount-btn" data-amount="1000" onclick="selectAmount(1000, this)">Le 1000<span class="amount-impact-preview">💧 Clean water</span></button>
                             <button class="amount-btn" data-amount="custom" onclick="selectCustomAmount(this)">Custom</button>
@@ -1209,7 +1214,7 @@
                             
                             <div class="trust-security-badges">
                                 <div class="security-badge">
-                                    <div class="security-badge-icon">🔒</div>
+                                    <div class="security-badge-icon"></div>
                                     <div class="security-badge-text">256-bit SSL<br>Encryption</div>
                                 </div>
                                 <div class="security-badge">
@@ -1439,7 +1444,7 @@
             const fileName = input.files[0]?.name || '';
             const fileNameDisplay = document.getElementById('fileNameIntl');
             if (fileName) { 
-                fileNameDisplay.textContent = `📎 Selected: ${fileName}`; 
+                fileNameDisplay.textContent = ` Selected: ${fileName}`; 
                 fileNameDisplay.style.color = 'var(--primary-color)';
             } else { 
                 fileNameDisplay.textContent = ''; 
@@ -1535,13 +1540,13 @@
 
         const impactTiers = [
             { min: 0, max: 9, icon: '', visual: '🌱', description: 'Plants a seed of hope for a child', children: 1 },
-            { min: 10, max: 24, icon: '', visual: '📚', description: 'Provides school supplies for one child', children: 1 },
-            { min: 25, max: 49, icon: '🎒', visual: '🎒', description: 'Provides a complete school kit for one child', children: 1 },
-            { min: 50, max: 99, icon: '🩺', visual: '🩺', description: 'Funds a medical checkup for one child', children: 1 },
+            { min: 10, max: 24, icon: '', visual: '', description: 'Provides school supplies for one child', children: 1 },
+            { min: 25, max: 49, icon: '', visual: '🎒', description: 'Provides a complete school kit for one child', children: 1 },
+            { min: 50, max: 99, icon: '', visual: '🩺', description: 'Funds a medical checkup for one child', children: 1 },
             { min: 100, max: 249, icon: '🍎', visual: '🍎', description: 'Supplies a family with a month of nutritional support', children: 3 },
             { min: 250, max: 499, icon: '💉', visual: '💉', description: 'Provides vaccines for 5 children', children: 5 },
-            { min: 500, max: 999, icon: '👩‍️', visual: '👩‍️', description: 'Trains one healthcare worker for a month', children: 10 },
-            { min: 1000, max: Infinity, icon: '💧', visual: '💧', description: 'Helps build clean water access for a community', children: 50 }
+            { min: 500, max: 999, icon: '👩‍️', visual: '‍️', description: 'Trains one healthcare worker for a month', children: 10 },
+            { min: 1000, max: Infinity, icon: '💧', visual: '', description: 'Helps build clean water access for a community', children: 50 }
         ];
 
         function updateImpactFromAmount(amount) {
