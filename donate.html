@@ -57,10 +57,28 @@
         nav a:hover, nav a.active { color: var(--secondary-color); }
         nav .btn-primary { padding: 10px 24px; font-size: 0.9rem; color: white !important; }
 
-        /* HERO */
-        .page-hero { background: linear-gradient(135deg, rgba(26, 54, 93, 0.95) 0%, rgba(44, 82, 130, 0.9) 100%),  url('assets/project-djf-images/image54.jpeg') center/cover; color: white; text-align: center; padding: 140px 20px 100px; position: relative; overflow: hidden; }
-        .page-hero h1 { font-size: 3.5rem; margin-bottom: 15px; }
-        .page-hero p { font-size: 1.2rem; max-width: 700px; margin: 0 auto; color: rgba(255,255,255,0.9); }
+        /* HERO - ENHANCED VISIBILITY */
+        .page-hero { 
+            background: linear-gradient(135deg, rgba(26, 54, 93, 0.65) 0%, rgba(44, 82, 130, 0.60) 100%),  
+                        url('assets/project-djf-images/image54.jpeg') center/cover; 
+            color: white; 
+            text-align: center; 
+            padding: 140px 20px 100px; 
+            position: relative; 
+            overflow: hidden;
+        }
+        .page-hero h1 { 
+            font-size: 3.5rem; 
+            margin-bottom: 15px; 
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        .page-hero p { 
+            font-size: 1.2rem; 
+            max-width: 700px; 
+            margin: 0 auto; 
+            color: rgba(255,255,255,0.95); 
+            text-shadow: 0 1px 5px rgba(0,0,0,0.3);
+        }
         
         /* NEW: Live Donor Ticker */
         .donor-ticker {
@@ -942,7 +960,7 @@
                     <div class="frequency-label">Choose Donation Frequency</div>
                     <div class="frequency-toggle">
                         <button class="freq-btn active" data-freq="onetime" onclick="setFrequency('onetime')"><span>💝</span> One-Time</button>
-                        <button class="freq-btn" data-freq="monthly" onclick="setFrequency('monthly')"><span>🔄</span> Monthly <span class="freq-save">Save 20%</span></button>
+                        <button class="freq-btn" data-freq="monthly" onclick="setFrequency('monthly')"><span></span> Monthly <span class="freq-save">Save 20%</span></button>
                     </div>
                     <!-- NEW: Monthly benefits tooltip -->
                     <div class="monthly-benefits" id="monthlyBenefits">
@@ -1199,7 +1217,7 @@
                                     <div class="security-badge-text">Verified<br>Non-Profit</div>
                                 </div>
                                 <div class="security-badge">
-                                    <div class="security-badge-icon">🛡️</div>
+                                    <div class="security-badge-icon">️</div>
                                     <div class="security-badge-text">Secure<br>Payment</div>
                                 </div>
                                 <div class="security-badge">
@@ -1367,7 +1385,7 @@
             
             <div class="modal-actions">
                 <button class="btn btn-outline" onclick="closeSuccessModal()">Close</button>
-                <button class="btn btn-primary" onclick="window.print()">🖨️ Print Receipt</button>
+                <button class="btn btn-primary" onclick="window.print()">️ Print Receipt</button>
             </div>
         </div>
     </div>
@@ -1516,13 +1534,13 @@
         });
 
         const impactTiers = [
-            { min: 0, max: 9, icon: '🌱', visual: '🌱', description: 'Plants a seed of hope for a child', children: 1 },
-            { min: 10, max: 24, icon: '📚', visual: '📚', description: 'Provides school supplies for one child', children: 1 },
+            { min: 0, max: 9, icon: '', visual: '🌱', description: 'Plants a seed of hope for a child', children: 1 },
+            { min: 10, max: 24, icon: '', visual: '📚', description: 'Provides school supplies for one child', children: 1 },
             { min: 25, max: 49, icon: '🎒', visual: '🎒', description: 'Provides a complete school kit for one child', children: 1 },
             { min: 50, max: 99, icon: '🩺', visual: '🩺', description: 'Funds a medical checkup for one child', children: 1 },
             { min: 100, max: 249, icon: '🍎', visual: '🍎', description: 'Supplies a family with a month of nutritional support', children: 3 },
             { min: 250, max: 499, icon: '💉', visual: '💉', description: 'Provides vaccines for 5 children', children: 5 },
-            { min: 500, max: 999, icon: '👩‍⚕️', visual: '👩‍⚕️', description: 'Trains one healthcare worker for a month', children: 10 },
+            { min: 500, max: 999, icon: '👩‍️', visual: '👩‍️', description: 'Trains one healthcare worker for a month', children: 10 },
             { min: 1000, max: Infinity, icon: '💧', visual: '💧', description: 'Helps build clean water access for a community', children: 50 }
         ];
 
