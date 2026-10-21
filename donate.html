@@ -23,6 +23,9 @@
             --orange-color: #FF7900;
             --africell-color: #0066B3;
             --qcell-color: #E30613;
+            --success-color: #48BB78;
+            --error-color: #E53E3E;
+            --warning-color: #ECC94B;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -55,9 +58,39 @@
         nav .btn-primary { padding: 10px 24px; font-size: 0.9rem; color: white !important; }
 
         /* HERO */
-        .page-hero { background: linear-gradient(135deg, rgba(26, 54, 93, 0.95) 0%, rgba(44, 82, 130, 0.9) 100%), url('https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=1600&q=80') center/cover; color: white; text-align: center; padding: 140px 20px 100px; }
+        .page-hero { background: linear-gradient(135deg, rgba(26, 54, 93, 0.95) 0%, rgba(44, 82, 130, 0.9) 100%), url('https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=1600&q=80') center/cover; color: white; text-align: center; padding: 140px 20px 100px; position: relative; overflow: hidden; }
         .page-hero h1 { font-size: 3.5rem; margin-bottom: 15px; }
         .page-hero p { font-size: 1.2rem; max-width: 700px; margin: 0 auto; color: rgba(255,255,255,0.9); }
+        
+        /* NEW: Live Donor Ticker */
+        .donor-ticker {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 10px 20px;
+            border-radius: 50px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 25px;
+            font-size: 0.9rem;
+            animation: ticker-fade 3s ease-in-out infinite;
+        }
+        .ticker-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--success-color);
+            border-radius: 50%;
+            animation: pulse-dot 2s ease-in-out infinite;
+        }
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.3); }
+        }
+        @keyframes ticker-fade {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.9; }
+        }
 
         /* CAUSES SECTION */
         .causes-section { padding: 80px 20px; background-color: var(--bg-light); }
@@ -78,7 +111,6 @@
         .progress-fill { height: 100%; background: linear-gradient(90deg, var(--secondary-color), var(--accent-sun)); border-radius: 10px; transition: width 1.5s ease; }
         .cause-btn { width: 100%; text-align: center; }
 
-        /* SAME CAUSE CARD SIZE AS THE HOME PAGE */
         .causes-section .container { max-width: 1100px; padding: 0; }
         .cause-card {
             border-radius: 15px;
@@ -104,6 +136,69 @@
 
         .payment-container { background: var(--bg-white); border-radius: 24px; box-shadow: 0 25px 60px rgba(26, 54, 93, 0.12); overflow: hidden; border: 1px solid #edf2f7; }
 
+        /* NEW: Step Progress Indicator */
+        .progress-steps {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px 40px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, #2c5282 100%);
+            color: white;
+            position: relative;
+        }
+        .progress-steps::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 80px;
+            right: 80px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.3);
+            z-index: 0;
+        }
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+            z-index: 1;
+            flex: 1;
+        }
+        .step-circle {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: all 0.4s ease;
+            border: 2px solid transparent;
+        }
+        .step.active .step-circle {
+            background: var(--accent-sun);
+            color: var(--primary-color);
+            border-color: white;
+            box-shadow: 0 0 0 4px rgba(251, 211, 141, 0.3);
+            transform: scale(1.1);
+        }
+        .step.completed .step-circle {
+            background: var(--success-color);
+            color: white;
+        }
+        .step-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            opacity: 0.7;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .step.active .step-label, .step.completed .step-label {
+            opacity: 1;
+        }
+
         .donation-frequency { padding: 25px 40px 20px; background: var(--bg-light); border-bottom: 1px solid #edf2f7; }
         .frequency-label { font-size: 0.85rem; font-weight: 600; color: var(--text-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; text-align: center; }
         .frequency-toggle { display: flex; background: white; border-radius: 50px; padding: 5px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); max-width: 380px; margin: 0 auto; }
@@ -111,6 +206,25 @@
         .freq-btn.active { background: linear-gradient(135deg, var(--secondary-color), #ff7676); color: white; box-shadow: 0 4px 15px rgba(255, 138, 128, 0.4); }
         .freq-btn:hover:not(.active) { color: var(--primary-color); }
         .freq-save { font-size: 0.7rem; background: var(--accent-sun); color: var(--primary-color); padding: 2px 8px; border-radius: 10px; font-weight: 700; }
+
+        /* NEW: Monthly donation benefits tooltip */
+        .monthly-benefits {
+            max-width: 380px;
+            margin: 15px auto 0;
+            padding: 12px 16px;
+            background: linear-gradient(135deg, rgba(251, 211, 141, 0.2), rgba(255, 138, 128, 0.1));
+            border-radius: 12px;
+            border: 1px solid var(--accent-sun);
+            font-size: 0.85rem;
+            color: var(--primary-color);
+            display: none;
+            animation: slideDown 0.3s ease;
+        }
+        .monthly-benefits.show { display: block; }
+        .monthly-benefits strong { color: var(--secondary-color); }
+        .monthly-benefits ul { list-style: none; margin-top: 8px; padding-left: 0; }
+        .monthly-benefits ul li { padding: 3px 0; display: flex; align-items: center; gap: 6px; }
+        .monthly-benefits ul li::before { content: '✓'; color: var(--success-color); font-weight: 700; }
 
         .payment-tabs { display: flex; background: var(--bg-light); border-bottom: 1px solid #edf2f7; }
         .tab-btn { flex: 1; padding: 20px 15px; background: transparent; border: none; font-family: var(--font-body); font-weight: 600; font-size: 0.95rem; color: var(--text-light); cursor: pointer; transition: all 0.3s; display: flex; flex-direction: column; align-items: center; gap: 8px; position: relative; }
@@ -128,9 +242,21 @@
         .quick-amount-section { margin-bottom: 30px; padding: 25px; background: var(--bg-light); border-radius: 16px; }
         .quick-amount-label { font-size: 0.9rem; font-weight: 600; color: var(--text-dark); margin-bottom: 15px; display: block; }
         .amount-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 15px; }
-        .amount-btn { padding: 14px 10px; background: white; border: 2px solid #e2e8f0; border-radius: 12px; font-family: var(--font-body); font-weight: 700; font-size: 1.1rem; color: var(--primary-color); cursor: pointer; transition: all 0.3s; }
+        .amount-btn { padding: 14px 10px; background: white; border: 2px solid #e2e8f0; border-radius: 12px; font-family: var(--font-body); font-weight: 700; font-size: 1.1rem; color: var(--primary-color); cursor: pointer; transition: all 0.3s; position: relative; overflow: hidden; }
         .amount-btn:hover { border-color: var(--secondary-color); transform: translateY(-2px); }
         .amount-btn.active { background: linear-gradient(135deg, var(--secondary-color), #ff7676); color: white; border-color: var(--secondary-color); box-shadow: 0 6px 20px rgba(255, 138, 128, 0.4); }
+        
+        /* NEW: Impact preview under amount buttons */
+        .amount-impact-preview {
+            font-size: 0.7rem;
+            font-weight: 400;
+            opacity: 0.8;
+            display: block;
+            margin-top: 4px;
+            color: var(--text-light);
+        }
+        .amount-btn.active .amount-impact-preview { color: rgba(255,255,255,0.9); }
+        
         .custom-amount-wrapper { position: relative; }
         .custom-amount-wrapper .currency-symbol { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); font-weight: 700; color: var(--text-light); font-size: 1.1rem; }
         .custom-amount-input { width: 100%; padding: 14px 16px 14px 45px; border: 2px solid #e2e8f0; border-radius: 12px; font-family: var(--font-body); font-size: 1rem; font-weight: 600; transition: all 0.3s; background: white; }
@@ -166,7 +292,7 @@
         .money-details p { font-size: 0.9rem; margin-bottom: 0; color: var(--text-light); }
         .copy-btn { padding: 8px 16px; background: var(--bg-light); color: var(--primary-color); border: none; border-radius: 8px; font-weight: 600; font-size: 0.85rem; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; gap: 5px; }
         .copy-btn:hover { background: var(--secondary-color); color: white; }
-        .copy-btn.copied { background: #48BB78; color: white; }
+        .copy-btn.copied { background: var(--success-color); color: white; }
 
         .bank-details { background: var(--bg-light); padding: 30px; border-radius: 16px; border: 1px solid #edf2f7; }
         .bank-row { display: flex; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid #e2e8f0; }
@@ -195,10 +321,58 @@
         .file-input-label svg { width: 48px; height: 48px; color: var(--secondary-color); margin-bottom: 15px; transition: transform 0.3s; }
         .file-input-label:hover svg { transform: translateY(-5px); }
         .file-name { margin-top: 15px; font-size: 0.95rem; color: var(--primary-color); font-weight: 600; }
-        .form-input { width: 100%; padding: 14px 16px; border: 2px solid #e2e8f0; border-radius: 12px; margin-bottom: 15px; font-family: var(--font-body); font-size: 0.95rem; transition: all 0.3s; background: white; }
-        .form-input:focus { outline: none; border-color: var(--secondary-color); box-shadow: 0 0 0 4px rgba(255, 138, 128, 0.1); }
         
-        /* NEW: Payment Method Dropdown Styling */
+        /* NEW: Enhanced form input with validation states */
+        .form-group { position: relative; margin-bottom: 15px; }
+        .form-input { 
+            width: 100%; 
+            padding: 14px 16px; 
+            border: 2px solid #e2e8f0; 
+            border-radius: 12px; 
+            font-family: var(--font-body); 
+            font-size: 0.95rem; 
+            transition: all 0.3s; 
+            background: white; 
+        }
+        .form-input:focus { outline: none; border-color: var(--secondary-color); box-shadow: 0 0 0 4px rgba(255, 138, 128, 0.1); }
+        .form-input.valid { border-color: var(--success-color); }
+        .form-input.invalid { border-color: var(--error-color); }
+        .form-input.valid:focus { box-shadow: 0 0 0 4px rgba(72, 187, 120, 0.1); }
+        .form-input.invalid:focus { box-shadow: 0 0 0 4px rgba(229, 62, 62, 0.1); }
+        
+        /* Validation icons */
+        .validation-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .validation-icon.show { opacity: 1; }
+        .validation-icon.valid { color: var(--success-color); }
+        .validation-icon.invalid { color: var(--error-color); }
+        
+        /* Error message */
+        .error-message {
+            font-size: 0.8rem;
+            color: var(--error-color);
+            margin-top: 4px;
+            display: none;
+            padding-left: 4px;
+            animation: slideDown 0.2s ease;
+        }
+        .error-message.show { display: block; }
+        
+        /* Character counter */
+        .char-counter {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            text-align: right;
+            margin-top: 2px;
+        }
+        
         .form-select { 
             width: 100%; 
             padding: 14px 16px; 
@@ -223,8 +397,8 @@
         }
         .form-select:focus { outline: none; border-color: var(--secondary-color); box-shadow: 0 0 0 4px rgba(255, 138, 128, 0.1); }
         .form-select:hover { border-color: var(--secondary-color); }
+        .form-select.valid { border-color: var(--success-color); }
 
-        /* TRUST/SECURITY BADGES (ADDED BACK FOR INTERNATIONAL FORM) */
         .trust-security-badges { 
             display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: 25px 0; padding: 20px; 
             background: linear-gradient(135deg, rgba(26, 54, 93, 0.03), rgba(255, 138, 128, 0.03)); 
@@ -248,12 +422,216 @@
         }
         .security-badge-text { font-size: 0.85rem; font-weight: 600; color: var(--primary-color); line-height: 1.3; }
 
-        .submit-btn { width: 100%; padding: 18px; background: linear-gradient(135deg, var(--primary-color) 0%, #2c5282 100%); color: white; border: none; border-radius: 12px; font-weight: 700; font-size: 1.1rem; cursor: pointer; transition: all 0.3s; position: relative; overflow: hidden; box-shadow: 0 8px 20px rgba(26, 54, 93, 0.2); }
+        /* NEW: Enhanced submit button with loading state */
+        .submit-btn { 
+            width: 100%; 
+            padding: 18px; 
+            background: linear-gradient(135deg, var(--primary-color) 0%, #2c5282 100%); 
+            color: white; 
+            border: none; 
+            border-radius: 12px; 
+            font-weight: 700; 
+            font-size: 1.1rem; 
+            cursor: pointer; 
+            transition: all 0.3s; 
+            position: relative; 
+            overflow: hidden; 
+            box-shadow: 0 8px 20px rgba(26, 54, 93, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
         .submit-btn::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); transition: left 0.6s; }
-        .submit-btn:hover::before { left: 100%; }
-        .submit-btn:hover { background: linear-gradient(135deg, var(--secondary-color) 0%, #ff7676 100%); transform: translateY(-3px); box-shadow: 0 12px 30px rgba(255, 138, 128, 0.4); }
+        .submit-btn:hover:not(:disabled)::before { left: 100%; }
+        .submit-btn:hover:not(:disabled) { background: linear-gradient(135deg, var(--secondary-color) 0%, #ff7676 100%); transform: translateY(-3px); box-shadow: 0 12px 30px rgba(255, 138, 128, 0.4); }
+        .submit-btn:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
+        
+        /* Loading spinner */
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            display: none;
+        }
+        .submit-btn.loading .spinner { display: inline-block; }
+        .submit-btn.loading .btn-text { display: none; }
+        .submit-btn.loading .btn-icon { display: none; }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
 
-        /* FLOATING NEWSLETTER SECTION (NEWLY ADDED) */
+        /* NEW: Success Modal */
+        .success-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(26, 54, 93, 0.8);
+            backdrop-filter: blur(8px);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            animation: fadeIn 0.3s ease;
+        }
+        .success-modal.show { display: flex; }
+        .success-modal-content {
+            background: white;
+            border-radius: 24px;
+            padding: 50px 40px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            animation: modalZoomIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 30px 80px rgba(0,0,0,0.3);
+        }
+        @keyframes modalZoomIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--success-color), #38A169);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            animation: successBounce 0.6s ease;
+        }
+        @keyframes successBounce {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        .success-icon svg { width: 40px; height: 40px; stroke: white; }
+        .success-modal h3 { font-size: 1.8rem; color: var(--primary-color); margin-bottom: 15px; }
+        .success-modal p { color: var(--text-light); margin-bottom: 25px; font-size: 1rem; line-height: 1.6; }
+        .receipt-preview {
+            background: var(--bg-light);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 25px 0;
+            border: 1px dashed var(--secondary-color);
+            text-align: left;
+        }
+        .receipt-preview h4 { font-size: 1rem; color: var(--primary-color); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+        .receipt-row { display: flex; justify-content: space-between; padding: 6px 0; font-size: 0.9rem; border-bottom: 1px solid #edf2f7; }
+        .receipt-row:last-child { border-bottom: none; }
+        .receipt-row .label { color: var(--text-light); }
+        .receipt-row .value { color: var(--primary-color); font-weight: 600; }
+        .modal-actions { display: flex; gap: 12px; margin-top: 25px; }
+        .modal-actions .btn { flex: 1; padding: 14px; }
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: color 0.3s;
+            line-height: 1;
+        }
+        .modal-close:hover { color: var(--primary-color); }
+
+        /* NEW: Donation FAQ Section */
+        .donation-faq {
+            padding: 80px 20px;
+            background: var(--bg-light);
+        }
+        .faq-grid {
+            max-width: 900px;
+            margin: 40px auto 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 20px;
+        }
+        .faq-item-new {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            border: 1px solid #edf2f7;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .faq-item-new:hover {
+            border-color: var(--secondary-color);
+            box-shadow: 0 10px 30px rgba(26, 54, 93, 0.08);
+            transform: translateY(-3px);
+        }
+        .faq-item-new h4 {
+            font-size: 1.05rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .faq-item-new h4::before {
+            content: '?';
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(135deg, var(--secondary-color), var(--accent-sun));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+        .faq-item-new p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            line-height: 1.6;
+            margin: 0;
+            padding-left: 38px;
+        }
+
+        /* NEW: Contact for donations section */
+        .donation-contact {
+            padding: 60px 20px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, #2c5282 100%);
+            color: white;
+            text-align: center;
+        }
+        .donation-contact h3 { color: white; font-size: 1.8rem; margin-bottom: 15px; }
+        .donation-contact p { color: rgba(255,255,255,0.9); max-width: 600px; margin: 0 auto 30px; }
+        .contact-methods {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        .contact-method {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 24px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 12px;
+            transition: all 0.3s;
+            text-decoration: none;
+            color: white;
+        }
+        .contact-method:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-3px);
+        }
+        .contact-method svg { width: 24px; height: 24px; }
+
         .newsletter-wrapper { background-color: var(--bg-light); padding: 40px 20px 0; position: relative; }
         .newsletter-card { max-width: 1100px; margin: 0 auto; background: linear-gradient(135deg, var(--primary-color) 0%, #2c5282 100%); border-radius: 20px; padding: 30px; display: grid; grid-template-columns: 1fr 1.2fr; gap: 25px; align-items: center; position: relative; top: 60px; z-index: 10; box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.4); }
         .newsletter-image { text-align: center; }
@@ -270,7 +648,6 @@
         .newsletter-note { margin-top: 10px; font-size: 0.8rem; color: rgba(255,255,255,0.8); }
         .newsletter-note a { color: var(--accent-sun); text-decoration: underline; }
 
-        /* MAIN FOOTER */
         .main-footer { background-color: var(--bg-white); padding: 100px 20px 30px; border-top: 1px solid #e2e8f0; }
         .footer-container { max-width: 1100px; margin: 0 auto; }
         .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1.5fr; gap: 40px; margin-bottom: 50px; }
@@ -294,7 +671,6 @@
         .footer-links a { color: var(--text-light); font-size: 0.9rem; transition: color 0.3s; }
         .footer-links a:hover { color: var(--secondary-color); }
 
-        /* SCROLL TO TOP BUTTON (NEWLY ADDED) */
         .scroll-top-btn {
             position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; border-radius: 50%;
             background-color: var(--primary-color); color: white; border: none; cursor: pointer;
@@ -327,6 +703,11 @@
             .bank-row { flex-direction: column; gap: 5px; }
             .bank-value { text-align: left; }
             
+            /* NEW: Mobile progress steps */
+            .progress-steps { padding: 15px 20px; }
+            .step-label { display: none; }
+            .progress-steps::before { left: 40px; right: 40px; }
+            
             .newsletter-card { grid-template-columns: 1fr; padding: 20px; top: 40px; text-align: center; }
             .newsletter-content h2 { text-align: center; }
             .newsletter-form { max-width: 100%; flex-direction: column; border-radius: 15px; padding: 10px; }
@@ -335,6 +716,16 @@
             .newsletter-image img { max-width: 180px; }
 
             .trust-security-badges { grid-template-columns: 1fr; }
+            
+            /* NEW: Mobile FAQ and contact */
+            .faq-grid { grid-template-columns: 1fr; }
+            .contact-methods { flex-direction: column; align-items: center; }
+            .contact-method { width: 100%; max-width: 300px; justify-content: center; }
+            
+            /* NEW: Mobile success modal */
+            .success-modal-content { padding: 30px 20px; }
+            .success-modal h3 { font-size: 1.4rem; }
+            .modal-actions { flex-direction: column; }
             
             .main-footer { padding-top: 70px; }
             .footer-grid { grid-template-columns: 1fr 1fr; gap: 30px; }
@@ -372,10 +763,16 @@
         <div class="container">
             <h1>Make a Difference Today</h1>
             <p>Your generosity creates lasting change in the lives of Sierra Leone's children. Choose your preferred donation method below.</p>
+            
+            <!-- NEW: Live Donor Ticker -->
+            <div class="donor-ticker" id="donorTicker">
+                <span class="ticker-dot"></span>
+                <span id="tickerText">Sarah from London just donated £50 for healthcare</span>
+            </div>
         </div>
     </section>
 
-    <!-- SUPPORT OUR CAUSES SECTION (SAME 6 CARDS AS HOME PAGE) -->
+    <!-- SUPPORT OUR CAUSES SECTION -->
     <section class="causes-section">
         <div class="container">
             <div class="section-header">
@@ -383,7 +780,6 @@
                 <p>Choose a specific project to support, or make a general donation to help us where it's needed most.</p>
             </div>
             <div class="causes-grid">
-                <!-- Cause 1 -->
                 <div class="cause-card">
                     <div class="cause-image" style="background-image: url('assets/project-djf-images/image19.jpeg');">
                         <span class="cause-badge">Urgent</span>
@@ -404,7 +800,6 @@
                     </div>
                 </div>
 
-                <!-- Cause 2 -->
                 <div class="cause-card">
                     <div class="cause-image" style="background-image: url('assets/project-djf-images/image41.jpeg');">
                         <span class="cause-badge">Ongoing</span>
@@ -425,7 +820,6 @@
                     </div>
                 </div>
 
-                <!-- Cause 3 -->
                 <div class="cause-card">
                     <div class="cause-image" style="background-image: url('assets/project-djf-images/image35.jpeg');">
                         <span class="cause-badge">New</span>
@@ -446,7 +840,6 @@
                     </div>
                 </div>
 
-                <!-- Cause 4 -->
                 <div class="cause-card">
                     <div class="cause-image" style="background-image: url('assets/project-djf-images/image39.jpeg');">
                         <span class="cause-badge">Critical</span>
@@ -467,7 +860,6 @@
                     </div>
                 </div>
 
-                <!-- Cause 5 -->
                 <div class="cause-card">
                     <div class="cause-image" style="background-image: url('assets/project-djf-images/image37.jpeg');">
                         <span class="cause-badge">Ongoing</span>
@@ -488,7 +880,6 @@
                     </div>
                 </div>
 
-                <!-- Cause 6 -->
                 <div class="cause-card">
                     <div class="cause-image" style="background-image: url('assets/project-djf-images/image12.jpeg');">
                         <span class="cause-badge">Urgent</span>
@@ -522,15 +913,46 @@
                     <div class="trust-item"><div class="trust-icon">🔒</div><span>100% Secure & Encrypted</span></div>
                     <div class="trust-item"><div class="trust-icon">📜</div><span>Tax-Deductible Receipt</span></div>
                     <div class="trust-item"><div class="trust-icon">🤝</div><span>Transparent Operations</span></div>
+                    <div class="trust-item"><div class="trust-icon">📊</div><span>Annual Impact Reports</span></div>
                 </div>
             </div>
 
             <div class="payment-container">
+                <!-- NEW: Progress Steps Indicator -->
+                <div class="progress-steps" id="progressSteps">
+                    <div class="step active" data-step="1">
+                        <div class="step-circle">1</div>
+                        <span class="step-label">Amount</span>
+                    </div>
+                    <div class="step" data-step="2">
+                        <div class="step-circle">2</div>
+                        <span class="step-label">Method</span>
+                    </div>
+                    <div class="step" data-step="3">
+                        <div class="step-circle">3</div>
+                        <span class="step-label">Details</span>
+                    </div>
+                    <div class="step" data-step="4">
+                        <div class="step-circle">4</div>
+                        <span class="step-label">Confirm</span>
+                    </div>
+                </div>
+
                 <div class="donation-frequency" id="donate-frequency">
                     <div class="frequency-label">Choose Donation Frequency</div>
                     <div class="frequency-toggle">
                         <button class="freq-btn active" data-freq="onetime" onclick="setFrequency('onetime')"><span>💝</span> One-Time</button>
                         <button class="freq-btn" data-freq="monthly" onclick="setFrequency('monthly')"><span>🔄</span> Monthly <span class="freq-save">Save 20%</span></button>
+                    </div>
+                    <!-- NEW: Monthly benefits tooltip -->
+                    <div class="monthly-benefits" id="monthlyBenefits">
+                        <strong>Why donate monthly?</strong>
+                        <ul>
+                            <li>Predictable funding for long-term programs</li>
+                            <li>Reduced transaction fees save more for children</li>
+                            <li>Cancel or modify anytime</li>
+                            <li>Exclusive monthly donor updates</li>
+                        </ul>
                     </div>
                 </div>
 
@@ -548,18 +970,18 @@
                     <div class="quick-amount-section">
                         <label class="quick-amount-label">💰 Select Donation Amount (New Leone)</label>
                         <div class="amount-grid">
-                            <button class="amount-btn" data-amount="10" onclick="selectAmount(10, this)">Le 10</button>
-                            <button class="amount-btn active" data-amount="25" onclick="selectAmount(25, this)">Le 25</button>
-                            <button class="amount-btn" data-amount="50" onclick="selectAmount(50, this)">Le 50</button>
-                            <button class="amount-btn" data-amount="100" onclick="selectAmount(100, this)">Le 100</button>
-                            <button class="amount-btn" data-amount="250" onclick="selectAmount(250, this)">Le 250</button>
-                            <button class="amount-btn" data-amount="500" onclick="selectAmount(500, this)">Le 500</button>
-                            <button class="amount-btn" data-amount="1000" onclick="selectAmount(1000, this)">Le 1000</button>
+                            <button class="amount-btn" data-amount="10" onclick="selectAmount(10, this)">Le 10<span class="amount-impact-preview">🌱 Seed of hope</span></button>
+                            <button class="amount-btn active" data-amount="25" onclick="selectAmount(25, this)">Le 25<span class="amount-impact-preview">🎒 School kit</span></button>
+                            <button class="amount-btn" data-amount="50" onclick="selectAmount(50, this)">Le 50<span class="amount-impact-preview">🩺 Medical checkup</span></button>
+                            <button class="amount-btn" data-amount="100" onclick="selectAmount(100, this)">Le 100<span class="amount-impact-preview">🍎 Family nutrition</span></button>
+                            <button class="amount-btn" data-amount="250" onclick="selectAmount(250, this)">Le 250<span class="amount-impact-preview">💉 5 vaccines</span></button>
+                            <button class="amount-btn" data-amount="500" onclick="selectAmount(500, this)">Le 500<span class="amount-impact-preview">👩‍⚕️ Train worker</span></button>
+                            <button class="amount-btn" data-amount="1000" onclick="selectAmount(1000, this)">Le 1000<span class="amount-impact-preview">💧 Clean water</span></button>
                             <button class="amount-btn" data-amount="custom" onclick="selectCustomAmount(this)">Custom</button>
                         </div>
                         <div class="custom-amount-wrapper">
                             <span class="currency-symbol">Le</span>
-                            <input type="number" id="customAmountInput" class="custom-amount-input" placeholder="Enter custom amount" oninput="updateImpactFromCustom(this.value)">
+                            <input type="text" id="customAmountInput" class="custom-amount-input" placeholder="Enter custom amount" oninput="updateImpactFromCustom(this.value)" inputmode="numeric">
                         </div>
 
                         <div class="impact-calculator">
@@ -609,7 +1031,7 @@
                         <h4>📸 Send Transaction Screenshot</h4>
                         <p>After completing your mobile money transfer, upload a screenshot of the transaction confirmation. We'll send you a tax receipt via email.</p>
 
-                        <form id="transactionForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" enctype="multipart/form-data">
+                        <form id="transactionForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" enctype="multipart/form-data" novalidate>
                             <div class="tribute-toggle" onclick="toggleTribute(event)">
                                 <input type="checkbox" id="tributeCheck" onchange="toggleTributeFields()">
                                 <label for="tributeCheck">🕊️ Dedicate this donation in memory of a loved one</label>
@@ -618,7 +1040,8 @@
                                 <label>In Memory Of</label>
                                 <input type="text" name="tribute_name" class="form-input" placeholder="Name of the person you're honoring">
                                 <label style="margin-top: 10px;">Optional Message</label>
-                                <textarea name="tribute_message" class="form-input" rows="2" placeholder="A short message or dedication (optional)" style="resize: vertical;"></textarea>
+                                <textarea name="tribute_message" class="form-input" rows="2" placeholder="A short message or dedication (optional)" style="resize: vertical;" maxlength="200"></textarea>
+                                <div class="char-counter" id="tributeCharCounter">0 / 200 characters</div>
                             </div>
 
                             <div class="file-input-wrapper">
@@ -630,15 +1053,32 @@
                                 </label>
                                 <div class="file-name" id="fileName"></div>
                             </div>
-                            <input type="text" name="donor_name" class="form-input" placeholder="Your Full Name" required>
-                            <input type="email" name="email" class="form-input" placeholder="Your Email Address" required>
-                            <input type="text" name="phone" class="form-input" placeholder="Your Phone Number" required>
                             
-                            <!-- UPDATED: Amount (SLE) field - explicitly labeled -->
-                            <input type="text" name="amount" id="formAmount" class="form-input" placeholder="Amount (SLE)" value="25" required>
+                            <div class="form-group">
+                                <input type="text" name="donor_name" class="form-input" id="donorName" placeholder="Your Full Name" required aria-label="Full Name" data-validate="name">
+                                <span class="validation-icon" id="nameIcon"></span>
+                                <div class="error-message" id="nameError">Please enter your full name</div>
+                            </div>
                             
-                            <!-- NEW: Payment Method dropdown -->
-                            <select name="payment_method" class="form-select" required>
+                            <div class="form-group">
+                                <input type="email" name="email" class="form-input" id="donorEmail" placeholder="Your Email Address" required aria-label="Email Address" data-validate="email">
+                                <span class="validation-icon" id="emailIcon"></span>
+                                <div class="error-message" id="emailError">Please enter a valid email address</div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <input type="tel" name="phone" class="form-input" id="donorPhone" placeholder="Your Phone Number (e.g., 076 123 4567)" required aria-label="Phone Number" data-validate="phone">
+                                <span class="validation-icon" id="phoneIcon"></span>
+                                <div class="error-message" id="phoneError">Please enter a valid Sierra Leone phone number</div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <input type="text" name="amount" id="formAmount" class="form-input" placeholder="Amount (SLE)" value="25" required aria-label="Donation Amount in SLE" data-validate="amount">
+                                <span class="validation-icon" id="amountIcon"></span>
+                                <div class="error-message" id="amountError">Please enter a valid amount</div>
+                            </div>
+                            
+                            <select name="payment_method" class="form-select" id="paymentMethod" required aria-label="Payment Method">
                                 <option value="" disabled selected>Select Payment Method</option>
                                 <option value="Orange Money">Orange Money</option>
                                 <option value="Afrimoney">Afrimoney</option>
@@ -648,9 +1088,21 @@
                             <input type="hidden" name="frequency" id="formFrequency" value="One-Time">
                             <input type="hidden" name="impact" id="formImpact" value="School kit for one child">
                             
-                            <button type="submit" class="submit-btn">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 8px;"><path d="M22 2L11 13"></path><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
-                                Send Screenshot & Receipt Request
+                            <div class="trust-security-badges" style="margin-top: 20px;">
+                                <div class="security-badge">
+                                    <div class="security-badge-icon">🔒</div>
+                                    <div class="security-badge-text">Secure<br>Submission</div>
+                                </div>
+                                <div class="security-badge">
+                                    <div class="security-badge-icon">📧</div>
+                                    <div class="security-badge-text">Receipt via<br>Email</div>
+                                </div>
+                            </div>
+                            
+                            <button type="submit" class="submit-btn" id="submitBtn">
+                                <svg class="btn-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13"></path><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                                <span class="btn-text">Send Screenshot & Receipt Request</span>
+                                <div class="spinner"></div>
                             </button>
                         </form>
                     </div>
@@ -687,7 +1139,7 @@
                         <h4>📸 Send Transaction Screenshot</h4>
                         <p>After completing your international transfer, upload a screenshot of the transaction confirmation. We'll send you a tax receipt via email.</p>
 
-                        <form id="internationalTransactionForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" enctype="multipart/form-data">
+                        <form id="internationalTransactionForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" enctype="multipart/form-data" novalidate>
                             <div class="tribute-toggle" onclick="toggleTributeIntl(event)">
                                 <input type="checkbox" id="tributeCheckIntl" onchange="toggleTributeFieldsIntl()">
                                 <label for="tributeCheckIntl">🕊️ Dedicate this donation in memory of a loved one</label>
@@ -696,7 +1148,8 @@
                                 <label>In Memory Of</label>
                                 <input type="text" name="tribute_name" class="form-input" placeholder="Name of the person you're honoring">
                                 <label style="margin-top: 10px;">Optional Message</label>
-                                <textarea name="tribute_message" class="form-input" rows="2" placeholder="A short message or dedication (optional)" style="resize: vertical;"></textarea>
+                                <textarea name="tribute_message" class="form-input" rows="2" placeholder="A short message or dedication (optional)" style="resize: vertical;" maxlength="200"></textarea>
+                                <div class="char-counter" id="tributeCharCounterIntl">0 / 200 characters</div>
                             </div>
 
                             <div class="file-input-wrapper">
@@ -708,14 +1161,34 @@
                                 </label>
                                 <div class="file-name" id="fileNameIntl"></div>
                             </div>
-                            <input type="text" name="donor_name" class="form-input" placeholder="Your Full Name" required>
-                            <input type="email" name="email" class="form-input" placeholder="Your Email Address" required>
-                            <input type="text" name="phone" class="form-input" placeholder="Your Phone Number" required>
-                            <input type="text" name="amount" id="formAmountIntl" class="form-input" placeholder="Amount Donated (USD/GBP/EUR)" required>
+                            
+                            <div class="form-group">
+                                <input type="text" name="donor_name" class="form-input" id="donorNameIntl" placeholder="Your Full Name" required aria-label="Full Name" data-validate="name">
+                                <span class="validation-icon" id="nameIconIntl"></span>
+                                <div class="error-message" id="nameErrorIntl">Please enter your full name</div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <input type="email" name="email" class="form-input" id="donorEmailIntl" placeholder="Your Email Address" required aria-label="Email Address" data-validate="email">
+                                <span class="validation-icon" id="emailIconIntl"></span>
+                                <div class="error-message" id="emailErrorIntl">Please enter a valid email address</div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <input type="tel" name="phone" class="form-input" id="donorPhoneIntl" placeholder="Your Phone Number" required aria-label="Phone Number" data-validate="phone">
+                                <span class="validation-icon" id="phoneIconIntl"></span>
+                                <div class="error-message" id="phoneErrorIntl">Please enter a valid phone number</div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <input type="text" name="amount" id="formAmountIntl" class="form-input" placeholder="Amount Donated (USD/GBP/EUR)" required aria-label="Donation Amount" data-validate="amount">
+                                <span class="validation-icon" id="amountIconIntl"></span>
+                                <div class="error-message" id="amountErrorIntl">Please enter a valid amount</div>
+                            </div>
+                            
                             <input type="hidden" name="frequency" id="formFrequencyIntl" value="One-Time">
                             <input type="hidden" name="impact" id="formImpactIntl" value="International Donation">
                             
-                            <!-- TRUST/SECURITY BADGES (ADDED BACK) -->
                             <div class="trust-security-badges">
                                 <div class="security-badge">
                                     <div class="security-badge-icon">🔒</div>
@@ -735,16 +1208,17 @@
                                 </div>
                             </div>
 
-                            <button type="submit" class="submit-btn">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 8px;"><path d="M22 2L11 13"></path><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
-                                Send Screenshot & Receipt Request
+                            <button type="submit" class="submit-btn" id="submitBtnIntl">
+                                <svg class="btn-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13"></path><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                                <span class="btn-text">Send Screenshot & Receipt Request</span>
+                                <div class="spinner"></div>
                             </button>
                         </form>
                     </div>
                     <p style="margin-top: 25px; font-size: 0.85rem; color: var(--text-light); text-align: center;">Or email screenshots directly to <strong>info@destinyjohnfoundation.org</strong></p>
                 </div>
 
-                <!-- BANK TRANSFER TAB (LOCAL) -->
+                <!-- BANK TRANSFER TAB -->
                 <div class="tab-content" id="bank">
                     <h3>Local Bank Transfer</h3>
                     <p>Prefer a direct local bank transfer? Use the details below. Please include "Donation" in the transfer reference.</p>
@@ -760,7 +1234,61 @@
         </div>
     </section>
 
-    <!-- FLOATING NEWSLETTER SECTION (NEWLY ADDED) -->
+    <!-- NEW: Donation FAQ Section -->
+    <section class="donation-faq">
+        <div class="container">
+            <div class="section-header">
+                <h2>Frequently Asked Questions</h2>
+                <p>Everything you need to know about donating to the Destiny John Foundation.</p>
+            </div>
+            <div class="faq-grid">
+                <div class="faq-item-new">
+                    <h4>Is my donation tax-deductible?</h4>
+                    <p>Yes! The Destiny John Foundation is a registered non-profit organization. You'll receive an official tax receipt via email for every donation.</p>
+                </div>
+                <div class="faq-item-new">
+                    <h4>How is my donation used?</h4>
+                    <p>100% of your donation goes directly to our programs: pediatric healthcare, education supplies, nutrition support, and community development.</p>
+                </div>
+                <div class="faq-item-new">
+                    <h4>Can I cancel my monthly donation?</h4>
+                    <p>Absolutely. You can cancel, pause, or modify your monthly donation at any time by contacting us at info@destinyjohnfoundation.org.</p>
+                </div>
+                <div class="faq-item-new">
+                    <h4>How do I get my receipt?</h4>
+                    <p>Once we verify your screenshot, we'll email your tax-deductible receipt within 24-48 hours. Check your spam folder if you don't see it.</p>
+                </div>
+                <div class="faq-item-new">
+                    <h4>Is my information secure?</h4>
+                    <p>Yes. We use 256-bit SSL encryption and never store your financial details. Your personal data is protected under our privacy policy.</p>
+                </div>
+                <div class="faq-item-new">
+                    <h4>Can I donate in honor of someone?</h4>
+                    <p>Yes! Use the tribute option in our form to dedicate your donation in memory or honor of a loved one. We'll include their name on your receipt.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW: Contact for Donations Section -->
+    <section class="donation-contact">
+        <div class="container">
+            <h3>Need Help with Your Donation?</h3>
+            <p>Our team is here to assist you with any questions about donating, receipts, or setting up corporate partnerships.</p>
+            <div class="contact-methods">
+                <a href="mailto:donations@destinyjohnfoundation.org" class="contact-method">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                    <span>donations@destinyjohnfoundation.org</span>
+                </a>
+                <a href="https://wa.me/+23278383134" class="contact-method" target="_blank">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                    <span>WhatsApp: +232 78 383 134</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FLOATING NEWSLETTER SECTION -->
     <div class="newsletter-wrapper">
         <div class="newsletter-card">
             <div class="newsletter-image">
@@ -801,14 +1329,55 @@
         </div>
     </footer>
 
-    <!-- SCROLL TO TOP BUTTON (NEWLY ADDED) -->
+    <!-- NEW: Success Modal -->
+    <div class="success-modal" id="successModal" role="dialog" aria-labelledby="successTitle" aria-modal="true">
+        <div class="success-modal-content">
+            <button class="modal-close" onclick="closeSuccessModal()" aria-label="Close">&times;</button>
+            <div class="success-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+            </div>
+            <h3 id="successTitle">Thank You for Your Generosity! 🎉</h3>
+            <p>Your donation screenshot has been received. We'll verify your transaction and email your tax receipt within 24-48 hours.</p>
+            
+            <div class="receipt-preview">
+                <h4>📧 Receipt Preview</h4>
+                <div class="receipt-row">
+                    <span class="label">Donor:</span>
+                    <span class="value" id="receiptName">—</span>
+                </div>
+                <div class="receipt-row">
+                    <span class="label">Amount:</span>
+                    <span class="value" id="receiptAmount">—</span>
+                </div>
+                <div class="receipt-row">
+                    <span class="label">Method:</span>
+                    <span class="value" id="receiptMethod">—</span>
+                </div>
+                <div class="receipt-row">
+                    <span class="label">Impact:</span>
+                    <span class="value" id="receiptImpact">—</span>
+                </div>
+                <div class="receipt-row">
+                    <span class="label">Receipt #:</span>
+                    <span class="value" id="receiptNumber">—</span>
+                </div>
+            </div>
+            
+            <div class="modal-actions">
+                <button class="btn btn-outline" onclick="closeSuccessModal()">Close</button>
+                <button class="btn btn-primary" onclick="window.print()">🖨️ Print Receipt</button>
+            </div>
+        </div>
+    </div>
+
     <button class="scroll-top-btn" id="scrollTopBtn" aria-label="Scroll to top">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M12 19V5M5 12l7-7 7 7"/>
         </svg>
     </button>
 
-    <!-- JAVASCRIPT -->
     <script>
         const menuToggle = document.getElementById('mobile-menu');
         const navList = document.getElementById('nav-list');
@@ -823,6 +1392,7 @@
                 tabContents.forEach(c => c.classList.remove('active'));
                 btn.classList.add('active');
                 document.getElementById(btn.getAttribute('data-tab')).classList.add('active');
+                updateProgressSteps(2);
             });
         });
 
@@ -838,13 +1408,24 @@
         function updateFileName(input) {
             const fileName = input.files[0]?.name || '';
             const fileNameDisplay = document.getElementById('fileName');
-            if (fileName) { fileNameDisplay.textContent = `📎 Selected: ${fileName}`; fileNameDisplay.style.color = 'var(--primary-color)'; } else { fileNameDisplay.textContent = ''; }
+            if (fileName) { 
+                fileNameDisplay.textContent = `📎 Selected: ${fileName}`; 
+                fileNameDisplay.style.color = 'var(--primary-color)';
+                updateProgressSteps(3);
+            } else { 
+                fileNameDisplay.textContent = ''; 
+            }
         }
 
         function updateFileNameIntl(input) {
             const fileName = input.files[0]?.name || '';
             const fileNameDisplay = document.getElementById('fileNameIntl');
-            if (fileName) { fileNameDisplay.textContent = `📎 Selected: ${fileName}`; fileNameDisplay.style.color = 'var(--primary-color)'; } else { fileNameDisplay.textContent = ''; }
+            if (fileName) { 
+                fileNameDisplay.textContent = `📎 Selected: ${fileName}`; 
+                fileNameDisplay.style.color = 'var(--primary-color)';
+            } else { 
+                fileNameDisplay.textContent = ''; 
+            }
         }
 
         let currentFrequency = 'onetime';
@@ -854,6 +1435,15 @@
             document.querySelector(`.freq-btn[data-freq="${freq}"]`).classList.add('active');
             document.getElementById('formFrequency').value = freq === 'monthly' ? 'Monthly' : 'One-Time';
             document.getElementById('formFrequencyIntl').value = freq === 'monthly' ? 'Monthly' : 'One-Time';
+            
+            // Show/hide monthly benefits
+            const monthlyBenefits = document.getElementById('monthlyBenefits');
+            if (freq === 'monthly') {
+                monthlyBenefits.classList.add('show');
+            } else {
+                monthlyBenefits.classList.remove('show');
+            }
+            
             updateImpactFromAmount(currentSelectedAmount);
         }
 
@@ -865,6 +1455,8 @@
             document.getElementById('customAmountInput').value = '';
             document.getElementById('formAmount').value = amount;
             updateImpactFromAmount(amount);
+            updateProgressSteps(1);
+            saveFormToStorage();
         }
         function selectCustomAmount(btn) {
             document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('active'));
@@ -872,14 +1464,56 @@
             document.getElementById('customAmountInput').focus();
         }
         function updateImpactFromCustom(value) {
-            const amount = parseFloat(value);
+            // Remove non-numeric characters except decimal
+            const cleanValue = value.replace(/[^0-9.]/g, '');
+            const amount = parseFloat(cleanValue);
+            
+            if (cleanValue !== value) {
+                document.getElementById('customAmountInput').value = cleanValue;
+            }
+            
             if (amount > 0) {
                 currentSelectedAmount = amount;
-                document.getElementById('formAmount').value = amount;
+                document.getElementById('formAmount').value = formatNumber(amount);
                 document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('active'));
                 updateImpactFromAmount(amount);
+                updateProgressSteps(1);
+                saveFormToStorage();
             }
         }
+
+        // NEW: Format number with thousand separators
+        function formatNumber(num) {
+            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        }
+
+        // NEW: Auto-format amount field
+        document.addEventListener('DOMContentLoaded', function() {
+            const amountField = document.getElementById('formAmount');
+            if (amountField) {
+                amountField.addEventListener('input', function(e) {
+                    const cleanValue = e.target.value.replace(/[^0-9.]/g, '');
+                    const num = parseFloat(cleanValue) || 0;
+                    if (cleanValue && !isNaN(num)) {
+                        e.target.value = formatNumber(num);
+                        currentSelectedAmount = num;
+                        updateImpactFromAmount(num);
+                        saveFormToStorage();
+                    }
+                });
+            }
+            
+            const amountFieldIntl = document.getElementById('formAmountIntl');
+            if (amountFieldIntl) {
+                amountFieldIntl.addEventListener('input', function(e) {
+                    const cleanValue = e.target.value.replace(/[^0-9.]/g, '');
+                    if (cleanValue) {
+                        const num = parseFloat(cleanValue) || 0;
+                        e.target.value = formatNumber(num);
+                    }
+                });
+            }
+        });
 
         const impactTiers = [
             { min: 0, max: 9, icon: '🌱', visual: '🌱', description: 'Plants a seed of hope for a child', children: 1 },
@@ -897,7 +1531,7 @@
             const freqLabel = currentFrequency === 'monthly' ? '/month' : '';
             document.getElementById('impactIcon').textContent = tier.icon;
             document.getElementById('impactVisual').textContent = tier.visual;
-            document.getElementById('impactAmount').textContent = `Le ${amount}${freqLabel}`;
+            document.getElementById('impactAmount').textContent = `Le ${formatNumber(amount)}${freqLabel}`;
             document.getElementById('impactDescription').textContent = tier.description;
             document.getElementById('formImpact').value = tier.description;
             
@@ -945,7 +1579,6 @@
             if (checkbox.checked) { fields.classList.add('show'); } else { fields.classList.remove('show'); }
         }
 
-        // SCROLL TO TOP BUTTON LOGIC (NEWLY ADDED)
         const scrollTopBtn = document.getElementById('scrollTopBtn');
         window.addEventListener('scroll', () => {
             if (window.scrollY > 300) {
@@ -956,6 +1589,346 @@
         });
         scrollTopBtn.addEventListener('click', () => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // NEW: Progress Steps Update
+        function updateProgressSteps(step) {
+            const steps = document.querySelectorAll('.progress-steps .step');
+            steps.forEach((s, index) => {
+                const stepNum = index + 1;
+                s.classList.remove('active', 'completed');
+                if (stepNum < step) {
+                    s.classList.add('completed');
+                } else if (stepNum === step) {
+                    s.classList.add('active');
+                }
+            });
+        }
+
+        // NEW: Real-time Form Validation
+        const validationRules = {
+            name: {
+                validate: (value) => value.trim().length >= 2 && /^[a-zA-Z\s'-]+$/.test(value),
+                message: 'Please enter a valid name (at least 2 characters)'
+            },
+            email: {
+                validate: (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value),
+                message: 'Please enter a valid email address'
+            },
+            phone: {
+                validate: (value) => /^[\d\s+\-()]{7,15}$/.test(value.replace(/\s/g, '')),
+                message: 'Please enter a valid phone number'
+            },
+            amount: {
+                validate: (value) => {
+                    const cleanValue = value.toString().replace(/,/g, '');
+                    const num = parseFloat(cleanValue);
+                    return !isNaN(num) && num > 0;
+                },
+                message: 'Please enter a valid amount greater than 0'
+            }
+        };
+
+        // Auto-validate on blur
+        document.querySelectorAll('[data-validate]').forEach(input => {
+            input.addEventListener('blur', function() {
+                validateField(this);
+                updateProgressSteps(3);
+                saveFormToStorage();
+            });
+            
+            input.addEventListener('input', function() {
+                if (this.classList.contains('invalid') || this.classList.contains('valid')) {
+                    validateField(this);
+                }
+            });
+        });
+
+        function validateField(input) {
+            const type = input.getAttribute('data-validate');
+            const rule = validationRules[type];
+            if (!rule) return true;
+
+            const isValid = rule.validate(input.value);
+            const suffix = input.id.includes('Intl') ? 'Intl' : '';
+            const iconEl = document.getElementById(`${type}Icon${suffix}`);
+            const errorEl = document.getElementById(`${type}Error${suffix}`);
+
+            if (input.value.trim() === '') {
+                input.classList.remove('valid', 'invalid');
+                if (iconEl) {
+                    iconEl.classList.remove('show', 'valid', 'invalid');
+                    iconEl.textContent = '';
+                }
+                if (errorEl) errorEl.classList.remove('show');
+                return false;
+            }
+
+            if (isValid) {
+                input.classList.remove('invalid');
+                input.classList.add('valid');
+                if (iconEl) {
+                    iconEl.classList.add('show', 'valid');
+                    iconEl.classList.remove('invalid');
+                    iconEl.textContent = '✓';
+                }
+                if (errorEl) errorEl.classList.remove('show');
+            } else {
+                input.classList.remove('valid');
+                input.classList.add('invalid');
+                if (iconEl) {
+                    iconEl.classList.add('show', 'invalid');
+                    iconEl.classList.remove('valid');
+                    iconEl.textContent = '✕';
+                }
+                if (errorEl) errorEl.classList.add('show');
+            }
+
+            return isValid;
+        }
+
+        function validateForm(formId) {
+            const form = document.getElementById(formId);
+            const inputs = form.querySelectorAll('[data-validate]');
+            let isValid = true;
+
+            inputs.forEach(input => {
+                if (input.hasAttribute('required') && !validateField(input)) {
+                    isValid = false;
+                }
+            });
+
+            // Check select
+            const select = form.querySelector('select[required]');
+            if (select && !select.value) {
+                isValid = false;
+                select.classList.add('invalid');
+            }
+
+            // Check file
+            const fileInput = form.querySelector('input[type="file"][required]');
+            if (fileInput && !fileInput.files.length) {
+                isValid = false;
+            }
+
+            return isValid;
+        }
+
+        // NEW: Character counter for tribute message
+        document.querySelectorAll('textarea[name="tribute_message"]').forEach(textarea => {
+            textarea.addEventListener('input', function() {
+                const counter = this.nextElementSibling;
+                if (counter && counter.classList.contains('char-counter')) {
+                    counter.textContent = `${this.value.length} / ${this.maxLength} characters`;
+                }
+            });
+        });
+
+        // NEW: Phone number auto-formatting
+        document.querySelectorAll('input[type="tel"]').forEach(input => {
+            input.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length > 12) value = value.slice(0, 12);
+                
+                // Format Sierra Leone numbers: XXX XXX XXXX
+                if (value.length >= 7) {
+                    value = value.slice(0, 3) + ' ' + value.slice(3, 6) + ' ' + value.slice(6);
+                } else if (value.length >= 4) {
+                    value = value.slice(0, 3) + ' ' + value.slice(3);
+                }
+                e.target.value = value;
+            });
+        });
+
+        // NEW: Form submission with loading state and success modal
+        function handleFormSubmit(formId, submitBtnId, isInternational = false) {
+            const form = document.getElementById(formId);
+            const submitBtn = document.getElementById(submitBtnId);
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                if (!validateForm(formId)) {
+                    // Scroll to first error
+                    const firstError = form.querySelector('.invalid');
+                    if (firstError) {
+                        firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        firstError.focus();
+                    }
+                    return;
+                }
+
+                // Show loading state
+                submitBtn.classList.add('loading');
+                submitBtn.disabled = true;
+                updateProgressSteps(4);
+
+                // Simulate submission (replace with actual form submission)
+                setTimeout(() => {
+                    submitBtn.classList.remove('loading');
+                    submitBtn.disabled = false;
+
+                    // Show success modal
+                    showSuccessModal(formId, isInternational);
+                    
+                    // Clear form storage
+                    localStorage.removeItem('donationFormData');
+                    
+                    // Reset form after a delay
+                    setTimeout(() => {
+                        form.reset();
+                        document.querySelectorAll('.form-input').forEach(i => i.classList.remove('valid', 'invalid'));
+                        document.querySelectorAll('.validation-icon').forEach(i => i.classList.remove('show', 'valid', 'invalid'));
+                        document.querySelectorAll('.error-message').forEach(e => e.classList.remove('show'));
+                        document.querySelectorAll('.file-name').forEach(f => f.textContent = '');
+                        updateImpactFromAmount(25);
+                        updateProgressSteps(1);
+                    }, 500);
+                }, 2000);
+            });
+        }
+
+        handleFormSubmit('transactionForm', 'submitBtn', false);
+        handleFormSubmit('internationalTransactionForm', 'submitBtnIntl', true);
+
+        // NEW: Success Modal Functions
+        function showSuccessModal(formId, isInternational) {
+            const form = document.getElementById(formId);
+            const modal = document.getElementById('successModal');
+            
+            const name = form.querySelector('[name="donor_name"]').value;
+            const amount = form.querySelector('[name="amount"]').value;
+            const method = isInternational ? 'International Transfer' : (form.querySelector('[name="payment_method"]')?.value || 'Mobile Money');
+            const impact = form.querySelector('[name="impact"]').value;
+            const receiptNum = 'DJF-' + Date.now().toString(36).toUpperCase() + '-' + Math.random().toString(36).substr(2, 4).toUpperCase();
+
+            document.getElementById('receiptName').textContent = name;
+            document.getElementById('receiptAmount').textContent = isInternational ? amount : `Le ${amount}`;
+            document.getElementById('receiptMethod').textContent = method;
+            document.getElementById('receiptImpact').textContent = impact;
+            document.getElementById('receiptNumber').textContent = receiptNum;
+
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeSuccessModal() {
+            const modal = document.getElementById('successModal');
+            modal.classList.remove('show');
+            document.body.style.overflow = '';
+        }
+
+        // Close modal on backdrop click
+        document.getElementById('successModal').addEventListener('click', function(e) {
+            if (e.target === this) closeSuccessModal();
+        });
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && document.getElementById('successModal').classList.contains('show')) {
+                closeSuccessModal();
+            }
+        });
+
+        // NEW: Live Donor Ticker Animation
+        const donorMessages = [
+            'Sarah from London just donated £50 for healthcare',
+            'Michael from New York donated $100 for education',
+            'Amina from Freetown gave Le 250 for nutrition',
+            'The Johnson family donated $500 for clean water',
+            'James from Manchester sent £25 for school supplies',
+            'Fatima from Bo contributed Le 500 for vaccines',
+            'Anonymous donor gave $1000 for emergency relief',
+            'David from Toronto donated $75 for medical care',
+            'Mariama from Kenema gave Le 100 for a school kit',
+            'The Williams family donated £200 monthly'
+        ];
+        let tickerIndex = 0;
+        const tickerText = document.getElementById('tickerText');
+        
+        setInterval(() => {
+            tickerText.style.opacity = '0';
+            setTimeout(() => {
+                tickerIndex = (tickerIndex + 1) % donorMessages.length;
+                tickerText.textContent = donorMessages[tickerIndex];
+                tickerText.style.opacity = '1';
+            }, 500);
+        }, 5000);
+
+        // NEW: Form Data Persistence (localStorage)
+        function saveFormToStorage() {
+            const formData = {
+                amount: currentSelectedAmount,
+                frequency: currentFrequency,
+                paymentMethod: document.getElementById('paymentMethod')?.value || '',
+                donorName: document.getElementById('donorName')?.value || '',
+                donorEmail: document.getElementById('donorEmail')?.value || '',
+                donorPhone: document.getElementById('donorPhone')?.value || '',
+                timestamp: Date.now()
+            };
+            localStorage.setItem('donationFormData', JSON.stringify(formData));
+        }
+
+        function loadFormFromStorage() {
+            const saved = localStorage.getItem('donationFormData');
+            if (!saved) return;
+
+            try {
+                const data = JSON.parse(saved);
+                // Only restore if saved within last 24 hours
+                if (Date.now() - data.timestamp > 24 * 60 * 60 * 1000) {
+                    localStorage.removeItem('donationFormData');
+                    return;
+                }
+
+                if (data.amount) {
+                    currentSelectedAmount = data.amount;
+                    document.getElementById('formAmount').value = formatNumber(data.amount);
+                    document.querySelectorAll('.amount-btn').forEach(btn => {
+                        if (parseFloat(btn.getAttribute('data-amount')) === data.amount) {
+                            btn.classList.add('active');
+                        } else {
+                            btn.classList.remove('active');
+                        }
+                    });
+                    updateImpactFromAmount(data.amount);
+                }
+
+                if (data.frequency && data.frequency !== currentFrequency) {
+                    setFrequency(data.frequency);
+                }
+
+                if (data.paymentMethod) {
+                    document.getElementById('paymentMethod').value = data.paymentMethod;
+                }
+
+                if (data.donorName) document.getElementById('donorName').value = data.donorName;
+                if (data.donorEmail) document.getElementById('donorEmail').value = data.donorEmail;
+                if (data.donorPhone) document.getElementById('donorPhone').value = data.donorPhone;
+
+            } catch (e) {
+                console.error('Error loading form data:', e);
+            }
+        }
+
+        // Auto-save on input changes
+        document.querySelectorAll('.form-input, .form-select').forEach(input => {
+            input.addEventListener('input', saveFormToStorage);
+            input.addEventListener('change', saveFormToStorage);
+        });
+
+        // Load saved form data on page load
+        document.addEventListener('DOMContentLoaded', loadFormFromStorage);
+
+        // NEW: Smooth scroll for cause card donate buttons
+        document.querySelectorAll('.cause-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            });
         });
     </script>
 </body>
