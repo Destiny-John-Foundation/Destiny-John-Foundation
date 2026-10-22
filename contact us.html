@@ -682,17 +682,21 @@
             font-weight: 600;
         }
         .hours-list li.today {
-            background: rgba(255, 255, 255, 0.08);
+            background: rgba(251, 211, 141, 0.2);
             padding: 14px 15px;
             border-radius: 10px;
             margin: 0 -15px;
             border-bottom: none;
+            border-left: 4px solid var(--accent-sun);
         }
         .hours-list li.today::before {
             content: '●';
             color: var(--success-color);
             margin-right: 10px;
             animation: pulse-dot 2s ease-in-out infinite;
+        }
+        .hours-list li.today .day {
+            color: var(--accent-sun);
         }
         @keyframes pulse-dot {
             0%, 100% { opacity: 1; }
@@ -759,77 +763,27 @@
             box-shadow: 0 20px 50px rgba(26, 54, 93, 0.1);
             position: relative;
         }
-        .map-placeholder {
+        .map-embed {
+            width: 100%;
             height: 450px;
-            background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e0 100%);
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
+            border: none;
         }
-        .map-placeholder::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background-image: 
-                linear-gradient(rgba(26, 54, 93, 0.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(26, 54, 93, 0.05) 1px, transparent 1px);
-            background-size: 40px 40px;
-        }
-        .map-pin {
-            position: relative;
-            text-align: center;
-            z-index: 2;
-        }
-        .map-pin-icon {
-            width: 70px;
-            height: 70px;
-            background: var(--secondary-color);
-            border-radius: 50% 50% 50% 0;
-            transform: rotate(-45deg);
-            margin: 0 auto 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 10px 30px rgba(255, 138, 128, 0.4);
-            animation: pin-bounce 2s ease-in-out infinite;
-        }
-        .map-pin-icon span {
-            transform: rotate(45deg);
-            font-size: 1.8rem;
-        }
-        @keyframes pin-bounce {
-            0%, 100% { transform: rotate(-45deg) translateY(0); }
-            50% { transform: rotate(-45deg) translateY(-10px); }
-        }
-        .map-pin h4 {
-            font-family: var(--font-heading);
-            color: var(--primary-color);
-            font-size: 1.3rem;
-            margin-bottom: 8px;
-        }
-        .map-pin p {
-            color: var(--text-light);
-            font-size: 0.95rem;
-            margin-bottom: 15px;
-        }
-        .map-directions-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 22px;
-            background: var(--primary-color);
+        .map-info {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #2c5282 100%);
             color: white;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: all 0.3s;
+            padding: 30px;
+            text-align: center;
         }
-        .map-directions-btn:hover {
-            background: var(--secondary-color);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(255, 138, 128, 0.3);
+        .map-info h4 {
+            font-family: var(--font-heading);
+            color: white;
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+        .map-info p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1rem;
+            margin: 0;
         }
 
         /* CTA SECTION */
@@ -1010,7 +964,7 @@
             .inquiry-types { grid-template-columns: 1fr; }
             .hours-layout { grid-template-columns: 1fr; gap: 30px; }
             .response-badges { grid-template-columns: 1fr 1fr; }
-            .map-placeholder { height: 350px; }
+            .map-embed { height: 350px; }
             .cta-buttons { flex-direction: column; align-items: center; }
             .cta-buttons .btn { width: 100%; max-width: 300px; }
             
@@ -1341,16 +1295,10 @@
             <p>We'd love to welcome you to our Freetown office. Come by for a chat about our work and how you can get involved.</p>
         </div>
         <div class="map-container">
-            <div class="map-placeholder">
-                <div class="map-pin">
-                    <div class="map-pin-icon"><span>🏢</span></div>
-                    <h4>Destiny John Foundation</h4>
-                    <p>6 Aberdeen Village, Freetown</p>
-                    <a href="https://maps.google.com/?q=Aberdeen+Village+Freetown+Sierra+Leone" target="_blank" class="map-directions-btn">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                        Get Directions
-                    </a>
-                </div>
+            <iframe class="map-embed" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3948.123456789!2d-13.2833!3d8.4833!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sAberdeen%20Village%2C%20Freetown%2C%20Sierra%20Leone!5e0!3m2!1sen!2ssl!4v1234567890" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <div class="map-info">
+                <h4>Destiny John Foundation</h4>
+                <p>6 Aberdeen Village, Freetown, Sierra Leone</p>
             </div>
         </div>
     </section>
@@ -1380,7 +1328,7 @@
                     <input type="email" placeholder="Enter your email address" required>
                     <button type="submit">Subscribe</button>
                 </form>
-                <p class="newsletter-note">Unsubscribe anytime. Read our privacy policy <a href="#">here</a>.</p>
+               
             </div>
         </div>
     </div>
@@ -1452,7 +1400,8 @@
             const today = new Date().getDay();
             const items = document.querySelectorAll('#hoursList li');
             items.forEach(item => {
-                if (parseInt(item.getAttribute('data-day')) === today) {
+                const dayNum = parseInt(item.getAttribute('data-day'));
+                if (dayNum === today) {
                     item.classList.add('today');
                     const daySpan = item.querySelector('.day');
                     daySpan.textContent = daySpan.textContent + ' (Today)';
