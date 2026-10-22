@@ -832,61 +832,6 @@
             box-shadow: 0 8px 20px rgba(255, 138, 128, 0.3);
         }
 
-        /* FAQ */
-        .contact-faq {
-            padding: 80px 20px;
-            background: var(--bg-light);
-        }
-        .faq-grid {
-            max-width: 900px;
-            margin: 40px auto 0;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-            gap: 20px;
-        }
-        .faq-item {
-            background: white;
-            border-radius: 16px;
-            padding: 25px;
-            border: 1px solid #edf2f7;
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-        .faq-item:hover {
-            border-color: var(--secondary-color);
-            box-shadow: 0 10px 30px rgba(26, 54, 93, 0.08);
-            transform: translateY(-3px);
-        }
-        .faq-item h4 {
-            font-size: 1.05rem;
-            color: var(--primary-color);
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .faq-item h4::before {
-            content: '?';
-            width: 28px;
-            height: 28px;
-            background: linear-gradient(135deg, var(--secondary-color), var(--accent-sun));
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 0.9rem;
-            flex-shrink: 0;
-        }
-        .faq-item p {
-            font-size: 0.9rem;
-            color: var(--text-light);
-            line-height: 1.6;
-            margin: 0;
-            padding-left: 38px;
-        }
-
         /* CTA SECTION */
         .cta-section {
             padding: 80px 20px;
@@ -1066,7 +1011,6 @@
             .hours-layout { grid-template-columns: 1fr; gap: 30px; }
             .response-badges { grid-template-columns: 1fr 1fr; }
             .map-placeholder { height: 350px; }
-            .faq-grid { grid-template-columns: 1fr; }
             .cta-buttons { flex-direction: column; align-items: center; }
             .cta-buttons .btn { width: 100%; max-width: 300px; }
             
@@ -1142,7 +1086,7 @@
                 <div class="quick-card-icon">📍</div>
                 <h4>Visit Us</h4>
                 <p>Come say hello</p>
-                <span>Freetown, Sierra Leone</span>
+                <span>6 Aberdeen Village, Freetown</span>
             </a>
         </div>
     </section>
@@ -1161,7 +1105,7 @@
                             <div class="info-list-icon">📍</div>
                             <div class="info-list-content">
                                 <strong>Our Office</strong>
-                                <span>Freetown, Sierra Leone</span>
+                                <span>6 Aberdeen Village, Freetown</span>
                             </div>
                         </li>
                         <li>
@@ -1401,47 +1345,12 @@
                 <div class="map-pin">
                     <div class="map-pin-icon"><span>🏢</span></div>
                     <h4>Destiny John Foundation</h4>
-                    <p>Freetown, Sierra Leone</p>
-                    <a href="https://maps.google.com/?q=Freetown,Sierra+Leone" target="_blank" class="map-directions-btn">
+                    <p>6 Aberdeen Village, Freetown</p>
+                    <a href="https://maps.google.com/?q=Aberdeen+Village+Freetown+Sierra+Leone" target="_blank" class="map-directions-btn">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
                         Get Directions
                     </a>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ -->
-    <section class="contact-faq">
-        <div class="section-header">
-            <span class="eyebrow">Common Questions</span>
-            <h2>Frequently Asked Questions</h2>
-            <p>Quick answers to the questions we hear most often.</p>
-        </div>
-        <div class="faq-grid">
-            <div class="faq-item">
-                <h4>How quickly will I receive a response?</h4>
-                <p>We typically respond to emails within 24 hours during business days. WhatsApp messages receive even faster replies, usually within 2 hours.</p>
-            </div>
-            <div class="faq-item">
-                <h4>Can I schedule a meeting with your team?</h4>
-                <p>Absolutely! Send us an email with your preferred date and time, and we'll arrange a meeting either in person at our Freetown office or via video call.</p>
-            </div>
-            <div class="faq-item">
-                <h4>Do you accept walk-in visitors?</h4>
-                <p>Yes, our office is open to visitors during business hours. We recommend calling ahead so we can ensure the right team member is available to assist you.</p>
-            </div>
-            <div class="faq-item">
-                <h4>How can I report an issue with my donation?</h4>
-                <p>Please email donations@destinyjohnfoundation.org with your receipt number and details. Our team will investigate and resolve the issue within 48 hours.</p>
-            </div>
-            <div class="faq-item">
-                <h4>Can I volunteer remotely?</h4>
-                <p>Yes! We have many remote volunteer opportunities including translation, design, fundraising, and administrative support. Email volunteer@destinyjohnfoundation.org.</p>
-            </div>
-            <div class="faq-item">
-                <h4>Do you offer school or group visits?</h4>
-                <p>We'd love to host your group! Contact us at least 2 weeks in advance to arrange an educational visit to learn about our programs and impact.</p>
             </div>
         </div>
     </section>
@@ -1493,7 +1402,7 @@
                 <div class="footer-column"><h3>Foundation</h3><ul><li><a href="about-us.html">About Us</a></li><li><a href="story.html">Our Story</a></li><li><a href="impact.html">Our Impact</a></li><li><a href="#">Our Team</a></li><li><a href="#">Careers</a></li></ul></div>
                 <div class="footer-column"><h3>Programs</h3><ul><li><a href="#">Healthcare</a></li><li><a href="#">Education</a></li><li><a href="#">Community Support</a></li><li><a href="#">Mentorship</a></li><li><a href="#">Events</a></li></ul></div>
                 <div class="footer-column"><h3>Get Involved</h3><ul><li><a href="donate.html">Donate</a></li><li><a href="#">Volunteer</a></li><li><a href="#">Partner With Us</a></li><li><a href="#">Fundraise</a></li><li><a href="#">Resources</a></li></ul></div>
-                <div class="footer-column"><h3>Contact Us</h3><div class="contact-info"><div class="contact-item"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg><span>+232 78 383 134</span></div><div class="contact-item"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg><span>info@destinyjohnfoundation.org</span></div><div class="contact-item"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg><span>Freetown, Sierra Leone</span></div></div></div>
+                <div class="footer-column"><h3>Contact Us</h3><div class="contact-info"><div class="contact-item"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg><span>+232 78 383 134</span></div><div class="contact-item"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg><span>info@destinyjohnfoundation.org</span></div><div class="contact-item"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg><span>6 Aberdeen Village, Freetown</span></div></div></div>
             </div>
             <div class="footer-bottom"><p>© 2026 Destiny John Foundation. All rights reserved. | Built with ❤️ for the children of Sierra Leone.</p><div class="footer-links"><a href="#">Privacy Policy</a><a href="#">Terms of Use</a><a href="#">Legal</a><a href="#">Site Map</a></div></div>
         </div>
