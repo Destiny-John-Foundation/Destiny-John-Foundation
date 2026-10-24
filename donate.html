@@ -64,7 +64,7 @@
 
         /* HERO - FULL IMAGE DISPLAY FITTING BANNER */
         .page-hero { 
-            background: linear-gradient(135deg, rgba(26, 54, 93, 0.70) 0%, rgba(44, 82, 130, 0.65) 100%),  
+            background: linear-gradient(135deg, rgba(15, 35, 70, 0.80) 0%, rgba(26, 54, 93, 0.74) 100%),  
                         url('assets/project-djf-images/image47.jpeg') center/cover; 
             background-size: cover;
             background-position: center;
@@ -81,16 +81,17 @@
         }
         .page-hero .container { width: 100%; }
         .page-hero h1 { 
+            color: #FFFFFF;
             font-size: 3.5rem; 
             margin-bottom: 15px; 
-            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            text-shadow: 0 3px 14px rgba(0,0,0,0.65), 0 1px 3px rgba(0,0,0,0.5);
         }
         .page-hero p { 
             font-size: 1.2rem; 
             max-width: 700px; 
             margin: 0 auto; 
             color: rgba(255,255,255,0.95); 
-            text-shadow: 0 1px 5px rgba(0,0,0,0.3);
+            text-shadow: 0 2px 8px rgba(0,0,0,0.55);
         }
 
         /* CAUSES SECTION */
@@ -698,6 +699,40 @@
         .scroll-top-btn:hover { background-color: var(--secondary-color); transform: translateY(-5px); }
         .scroll-top-btn.show { opacity: 1; visibility: visible; transform: translateY(0); }
 
+        /* Story, spending breakdown and registration (SAMPLE CONTENT - edit later) */
+        .trust-story-section { padding: 80px 20px; background: var(--bg-white); }
+        .trust-story-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1.1fr 1fr; gap: 40px; align-items: stretch; }
+        .story-card { background: var(--bg-light); border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(26, 54, 93, 0.08); display: flex; flex-direction: column; }
+        .story-photo { height: 300px; background-size: cover; background-position: center; position: relative; }
+        .story-body { padding: 30px; }
+        .story-body h3 { font-size: 1.4rem; margin-bottom: 12px; }
+        .story-body p { font-size: 0.95rem; }
+        .story-quote { border-left: 4px solid var(--secondary-color); padding-left: 15px; font-style: italic; color: var(--primary-color); margin: 15px 0; }
+        .story-meta { font-size: 0.85rem; font-weight: 600; color: var(--text-light); margin-bottom: 0; }
+        .sample-tag { position: absolute; top: 15px; left: 15px; background: rgba(26, 54, 93, 0.88); color: white; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; padding: 5px 12px; border-radius: 50px; }
+        .sample-tag.inline { position: static; display: inline-block; margin-bottom: 14px; }
+        .trust-side { display: flex; flex-direction: column; gap: 25px; }
+        .spend-card { background: white; border: 1px solid #edf2f7; border-radius: 20px; padding: 30px; box-shadow: 0 10px 30px rgba(26, 54, 93, 0.06); flex: 1; }
+        .spend-card h3 { font-size: 1.3rem; margin-bottom: 8px; }
+        .spend-card > p { font-size: 0.9rem; margin-bottom: 20px; }
+        .spend-row { margin-bottom: 16px; }
+        .spend-row:last-of-type { margin-bottom: 0; }
+        .spend-labels { display: flex; justify-content: space-between; font-size: 0.9rem; font-weight: 600; color: var(--text-dark); margin-bottom: 6px; }
+        .spend-labels span:last-child { color: var(--primary-color); }
+        .spend-note { font-size: 0.78rem; color: var(--text-light); margin: 18px 0 0; }
+        .reg-card { background: linear-gradient(135deg, var(--primary-color), #2c5282); color: white; border-radius: 16px; padding: 22px 25px; display: flex; gap: 16px; align-items: center; }
+        .reg-icon { width: 48px; height: 48px; border-radius: 50%; background: rgba(255, 255, 255, 0.15); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; }
+        .reg-card strong { display: block; font-size: 1rem; margin-bottom: 2px; }
+        .reg-card p { margin: 0; color: rgba(255, 255, 255, 0.9); font-size: 0.88rem; line-height: 1.5; }
+        .reg-card .reg-number { font-weight: 700; color: var(--accent-sun); letter-spacing: 0.5px; }
+
+        @media (max-width: 768px) {
+            .trust-story-section { padding: 60px 15px; }
+            .trust-story-grid { grid-template-columns: 1fr; gap: 30px; }
+            .story-photo { height: 230px; }
+            .story-body, .spend-card { padding: 22px; }
+        }
+
         /* Keyboard focus visibility (accessibility) */
         a:focus-visible, button:focus-visible, .menu-toggle:focus-visible,
         .form-input:focus-visible, .form-select:focus-visible, .custom-amount-input:focus-visible {
@@ -1282,6 +1317,65 @@
         </div>
     </section>
 
+    <!-- STORY, SPENDING BREAKDOWN & REGISTRATION (SAMPLE CONTENT - REPLACE WITH REAL DETAILS) -->
+    <section class="trust-story-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Your Impact &amp; Our Transparency</h2>
+                <p>See the difference a gift makes, and exactly how every donation is used.</p>
+            </div>
+            <div class="trust-story-grid">
+                <!-- EDIT: replace the photo, name, story and quote with a real child's story (with the family's consent) -->
+                <article class="story-card">
+                    <div class="story-photo" style="background-image: url('assets/project-djf-images/image4.jpeg');" role="img" aria-label="A child supported by the Destiny John Foundation">
+                        <span class="sample-tag">Sample story</span>
+                    </div>
+                    <div class="story-body">
+                        <h3>A Second Chance for Aminata</h3>
+                        <p>Aminata was two years old when she was brought to our outreach clinic with a high fever and trouble breathing. Quick treatment and follow-up visits helped her recover fully, and she is now back to playing with her friends.</p>
+                        <blockquote class="story-quote">“I was afraid I might lose my daughter. Today she is running and laughing again.”</blockquote>
+                        <p class="story-meta">Aminata's mother · Freetown · Pediatric Healthcare</p>
+                    </div>
+                </article>
+
+                <div class="trust-side">
+                    <!-- EDIT: replace the percentages with your real figures (they should add up to 100%) -->
+                    <div class="spend-card">
+                        <span class="sample-tag inline">Sample figures</span>
+                        <h3>How We Spend Your Money</h3>
+                        <p>Every donation is directed to our programs for children and families.</p>
+                        <div class="spend-row">
+                            <div class="spend-labels"><span>🩺 Pediatric Healthcare</span><span>40%</span></div>
+                            <div class="progress-bar" role="progressbar" aria-label="Pediatric Healthcare share of donations" aria-valuemin="0" aria-valuemax="100" aria-valuenow="40"><div class="progress-fill" style="width: 40%;"></div></div>
+                        </div>
+                        <div class="spend-row">
+                            <div class="spend-labels"><span>📚 Education Support</span><span>25%</span></div>
+                            <div class="progress-bar" role="progressbar" aria-label="Education Support share of donations" aria-valuemin="0" aria-valuemax="100" aria-valuenow="25"><div class="progress-fill" style="width: 25%;"></div></div>
+                        </div>
+                        <div class="spend-row">
+                            <div class="spend-labels"><span>🍎 Nutrition &amp; Food Security</span><span>20%</span></div>
+                            <div class="progress-bar" role="progressbar" aria-label="Nutrition and Food Security share of donations" aria-valuemin="0" aria-valuemax="100" aria-valuenow="20"><div class="progress-fill" style="width: 20%;"></div></div>
+                        </div>
+                        <div class="spend-row">
+                            <div class="spend-labels"><span>💧 Community &amp; Clean Water</span><span>15%</span></div>
+                            <div class="progress-bar" role="progressbar" aria-label="Community and Clean Water share of donations" aria-valuemin="0" aria-valuemax="100" aria-valuenow="15"><div class="progress-fill" style="width: 15%;"></div></div>
+                        </div>
+                        <p class="spend-note">Figures shown are for illustration and will be updated with our latest reported breakdown.</p>
+                    </div>
+
+                    <!-- EDIT: replace with your real registration number and registering authority -->
+                    <div class="reg-card">
+                        <div class="reg-icon" aria-hidden="true">🏛️</div>
+                        <div>
+                            <strong>Registered Non-Profit Organization</strong>
+                            <p>Registration No.: <span class="reg-number">[Your Registration Number]</span><br>Registered with: [Registering Authority]</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Donation FAQ Section -->
     <section class="donation-faq">
         <div class="container">
@@ -1350,6 +1444,7 @@
                     <input type="email" placeholder="Enter your email address" aria-label="Email address for newsletter" autocomplete="email" required>
                     <button type="submit">Subscribe</button>
                 </form>
+                <p class="newsletter-note">You will be able to unsubscribe at any time. <br>Read our privacy policy <a href="#">here</a>.</p>
             </div>
         </div>
     </div>
