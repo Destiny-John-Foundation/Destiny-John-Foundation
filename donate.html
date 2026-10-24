@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Donate - Destiny John Foundation</title>
     <meta name="description" content="Support the Destiny John Foundation. Donate via Orange Money, Africell Money, QMoney, Flutterwave, or Bank Transfer to help children in Sierra Leone.">
+    <meta name="theme-color" content="#1A365D">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Donate - Destiny John Foundation">
+    <meta property="og:description" content="Your generosity creates lasting change in the lives of Sierra Leone's children. Donate via mobile money, card or bank transfer.">
+    <meta property="og:image" content="assets/project-djf-images/image47.jpeg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
@@ -74,6 +79,7 @@
             align-items: center;
             justify-content: center;
         }
+        .page-hero .container { width: 100%; }
         .page-hero h1 { 
             font-size: 3.5rem; 
             margin-bottom: 15px; 
@@ -85,36 +91,6 @@
             margin: 0 auto; 
             color: rgba(255,255,255,0.95); 
             text-shadow: 0 1px 5px rgba(0,0,0,0.3);
-        }
-        
-        /* NEW: Live Donor Ticker */
-        .donor-ticker {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 10px 20px;
-            border-radius: 50px;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            margin-top: 25px;
-            font-size: 0.9rem;
-            animation: ticker-fade 3s ease-in-out infinite;
-        }
-        .ticker-dot {
-            width: 8px;
-            height: 8px;
-            background: var(--success-color);
-            border-radius: 50%;
-            animation: pulse-dot 2s ease-in-out infinite;
-        }
-        @keyframes pulse-dot {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.6; transform: scale(1.3); }
-        }
-        @keyframes ticker-fade {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.9; }
         }
 
         /* CAUSES SECTION */
@@ -161,7 +137,7 @@
 
         .payment-container { background: var(--bg-white); border-radius: 24px; box-shadow: 0 25px 60px rgba(26, 54, 93, 0.12); overflow: hidden; border: 1px solid #edf2f7; }
 
-        /* NEW: Step Progress Indicator */
+        /* Step Progress Indicator */
         .progress-steps {
             display: flex;
             justify-content: space-between;
@@ -232,7 +208,14 @@
         .freq-btn:hover:not(.active) { color: var(--primary-color); }
         .freq-save { font-size: 0.7rem; background: var(--accent-sun); color: var(--primary-color); padding: 2px 8px; border-radius: 10px; font-weight: 700; }
 
-        /* NEW: Monthly donation benefits tooltip */
+        /* Selected cause ("Your gift supports") */
+        .designation-bar { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 8px; margin-top: 14px; font-size: 0.9rem; color: var(--text-light); text-align: center; }
+        .designation-bar strong { color: var(--primary-color); }
+        .designation-clear { border: none; background: transparent; color: var(--secondary-color); font-weight: 700; font-size: 0.85rem; cursor: pointer; text-decoration: underline; font-family: var(--font-body); }
+        .donation-frequency.highlight { animation: highlightPulse 1.4s ease; }
+        @keyframes highlightPulse { 0%, 100% { box-shadow: inset 0 0 0 0 rgba(255, 138, 128, 0); } 40% { box-shadow: inset 0 0 0 4px rgba(255, 138, 128, 0.55); } }
+
+        /* Monthly donation info */
         .monthly-benefits {
             max-width: 380px;
             margin: 15px auto 0;
@@ -271,7 +254,7 @@
         .amount-btn:hover { border-color: var(--secondary-color); transform: translateY(-2px); }
         .amount-btn.active { background: linear-gradient(135deg, var(--secondary-color), #ff7676); color: white; border-color: var(--secondary-color); box-shadow: 0 6px 20px rgba(255, 138, 128, 0.4); }
         
-        /* NEW: Impact preview under amount buttons */
+        /* Impact preview under amount buttons */
         .amount-impact-preview {
             font-size: 0.7rem;
             font-weight: 400;
@@ -346,8 +329,9 @@
         .file-input-label svg { width: 48px; height: 48px; color: var(--secondary-color); margin-bottom: 15px; transition: transform 0.3s; }
         .file-input-label:hover svg { transform: translateY(-5px); }
         .file-name { margin-top: 15px; font-size: 0.95rem; color: var(--primary-color); font-weight: 600; }
+        .file-name.error { color: var(--error-color); }
         
-        /* NEW: Enhanced form input with validation states */
+        /* Enhanced form input with validation states */
         .form-group { position: relative; margin-bottom: 15px; }
         .form-input { 
             width: 100%; 
@@ -365,15 +349,16 @@
         .form-input.valid:focus { box-shadow: 0 0 0 4px rgba(72, 187, 120, 0.1); }
         .form-input.invalid:focus { box-shadow: 0 0 0 4px rgba(229, 62, 62, 0.1); }
         
-        /* Validation icons */
+        /* Validation icons (pinned to the input row, not the error text) */
         .validation-icon {
             position: absolute;
             right: 15px;
-            top: 50%;
+            top: 26px;
             transform: translateY(-50%);
             font-size: 1.2rem;
             opacity: 0;
             transition: opacity 0.3s;
+            pointer-events: none;
         }
         .validation-icon.show { opacity: 1; }
         .validation-icon.valid { color: var(--success-color); }
@@ -423,6 +408,7 @@
         .form-select:focus { outline: none; border-color: var(--secondary-color); box-shadow: 0 0 0 4px rgba(255, 138, 128, 0.1); }
         .form-select:hover { border-color: var(--secondary-color); }
         .form-select.valid { border-color: var(--success-color); }
+        .form-select.invalid { border-color: var(--error-color); }
 
         .trust-security-badges { 
             display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: 25px 0; padding: 20px; 
@@ -447,7 +433,7 @@
         }
         .security-badge-text { font-size: 0.85rem; font-weight: 600; color: var(--primary-color); line-height: 1.3; }
 
-        /* NEW: Enhanced submit button with loading state */
+        /* Enhanced submit button with loading state */
         .submit-btn { 
             width: 100%; 
             padding: 18px; 
@@ -489,7 +475,13 @@
             to { transform: rotate(360deg); }
         }
 
-        /* NEW: Success Modal */
+        /* Form feedback + spam trap */
+        .form-status { display: none; margin-top: 15px; padding: 14px 18px; border-radius: 12px; font-size: 0.95rem; font-weight: 600; position: relative; z-index: 1; }
+        .form-status.error { display: block; background: #FFF5F5; color: #C53030; border: 1px solid #FEB2B2; }
+        .upload-section .form-privacy { font-size: 0.8rem; text-align: center; margin: 12px 0 0; color: var(--text-light); }
+        .hp-field { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+        /* Success Modal */
         .success-modal {
             display: none;
             position: fixed;
@@ -512,6 +504,8 @@
             padding: 50px 40px;
             max-width: 500px;
             width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
             text-align: center;
             position: relative;
             animation: modalZoomIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -549,10 +543,10 @@
             text-align: left;
         }
         .receipt-preview h4 { font-size: 1rem; color: var(--primary-color); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
-        .receipt-row { display: flex; justify-content: space-between; padding: 6px 0; font-size: 0.9rem; border-bottom: 1px solid #edf2f7; }
+        .receipt-row { display: flex; justify-content: space-between; gap: 15px; padding: 6px 0; font-size: 0.9rem; border-bottom: 1px solid #edf2f7; }
         .receipt-row:last-child { border-bottom: none; }
         .receipt-row .label { color: var(--text-light); }
-        .receipt-row .value { color: var(--primary-color); font-weight: 600; }
+        .receipt-row .value { color: var(--primary-color); font-weight: 600; text-align: right; }
         .modal-actions { display: flex; gap: 12px; margin-top: 25px; }
         .modal-actions .btn { flex: 1; padding: 14px; }
         .modal-close {
@@ -569,7 +563,7 @@
         }
         .modal-close:hover { color: var(--primary-color); }
 
-        /* NEW: Donation FAQ Section */
+        /* Donation FAQ Section */
         .donation-faq {
             padding: 80px 20px;
             background: var(--bg-light);
@@ -587,7 +581,6 @@
             padding: 25px;
             border: 1px solid #edf2f7;
             transition: all 0.3s;
-            cursor: pointer;
         }
         .faq-item-new:hover {
             border-color: var(--secondary-color);
@@ -624,7 +617,7 @@
             padding-left: 38px;
         }
 
-        /* NEW: Contact for donations section */
+        /* Contact for donations section */
         .donation-contact {
             padding: 60px 20px;
             background: linear-gradient(135deg, var(--primary-color) 0%, #2c5282 100%);
@@ -705,6 +698,26 @@
         .scroll-top-btn:hover { background-color: var(--secondary-color); transform: translateY(-5px); }
         .scroll-top-btn.show { opacity: 1; visibility: visible; transform: translateY(0); }
 
+        /* Keyboard focus visibility (accessibility) */
+        a:focus-visible, button:focus-visible, .menu-toggle:focus-visible,
+        .form-input:focus-visible, .form-select:focus-visible, .custom-amount-input:focus-visible {
+            outline: 3px solid var(--secondary-color);
+            outline-offset: 3px;
+        }
+        .file-input-wrapper input[type="file"]:focus-visible + .file-input-label { border-color: var(--secondary-color); box-shadow: 0 0 0 4px rgba(255, 138, 128, 0.2); }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+        }
+
+        /* Print only the submission summary */
+        @media print {
+            body > *:not(#successModal) { display: none !important; }
+            .success-modal { position: static; display: block !important; background: none; backdrop-filter: none; padding: 0; }
+            .success-modal-content { box-shadow: none; max-height: none; animation: none; }
+            .modal-close, .modal-actions { display: none !important; }
+        }
+
         @media (max-width: 768px) {
             h1 { font-size: 2rem; } h2 { font-size: 1.75rem; } .page-hero h1 { font-size: 2.5rem; }
             .logo img { height: 80px; }
@@ -727,8 +740,9 @@
             .copy-btn { width: 100%; justify-content: center; }
             .bank-row { flex-direction: column; gap: 5px; }
             .bank-value { text-align: left; }
+            .upload-section { padding: 25px 20px; }
             
-            /* NEW: Mobile progress steps */
+            /* Mobile progress steps */
             .progress-steps { padding: 15px 20px; }
             .step-label { display: none; }
             .progress-steps::before { left: 40px; right: 40px; }
@@ -742,12 +756,12 @@
 
             .trust-security-badges { grid-template-columns: 1fr; }
             
-            /* NEW: Mobile FAQ and contact */
+            /* Mobile FAQ and contact */
             .faq-grid { grid-template-columns: 1fr; }
             .contact-methods { flex-direction: column; align-items: center; }
             .contact-method { width: 100%; max-width: 300px; justify-content: center; }
             
-            /* NEW: Mobile success modal */
+            /* Mobile success modal */
             .success-modal-content { padding: 30px 20px; }
             .success-modal h3 { font-size: 1.4rem; }
             .modal-actions { flex-direction: column; }
@@ -768,32 +782,27 @@
     <header>
         <div class="nav-container">
             <div class="logo"><a href="index.html"><img src="logo.png" alt="Destiny John Foundation Logo"></a></div>
-            <div class="menu-toggle" id="mobile-menu">&#9776;</div>
-            <nav>
+            <div class="menu-toggle" id="mobile-menu" role="button" tabindex="0" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-list">&#9776;</div>
+            <nav aria-label="Main navigation">
                 <ul id="nav-list">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="about-us.html">About Us</a></li>
-                    <li><a href="our-story.html">Our Story</a></li>
+                    <li><a href="story.html">Our Story</a></li>
                     <li><a href="vision.html">Vision & Mission</a></li>
                     <li><a href="impact.html">Our Impact</a></li>
-                    <li><a href="contact us.html">Contact Us</a></li>
-                    <li><a href="donate.html" class="btn btn-primary active">Donate</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="donate.html" class="btn btn-primary active" aria-current="page">Donate</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
+    <main>
     <!-- HERO -->
     <section class="page-hero">
         <div class="container">
             <h1>Make a Difference Today</h1>
             <p>Your generosity creates lasting change in the lives of Sierra Leone's children. Choose your preferred donation method below.</p>
-            
-            <!-- NEW: Live Donor Ticker -->
-            <div class="donor-ticker" id="donorTicker">
-                <span class="ticker-dot"></span>
-                <span id="tickerText">Sarah from London just donated £50 for healthcare</span>
-            </div>
         </div>
     </section>
 
@@ -817,11 +826,11 @@
                                 <span>Raised: Le 12,450</span>
                                 <span>Goal: Le 120,000</span>
                             </div>
-                            <div class="progress-bar">
+                            <div class="progress-bar" role="progressbar" aria-label="Pediatric Healthcare funding progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
                                 <div class="progress-fill" style="width: 50%;"></div>
                             </div>
                         </div>
-                        <a href="#donate-frequency" class="btn btn-primary cause-btn">Donate to this Cause</a>
+                        <a href="#donate-frequency" class="btn btn-primary cause-btn" data-cause="Pediatric Healthcare">Donate to this Cause</a>
                     </div>
                 </div>
 
@@ -837,11 +846,11 @@
                                 <span>Raised: Le 8,200</span>
                                 <span>Goal: Le 50,000</span>
                             </div>
-                            <div class="progress-bar">
+                            <div class="progress-bar" role="progressbar" aria-label="Education Support funding progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="55">
                                 <div class="progress-fill" style="width: 55%;"></div>
                             </div>
                         </div>
-                        <a href="#donate-frequency" class="btn btn-primary cause-btn">Donate to this Cause</a>
+                        <a href="#donate-frequency" class="btn btn-primary cause-btn" data-cause="Education Support">Donate to this Cause</a>
                     </div>
                 </div>
 
@@ -857,11 +866,11 @@
                                 <span>Raised: Le 5,600</span>
                                 <span>Goal: Le 200,000</span>
                             </div>
-                            <div class="progress-bar">
+                            <div class="progress-bar" role="progressbar" aria-label="Community Development funding progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="28">
                                 <div class="progress-fill" style="width: 28%;"></div>
                             </div>
                         </div>
-                        <a href="#donate-frequency" class="btn btn-primary cause-btn">Donate to this Cause</a>
+                        <a href="#donate-frequency" class="btn btn-primary cause-btn" data-cause="Community Development">Donate to this Cause</a>
                     </div>
                 </div>
 
@@ -877,11 +886,11 @@
                                 <span>Raised: Le 15,800</span>
                                 <span>Goal: Le 80,000</span>
                             </div>
-                            <div class="progress-bar">
+                            <div class="progress-bar" role="progressbar" aria-label="Clean Water Initiative funding progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="40">
                                 <div class="progress-fill" style="width: 40%;"></div>
                             </div>
                         </div>
-                        <a href="#donate-frequency" class="btn btn-primary cause-btn">Donate to this Cause</a>
+                        <a href="#donate-frequency" class="btn btn-primary cause-btn" data-cause="Clean Water Initiative">Donate to this Cause</a>
                     </div>
                 </div>
 
@@ -897,11 +906,11 @@
                                 <span>Raised: Le 9,400</span>
                                 <span>Goal: Le 60,000</span>
                             </div>
-                            <div class="progress-bar">
+                            <div class="progress-bar" role="progressbar" aria-label="Nutrition and Food Security funding progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="45">
                                 <div class="progress-fill" style="width: 45%;"></div>
                             </div>
                         </div>
-                        <a href="#donate-frequency" class="btn btn-primary cause-btn">Donate to this Cause</a>
+                        <a href="#donate-frequency" class="btn btn-primary cause-btn" data-cause="Nutrition &amp; Food Security">Donate to this Cause</a>
                     </div>
                 </div>
 
@@ -917,11 +926,11 @@
                                 <span>Raised: Le 22,100</span>
                                 <span>Goal: Le 150,000</span>
                             </div>
-                            <div class="progress-bar">
+                            <div class="progress-bar" role="progressbar" aria-label="Emergency Relief Fund funding progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="35">
                                 <div class="progress-fill" style="width: 35%;"></div>
                             </div>
                         </div>
-                        <a href="#donate-frequency" class="btn btn-primary cause-btn">Donate to this Cause</a>
+                        <a href="#donate-frequency" class="btn btn-primary cause-btn" data-cause="Emergency Relief Fund">Donate to this Cause</a>
                     </div>
                 </div>
             </div>
@@ -935,16 +944,15 @@
                 <div class="impact-card"><h3>Where Your Money Goes</h3><p>100% of your donation funds pediatric healthcare, education supplies, and community outreach programs for underprivileged children.</p></div>
                 <div class="impact-card"><h3>Make an Immediate Impact</h3><p>Le 25 provides a school kit. Le 50 funds a medical checkup. Le 100 supplies a family with a month of nutritional support.</p></div>
                 <div class="trust-badges">
-                    <div class="trust-item"><div class="trust-icon"></div><span>100% Secure & Encrypted</span></div>
+                    <div class="trust-item"><div class="trust-icon">🔒</div><span>100% Secure & Encrypted</span></div>
                     <div class="trust-item"><div class="trust-icon">📜</div><span>Tax-Deductible Receipt</span></div>
-                    <div class="trust-item"><div class="trust-icon"></div><span>Transparent Operations</span></div>
-                    <div class="trust-item"><div class="trust-icon">📊</div><span>Annual Impact Reports</span></div>
+                    <div class="trust-item"><div class="trust-icon">🤝</div><span>Transparent Operations</span></div>
                 </div>
             </div>
 
             <div class="payment-container">
-                <!-- NEW: Progress Steps Indicator -->
-                <div class="progress-steps" id="progressSteps">
+                <!-- Progress Steps Indicator -->
+                <div class="progress-steps" id="progressSteps" role="group" aria-label="Donation progress">
                     <div class="step active" data-step="1">
                         <div class="step-circle">1</div>
                         <span class="step-label">Amount</span>
@@ -964,49 +972,52 @@
                 </div>
 
                 <div class="donation-frequency" id="donate-frequency">
-                    <div class="frequency-label">Choose Donation Frequency</div>
-                    <div class="frequency-toggle">
-                        <button class="freq-btn active" data-freq="onetime" onclick="setFrequency('onetime')"><span>💝</span> One-Time</button>
-                        <button class="freq-btn" data-freq="monthly" onclick="setFrequency('monthly')"><span>🔄</span> Monthly <span class="freq-save">Save 20%</span></button>
+                    <div class="frequency-label" id="frequencyLabel">Choose Donation Frequency</div>
+                    <div class="frequency-toggle" role="group" aria-labelledby="frequencyLabel">
+                        <button type="button" class="freq-btn active" data-freq="onetime" aria-pressed="true" onclick="setFrequency('onetime')"><span>💝</span> One-Time</button>
+                        <button type="button" class="freq-btn" data-freq="monthly" aria-pressed="false" onclick="setFrequency('monthly')"><span>🔄</span> Monthly</button>
                     </div>
-                    <!-- NEW: Monthly benefits tooltip -->
+                    <div class="designation-bar" aria-live="polite">
+                        <span>Your gift supports:</span>
+                        <strong id="designationName">General fund (where it's needed most)</strong>
+                        <button type="button" class="designation-clear" id="designationClear" onclick="clearCause()" hidden>Change</button>
+                    </div>
+                    <!-- Monthly donation info -->
                     <div class="monthly-benefits" id="monthlyBenefits">
                         <strong>Why donate monthly?</strong>
                         <ul>
                             <li>Predictable funding for long-term programs</li>
-                            <li>Reduced transaction fees save more for children</li>
-                            <li>Cancel or modify anytime</li>
-                            <li>Exclusive monthly donor updates</li>
+                            <li>Simple: repeat the steps below each month, with no automatic deductions</li>
                         </ul>
                     </div>
                 </div>
 
-                <div class="payment-tabs">
-                    <button class="tab-btn active" data-tab="mobile"><span class="tab-icon">📱</span>Mobile Money</button>
-                    <button class="tab-btn" data-tab="international"><span class="tab-icon">🌍</span>International</button>
-                    <button class="tab-btn" data-tab="bank"><span class="tab-icon"></span>Bank Transfer</button>
+                <div class="payment-tabs" role="tablist" aria-label="Payment methods">
+                    <button type="button" class="tab-btn active" id="tab-mobile" role="tab" aria-selected="true" aria-controls="mobile" tabindex="0" data-tab="mobile"><span class="tab-icon">📱</span>Mobile Money</button>
+                    <button type="button" class="tab-btn" id="tab-international" role="tab" aria-selected="false" aria-controls="international" tabindex="-1" data-tab="international"><span class="tab-icon">🌍</span>International</button>
+                    <button type="button" class="tab-btn" id="tab-bank" role="tab" aria-selected="false" aria-controls="bank" tabindex="-1" data-tab="bank"><span class="tab-icon">🏦</span>Bank Transfer</button>
                 </div>
 
                 <!-- MOBILE MONEY TAB -->
-                <div class="tab-content active" id="mobile">
+                <div class="tab-content active" id="mobile" role="tabpanel" aria-labelledby="tab-mobile">
                     <h3>Local Mobile Money</h3>
                     <p>Quick and easy donations using your preferred mobile money provider in Sierra Leone. Tap "Copy" to copy the number.</p>
 
                     <div class="quick-amount-section">
-                        <label class="quick-amount-label">💰 Select Donation Amount (New Leone)</label>
+                        <label class="quick-amount-label" for="customAmountInput">💰 Select Donation Amount (New Leone)</label>
                         <div class="amount-grid">
-                            <button class="amount-btn" data-amount="10" onclick="selectAmount(10, this)">Le 10<span class="amount-impact-preview">🌱 Seed of hope</span></button>
-                            <button class="amount-btn active" data-amount="25" onclick="selectAmount(25, this)">Le 25<span class="amount-impact-preview">🎒 School kit</span></button>
-                            <button class="amount-btn" data-amount="50" onclick="selectAmount(50, this)">Le 50<span class="amount-impact-preview">🩺 Medical checkup</span></button>
-                            <button class="amount-btn" data-amount="100" onclick="selectAmount(100, this)">Le 100<span class="amount-impact-preview">🍎 Family nutrition</span></button>
-                            <button class="amount-btn" data-amount="250" onclick="selectAmount(250, this)">Le 250<span class="amount-impact-preview">💉 5 vaccines</span></button>
-                            <button class="amount-btn" data-amount="500" onclick="selectAmount(500, this)">Le 500<span class="amount-impact-preview">👩‍⚕️ Train worker</span></button>
-                            <button class="amount-btn" data-amount="1000" onclick="selectAmount(1000, this)">Le 1000<span class="amount-impact-preview">💧 Clean water</span></button>
-                            <button class="amount-btn" data-amount="custom" onclick="selectCustomAmount(this)">Custom</button>
+                            <button type="button" class="amount-btn" data-amount="10" onclick="selectAmount(10, this)">Le 10<span class="amount-impact-preview">🌱 Seed of hope</span></button>
+                            <button type="button" class="amount-btn active" data-amount="25" onclick="selectAmount(25, this)">Le 25<span class="amount-impact-preview">🎒 School kit</span></button>
+                            <button type="button" class="amount-btn" data-amount="50" onclick="selectAmount(50, this)">Le 50<span class="amount-impact-preview">🩺 Medical checkup</span></button>
+                            <button type="button" class="amount-btn" data-amount="100" onclick="selectAmount(100, this)">Le 100<span class="amount-impact-preview">🍎 Family nutrition</span></button>
+                            <button type="button" class="amount-btn" data-amount="250" onclick="selectAmount(250, this)">Le 250<span class="amount-impact-preview">💉 5 vaccines</span></button>
+                            <button type="button" class="amount-btn" data-amount="500" onclick="selectAmount(500, this)">Le 500<span class="amount-impact-preview">👩‍⚕️ Train worker</span></button>
+                            <button type="button" class="amount-btn" data-amount="1000" onclick="selectAmount(1000, this)">Le 1000<span class="amount-impact-preview">💧 Clean water</span></button>
+                            <button type="button" class="amount-btn" data-amount="custom" onclick="selectCustomAmount(this)">Custom</button>
                         </div>
                         <div class="custom-amount-wrapper">
                             <span class="currency-symbol">Le</span>
-                            <input type="text" id="customAmountInput" class="custom-amount-input" placeholder="Enter custom amount" oninput="updateImpactFromCustom(this.value)" inputmode="numeric">
+                            <input type="text" id="customAmountInput" class="custom-amount-input" placeholder="Enter custom amount" oninput="updateImpactFromCustom(this.value)" inputmode="decimal">
                         </div>
 
                         <div class="impact-calculator">
@@ -1017,7 +1028,7 @@
                                     <div class="impact-calc-subtitle">Here's what your donation provides</div>
                                 </div>
                             </div>
-                            <div class="impact-display">
+                            <div class="impact-display" aria-live="polite">
                                 <div class="impact-visual" id="impactVisual">🎒</div>
                                 <div class="impact-details">
                                     <div class="impact-amount" id="impactAmount">Le 25</div>
@@ -1034,21 +1045,21 @@
                                 <div class="money-logo"><img src="assets/project-djf-images/orange money.png" alt="Orange Money"></div>
                                 <div class="money-details"><h4>Orange Money</h4><p class="phone-number">076 000 000</p></div>
                             </div>
-                            <button class="copy-btn" onclick="copyNumber(this, '076000000')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path></svg>Copy</button>
+                            <button type="button" class="copy-btn" aria-label="Copy Orange Money number" onclick="copyNumber(this, '076000000')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path></svg>Copy</button>
                         </div>
                         <div class="money-card africell-glow">
                             <div class="money-info">
                                 <div class="money-logo"><img src="assets/project-djf-images/africell money.jpg" alt="Afrimoney"></div>
                                 <div class="money-details"><h4>Afrimoney</h4><p class="phone-number">088 000 000</p></div>
                             </div>
-                            <button class="copy-btn" onclick="copyNumber(this, '088000000')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path></svg>Copy</button>
+                            <button type="button" class="copy-btn" aria-label="Copy Afrimoney number" onclick="copyNumber(this, '088000000')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path></svg>Copy</button>
                         </div>
                         <div class="money-card qcell-glow">
                             <div class="money-info">
                                 <div class="money-logo"><img src="assets/project-djf-images/Qmoney.jpg" alt="QMoney"></div>
                                 <div class="money-details"><h4>QMoney (Qcell)</h4><p class="phone-number">031 000 000</p></div>
                             </div>
-                            <button class="copy-btn" onclick="copyNumber(this, '031000000')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path></svg>Copy</button>
+                            <button type="button" class="copy-btn" aria-label="Copy QMoney number" onclick="copyNumber(this, '031000000')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path></svg>Copy</button>
                         </div>
                     </div>
 
@@ -1062,10 +1073,10 @@
                                 <label for="tributeCheck">🕊️ Dedicate this donation in memory of a loved one</label>
                             </div>
                             <div class="tribute-fields" id="tributeFields">
-                                <label>In Memory Of</label>
-                                <input type="text" name="tribute_name" class="form-input" placeholder="Name of the person you're honoring">
-                                <label style="margin-top: 10px;">Optional Message</label>
-                                <textarea name="tribute_message" class="form-input" rows="2" placeholder="A short message or dedication (optional)" style="resize: vertical;" maxlength="200"></textarea>
+                                <label for="tributeName">In Memory Of</label>
+                                <input type="text" id="tributeName" name="tribute_name" class="form-input" placeholder="Name of the person you're honoring">
+                                <label for="tributeMessage" style="margin-top: 10px;">Optional Message</label>
+                                <textarea id="tributeMessage" name="tribute_message" class="form-input" rows="2" placeholder="A short message or dedication (optional)" style="resize: vertical;" maxlength="200"></textarea>
                                 <div class="char-counter" id="tributeCharCounter">0 / 200 characters</div>
                             </div>
 
@@ -1076,31 +1087,31 @@
                                     <div style="font-weight: 600; color: var(--primary-color); margin-bottom: 5px;">Click to upload screenshot</div>
                                     <div style="font-size: 0.85rem; color: var(--text-light);">PNG, JPG up to 5MB</div>
                                 </label>
-                                <div class="file-name" id="fileName"></div>
+                                <div class="file-name" id="fileName" aria-live="polite"></div>
                             </div>
                             
                             <div class="form-group">
-                                <input type="text" name="donor_name" class="form-input" id="donorName" placeholder="Your Full Name" required aria-label="Full Name" data-validate="name">
+                                <input type="text" name="donor_name" class="form-input" id="donorName" placeholder="Your Full Name" autocomplete="name" required aria-label="Full Name" data-validate="name">
                                 <span class="validation-icon" id="nameIcon"></span>
-                                <div class="error-message" id="nameError">Please enter your full name</div>
+                                <div class="error-message" id="nameError" role="alert">Please enter your full name</div>
                             </div>
                             
                             <div class="form-group">
-                                <input type="email" name="email" class="form-input" id="donorEmail" placeholder="Your Email Address" required aria-label="Email Address" data-validate="email">
+                                <input type="email" name="email" class="form-input" id="donorEmail" placeholder="Your Email Address" autocomplete="email" required aria-label="Email Address" data-validate="email">
                                 <span class="validation-icon" id="emailIcon"></span>
-                                <div class="error-message" id="emailError">Please enter a valid email address</div>
+                                <div class="error-message" id="emailError" role="alert">Please enter a valid email address</div>
                             </div>
                             
                             <div class="form-group">
-                                <input type="tel" name="phone" class="form-input" id="donorPhone" placeholder="Your Phone Number (e.g., 076 123 4567)" required aria-label="Phone Number" data-validate="phone">
+                                <input type="tel" name="phone" class="form-input" id="donorPhone" placeholder="Your Phone Number (e.g., 076 123 4567)" autocomplete="tel" required aria-label="Phone Number" data-validate="phone">
                                 <span class="validation-icon" id="phoneIcon"></span>
-                                <div class="error-message" id="phoneError">Please enter a valid Sierra Leone phone number</div>
+                                <div class="error-message" id="phoneError" role="alert">Please enter a valid Sierra Leone phone number</div>
                             </div>
                             
                             <div class="form-group">
-                                <input type="text" name="amount" id="formAmount" class="form-input" placeholder="Amount (SLE)" value="25" required aria-label="Donation Amount in SLE" data-validate="amount">
+                                <input type="text" name="amount" id="formAmount" class="form-input" placeholder="Amount (SLE)" value="25" inputmode="decimal" required aria-label="Donation Amount in SLE" data-validate="amount">
                                 <span class="validation-icon" id="amountIcon"></span>
-                                <div class="error-message" id="amountError">Please enter a valid amount</div>
+                                <div class="error-message" id="amountError" role="alert">Please enter a valid amount</div>
                             </div>
                             
                             <select name="payment_method" class="form-select" id="paymentMethod" required aria-label="Payment Method">
@@ -1112,10 +1123,14 @@
                             
                             <input type="hidden" name="frequency" id="formFrequency" value="One-Time">
                             <input type="hidden" name="impact" id="formImpact" value="School kit for one child">
+                            <input type="hidden" name="cause" id="formCause" value="General fund (where it's needed most)">
+                            <input type="hidden" name="reference" value="">
+                            <input type="hidden" name="_subject" value="New donation screenshot - Destiny John Foundation">
+                            <div class="hp-field" aria-hidden="true"><input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></div>
                             
                             <div class="trust-security-badges" style="margin-top: 20px;">
                                 <div class="security-badge">
-                                    <div class="security-badge-icon"></div>
+                                    <div class="security-badge-icon">🔒</div>
                                     <div class="security-badge-text">Secure<br>Submission</div>
                                 </div>
                                 <div class="security-badge">
@@ -1129,20 +1144,22 @@
                                 <span class="btn-text">Send Screenshot & Receipt Request</span>
                                 <div class="spinner"></div>
                             </button>
+                            <p class="form-privacy">🔒 We use your details only to process your donation and send your receipt.</p>
+                            <div class="form-status" role="status" aria-live="polite"></div>
                         </form>
                     </div>
                     <p style="margin-top: 25px; font-size: 0.85rem; color: var(--text-light); text-align: center;">Or email screenshots directly to <strong>info@destinyjohnfoundation.org</strong></p>
                 </div>
 
                 <!-- INTERNATIONAL TAB -->
-                <div class="tab-content" id="international">
+                <div class="tab-content" id="international" role="tabpanel" aria-labelledby="tab-international">
                     <h3>International Donation</h3>
                     <p>Support us from anywhere in the world securely. Choose your preferred method below:</p>
                     
                     <div style="text-align: center; margin-bottom: 30px; padding: 25px; background: var(--bg-light); border-radius: 16px; border: 2px solid var(--accent-sun);">
                         <h4 style="color: var(--primary-color); margin-bottom: 10px; font-size: 1.2rem;">💳 Donate via Credit/Debit Card</h4>
                         <p style="font-size: 0.9rem; margin-bottom: 20px;">Securely process your donation in USD, GBP, or EUR via Flutterwave.</p>
-                        <a href="https://flutterwave.com/pay/your-link-here" target="_blank" class="btn btn-primary" style="background: #f5a623; color: white;">
+                        <a href="https://flutterwave.com/pay/your-link-here" target="_blank" rel="noopener" class="btn btn-primary" style="background: #f5a623; color: white;">
                             Donate Securely via Flutterwave
                         </a>
                     </div>
@@ -1161,7 +1178,7 @@
                     </div>
 
                     <div class="upload-section">
-                        <h4> Send Transaction Screenshot</h4>
+                        <h4>📸 Send Transaction Screenshot</h4>
                         <p>After completing your international transfer, upload a screenshot of the transaction confirmation. We'll send you a tax receipt via email.</p>
 
                         <form id="internationalTransactionForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" enctype="multipart/form-data" novalidate>
@@ -1170,10 +1187,10 @@
                                 <label for="tributeCheckIntl">🕊️ Dedicate this donation in memory of a loved one</label>
                             </div>
                             <div class="tribute-fields" id="tributeFieldsIntl">
-                                <label>In Memory Of</label>
-                                <input type="text" name="tribute_name" class="form-input" placeholder="Name of the person you're honoring">
-                                <label style="margin-top: 10px;">Optional Message</label>
-                                <textarea name="tribute_message" class="form-input" rows="2" placeholder="A short message or dedication (optional)" style="resize: vertical;" maxlength="200"></textarea>
+                                <label for="tributeNameIntl">In Memory Of</label>
+                                <input type="text" id="tributeNameIntl" name="tribute_name" class="form-input" placeholder="Name of the person you're honoring">
+                                <label for="tributeMessageIntl" style="margin-top: 10px;">Optional Message</label>
+                                <textarea id="tributeMessageIntl" name="tribute_message" class="form-input" rows="2" placeholder="A short message or dedication (optional)" style="resize: vertical;" maxlength="200"></textarea>
                                 <div class="char-counter" id="tributeCharCounterIntl">0 / 200 characters</div>
                             </div>
 
@@ -1184,39 +1201,43 @@
                                     <div style="font-weight: 600; color: var(--primary-color); margin-bottom: 5px;">Click to upload screenshot</div>
                                     <div style="font-size: 0.85rem; color: var(--text-light);">PNG, JPG up to 5MB</div>
                                 </label>
-                                <div class="file-name" id="fileNameIntl"></div>
+                                <div class="file-name" id="fileNameIntl" aria-live="polite"></div>
                             </div>
                             
                             <div class="form-group">
-                                <input type="text" name="donor_name" class="form-input" id="donorNameIntl" placeholder="Your Full Name" required aria-label="Full Name" data-validate="name">
+                                <input type="text" name="donor_name" class="form-input" id="donorNameIntl" placeholder="Your Full Name" autocomplete="name" required aria-label="Full Name" data-validate="name">
                                 <span class="validation-icon" id="nameIconIntl"></span>
-                                <div class="error-message" id="nameErrorIntl">Please enter your full name</div>
+                                <div class="error-message" id="nameErrorIntl" role="alert">Please enter your full name</div>
                             </div>
                             
                             <div class="form-group">
-                                <input type="email" name="email" class="form-input" id="donorEmailIntl" placeholder="Your Email Address" required aria-label="Email Address" data-validate="email">
+                                <input type="email" name="email" class="form-input" id="donorEmailIntl" placeholder="Your Email Address" autocomplete="email" required aria-label="Email Address" data-validate="email">
                                 <span class="validation-icon" id="emailIconIntl"></span>
-                                <div class="error-message" id="emailErrorIntl">Please enter a valid email address</div>
+                                <div class="error-message" id="emailErrorIntl" role="alert">Please enter a valid email address</div>
                             </div>
                             
                             <div class="form-group">
-                                <input type="tel" name="phone" class="form-input" id="donorPhoneIntl" placeholder="Your Phone Number" required aria-label="Phone Number" data-validate="phone">
+                                <input type="tel" name="phone" class="form-input" id="donorPhoneIntl" placeholder="Your Phone Number (include country code)" autocomplete="tel" required aria-label="Phone Number" data-validate="phone">
                                 <span class="validation-icon" id="phoneIconIntl"></span>
-                                <div class="error-message" id="phoneErrorIntl">Please enter a valid phone number</div>
+                                <div class="error-message" id="phoneErrorIntl" role="alert">Please enter a valid phone number</div>
                             </div>
                             
                             <div class="form-group">
-                                <input type="text" name="amount" id="formAmountIntl" class="form-input" placeholder="Amount Donated (USD/GBP/EUR)" required aria-label="Donation Amount" data-validate="amount">
+                                <input type="text" name="amount" id="formAmountIntl" class="form-input" placeholder="Amount Donated (USD/GBP/EUR)" inputmode="decimal" required aria-label="Donation Amount" data-validate="amount">
                                 <span class="validation-icon" id="amountIconIntl"></span>
-                                <div class="error-message" id="amountErrorIntl">Please enter a valid amount</div>
+                                <div class="error-message" id="amountErrorIntl" role="alert">Please enter a valid amount</div>
                             </div>
                             
                             <input type="hidden" name="frequency" id="formFrequencyIntl" value="One-Time">
                             <input type="hidden" name="impact" id="formImpactIntl" value="International Donation">
+                            <input type="hidden" name="cause" id="formCauseIntl" value="General fund (where it's needed most)">
+                            <input type="hidden" name="reference" value="">
+                            <input type="hidden" name="_subject" value="New international donation screenshot - Destiny John Foundation">
+                            <div class="hp-field" aria-hidden="true"><input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></div>
                             
                             <div class="trust-security-badges">
                                 <div class="security-badge">
-                                    <div class="security-badge-icon"></div>
+                                    <div class="security-badge-icon">🔒</div>
                                     <div class="security-badge-text">256-bit SSL<br>Encryption</div>
                                 </div>
                                 <div class="security-badge">
@@ -1238,13 +1259,15 @@
                                 <span class="btn-text">Send Screenshot & Receipt Request</span>
                                 <div class="spinner"></div>
                             </button>
+                            <p class="form-privacy">🔒 We use your details only to process your donation and send your receipt.</p>
+                            <div class="form-status" role="status" aria-live="polite"></div>
                         </form>
                     </div>
                     <p style="margin-top: 25px; font-size: 0.85rem; color: var(--text-light); text-align: center;">Or email screenshots directly to <strong>info@destinyjohnfoundation.org</strong></p>
                 </div>
 
                 <!-- BANK TRANSFER TAB -->
-                <div class="tab-content" id="bank">
+                <div class="tab-content" id="bank" role="tabpanel" aria-labelledby="tab-bank">
                     <h3>Local Bank Transfer</h3>
                     <p>Prefer a direct local bank transfer? Use the details below. Please include "Donation" in the transfer reference.</p>
                     <div class="bank-details">
@@ -1259,7 +1282,7 @@
         </div>
     </section>
 
-    <!-- NEW: Donation FAQ Section -->
+    <!-- Donation FAQ Section -->
     <section class="donation-faq">
         <div class="container">
             <div class="section-header">
@@ -1276,42 +1299,43 @@
                     <p>100% of your donation goes directly to our programs: pediatric healthcare, education supplies, nutrition support, and community development.</p>
                 </div>
                 <div class="faq-item-new">
-                    <h4>Can I cancel my monthly donation?</h4>
-                    <p>Absolutely. You can cancel, pause, or modify your monthly donation at any time by contacting us at info@destinyjohnfoundation.org.</p>
+                    <h4>How does monthly giving work?</h4>
+                    <p>Choose Monthly, then complete the steps on this page each month. There is no automatic deduction, so you stay in control and can stop whenever you like.</p>
                 </div>
                 <div class="faq-item-new">
                     <h4>How do I get my receipt?</h4>
-                    <p>Once we verify your screenshot, we'll email your tax-deductible receipt within 24-48 hours. Check your spam folder if you don't see it.</p>
+                    <p>Once we verify your screenshot, we'll email your receipt to the address you provided. If you don't see it, check your spam folder or contact us.</p>
                 </div>
                 <div class="faq-item-new">
                     <h4>Is my information secure?</h4>
-                    <p>Yes. We use 256-bit SSL encryption and never store your financial details. Your personal data is protected under our privacy policy.</p>
+                    <p>We only ask for the details on the form so we can verify your donation and send your receipt. We never ask for card numbers or PINs, and card payments are processed by Flutterwave.</p>
                 </div>
                 <div class="faq-item-new">
                     <h4>Can I donate in honor of someone?</h4>
-                    <p>Yes! Use the tribute option in our form to dedicate your donation in memory or honor of a loved one. We'll include their name on your receipt.</p>
+                    <p>Yes! Use the tribute option in the form to dedicate your donation in memory of a loved one, and we'll note the dedication with your donation.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- NEW: Contact for Donations Section -->
+    <!-- Contact for Donations Section -->
     <section class="donation-contact">
         <div class="container">
             <h3>Need Help with Your Donation?</h3>
             <p>Our team is here to assist you with any questions about donating, receipts, or setting up corporate partnerships.</p>
             <div class="contact-methods">
-                <a href="mailto:donations@destinyjohnfoundation.org" class="contact-method">
+                <a href="mailto:info@destinyjohnfoundation.org" class="contact-method">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                    <span>donations@destinyjohnfoundation.org</span>
+                    <span>info@destinyjohnfoundation.org</span>
                 </a>
-                <a href="https://wa.me/+23278383134" class="contact-method" target="_blank">
+                <a href="https://wa.me/+23278383134" class="contact-method" target="_blank" rel="noopener">
                     <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
                     <span>WhatsApp: +232 78 383 134</span>
                 </a>
             </div>
         </div>
     </section>
+    </main>
 
     <!-- FLOATING NEWSLETTER SECTION -->
     <div class="newsletter-wrapper">
@@ -1323,7 +1347,7 @@
                 <h2>Subscribe to our newsletter to get updates on our latest programs</h2>
                 <p>Stay informed about our initiatives, success stories, and ways you can help children in Sierra Leone.</p>
                 <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Thank you for subscribing!');">
-                    <input type="email" placeholder="Enter your email address" required>
+                    <input type="email" placeholder="Enter your email address" aria-label="Email address for newsletter" autocomplete="email" required>
                     <button type="submit">Subscribe</button>
                 </form>
                 <p class="newsletter-note">You will be able to unsubscribe at any time. <br>Read our privacy policy <a href="#">here</a>.</p>
@@ -1354,20 +1378,20 @@
         </div>
     </footer>
 
-    <!-- NEW: Success Modal -->
+    <!-- Success Modal -->
     <div class="success-modal" id="successModal" role="dialog" aria-labelledby="successTitle" aria-modal="true">
         <div class="success-modal-content">
-            <button class="modal-close" onclick="closeSuccessModal()" aria-label="Close">&times;</button>
+            <button type="button" class="modal-close" id="modalCloseBtn" onclick="closeSuccessModal()" aria-label="Close">&times;</button>
             <div class="success-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="20 6 9 17 4 12"></polyline>
                 </svg>
             </div>
             <h3 id="successTitle">Thank You for Your Generosity! 🎉</h3>
-            <p>Your donation screenshot has been received. We'll verify your transaction and email your tax receipt within 24-48 hours.</p>
+            <p>Your donation screenshot has been received. We'll verify your transaction and email your tax receipt to the address you provided.</p>
             
             <div class="receipt-preview">
-                <h4>📧 Receipt Preview</h4>
+                <h4>📧 Submission Summary</h4>
                 <div class="receipt-row">
                     <span class="label">Donor:</span>
                     <span class="value" id="receiptName">—</span>
@@ -1381,18 +1405,22 @@
                     <span class="value" id="receiptMethod">—</span>
                 </div>
                 <div class="receipt-row">
+                    <span class="label">Supporting:</span>
+                    <span class="value" id="receiptCause">—</span>
+                </div>
+                <div class="receipt-row">
                     <span class="label">Impact:</span>
                     <span class="value" id="receiptImpact">—</span>
                 </div>
                 <div class="receipt-row">
-                    <span class="label">Receipt #:</span>
+                    <span class="label">Reference #:</span>
                     <span class="value" id="receiptNumber">—</span>
                 </div>
             </div>
             
             <div class="modal-actions">
-                <button class="btn btn-outline" onclick="closeSuccessModal()">Close</button>
-                <button class="btn btn-primary" onclick="window.print()">️ Print Receipt</button>
+                <button type="button" class="btn btn-outline" onclick="closeSuccessModal()">Close</button>
+                <button type="button" class="btn btn-primary" onclick="window.print()">🖨️ Print Summary</button>
             </div>
         </div>
     </div>
@@ -1404,81 +1432,149 @@
     </button>
 
     <script>
+        /* ---------- Mobile menu ---------- */
         const menuToggle = document.getElementById('mobile-menu');
         const navList = document.getElementById('nav-list');
-        menuToggle.addEventListener('click', () => { navList.classList.toggle('active'); });
-        document.querySelectorAll('#nav-list a').forEach(link => { link.addEventListener('click', () => { navList.classList.remove('active'); }); });
-
-        const tabBtns = document.querySelectorAll('.tab-btn');
-        const tabContents = document.querySelectorAll('.tab-content');
-        tabBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                tabBtns.forEach(b => b.classList.remove('active'));
-                tabContents.forEach(c => c.classList.remove('active'));
-                btn.classList.add('active');
-                document.getElementById(btn.getAttribute('data-tab')).classList.add('active');
-                updateProgressSteps(2);
+        function toggleMenu() {
+            const open = navList.classList.toggle('active');
+            menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        }
+        menuToggle.addEventListener('click', toggleMenu);
+        menuToggle.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleMenu(); }
+        });
+        document.querySelectorAll('#nav-list a').forEach(link => {
+            link.addEventListener('click', () => {
+                navList.classList.remove('active');
+                menuToggle.setAttribute('aria-expanded', 'false');
             });
         });
 
+        /* ---------- Payment tabs (click + arrow-key navigation) ---------- */
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+        function activateTab(btn, moveFocus) {
+            tabBtns.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); b.tabIndex = -1; });
+            tabContents.forEach(c => c.classList.remove('active'));
+            btn.classList.add('active');
+            btn.setAttribute('aria-selected', 'true');
+            btn.tabIndex = 0;
+            document.getElementById(btn.getAttribute('data-tab')).classList.add('active');
+            updateProgressSteps(2);
+            if (moveFocus) btn.focus();
+        }
+        tabBtns.forEach((btn, i) => {
+            btn.addEventListener('click', () => activateTab(btn, false));
+            btn.addEventListener('keydown', (e) => {
+                let next = null;
+                if (e.key === 'ArrowRight') next = tabBtns[(i + 1) % tabBtns.length];
+                if (e.key === 'ArrowLeft') next = tabBtns[(i - 1 + tabBtns.length) % tabBtns.length];
+                if (e.key === 'Home') next = tabBtns[0];
+                if (e.key === 'End') next = tabBtns[tabBtns.length - 1];
+                if (next) { e.preventDefault(); activateTab(next, true); }
+            });
+        });
+
+        /* ---------- Copy number (with fallback for non-secure contexts) ---------- */
+        function showCopied(button) {
+            const originalText = button.innerHTML;
+            button.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Copied!';
+            button.classList.add('copied');
+            setTimeout(() => { button.innerHTML = originalText; button.classList.remove('copied'); }, 2000);
+        }
+        function fallbackCopy(number) {
+            const ta = document.createElement('textarea');
+            ta.value = number;
+            ta.setAttribute('readonly', '');
+            ta.style.position = 'fixed';
+            ta.style.opacity = '0';
+            document.body.appendChild(ta);
+            ta.select();
+            let ok = false;
+            try { ok = document.execCommand('copy'); } catch (err) { ok = false; }
+            document.body.removeChild(ta);
+            return ok;
+        }
         function copyNumber(button, number) {
-            navigator.clipboard.writeText(number).then(() => {
-                const originalText = button.innerHTML;
-                button.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Copied!';
-                button.classList.add('copied');
-                setTimeout(() => { button.innerHTML = originalText; button.classList.remove('copied'); }, 2000);
-            }).catch(err => { console.error('Failed to copy: ', err); });
-        }
-
-        function updateFileName(input) {
-            const fileName = input.files[0]?.name || '';
-            const fileNameDisplay = document.getElementById('fileName');
-            if (fileName) { 
-                fileNameDisplay.textContent = ` Selected: ${fileName}`; 
-                fileNameDisplay.style.color = 'var(--primary-color)';
-                updateProgressSteps(3);
-            } else { 
-                fileNameDisplay.textContent = ''; 
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(number).then(() => showCopied(button)).catch(() => { if (fallbackCopy(number)) showCopied(button); });
+            } else if (fallbackCopy(number)) {
+                showCopied(button);
             }
         }
 
-        function updateFileNameIntl(input) {
-            const fileName = input.files[0]?.name || '';
-            const fileNameDisplay = document.getElementById('fileNameIntl');
-            if (fileName) { 
-                fileNameDisplay.textContent = `📎 Selected: ${fileName}`; 
-                fileNameDisplay.style.color = 'var(--primary-color)';
-            } else { 
-                fileNameDisplay.textContent = ''; 
+        /* ---------- Screenshot validation (image only, max 5MB) ---------- */
+        const MAX_FILE_BYTES = 5 * 1024 * 1024;
+        function handleFileSelect(input, displayId, advance) {
+            const display = document.getElementById(displayId);
+            const file = input.files[0];
+            display.classList.remove('error');
+            display.style.color = '';
+            if (!file) { display.textContent = ''; return; }
+            if (!file.type.startsWith('image/')) {
+                input.value = '';
+                display.classList.add('error');
+                display.textContent = '⚠️ Please upload an image file (PNG or JPG).';
+                return;
             }
+            if (file.size > MAX_FILE_BYTES) {
+                input.value = '';
+                display.classList.add('error');
+                display.textContent = '⚠️ That file is larger than 5MB. Please choose a smaller screenshot.';
+                return;
+            }
+            display.textContent = `📎 Selected: ${file.name}`;
+            display.style.color = 'var(--primary-color)';
+            if (advance) updateProgressSteps(3);
         }
+        function updateFileName(input) { handleFileSelect(input, 'fileName', true); }
+        function updateFileNameIntl(input) { handleFileSelect(input, 'fileNameIntl', false); }
 
+        /* ---------- Frequency ---------- */
         let currentFrequency = 'onetime';
         function setFrequency(freq) {
             currentFrequency = freq;
-            document.querySelectorAll('.freq-btn').forEach(btn => btn.classList.remove('active'));
-            document.querySelector(`.freq-btn[data-freq="${freq}"]`).classList.add('active');
+            document.querySelectorAll('.freq-btn').forEach(btn => { btn.classList.remove('active'); btn.setAttribute('aria-pressed', 'false'); });
+            const active = document.querySelector(`.freq-btn[data-freq="${freq}"]`);
+            active.classList.add('active');
+            active.setAttribute('aria-pressed', 'true');
             document.getElementById('formFrequency').value = freq === 'monthly' ? 'Monthly' : 'One-Time';
             document.getElementById('formFrequencyIntl').value = freq === 'monthly' ? 'Monthly' : 'One-Time';
-            
-            // Show/hide monthly benefits
+
             const monthlyBenefits = document.getElementById('monthlyBenefits');
             if (freq === 'monthly') {
                 monthlyBenefits.classList.add('show');
             } else {
                 monthlyBenefits.classList.remove('show');
             }
-            
+
             updateImpactFromAmount(currentSelectedAmount);
+            saveFormToStorage();
         }
 
+        /* ---------- Amount selection ---------- */
         let currentSelectedAmount = 25;
+
+        function formatNumber(num) {
+            return Number(num).toLocaleString('en-US', { maximumFractionDigits: 2 });
+        }
+        // Formats what the donor types (keeps decimals, adds thousands separators)
+        function formatAmountString(raw) {
+            const clean = String(raw).replace(/[^0-9.]/g, '');
+            const parts = clean.split('.');
+            const intPart = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            return parts.length > 1 ? intPart + '.' + parts.slice(1).join('').slice(0, 2) : intPart;
+        }
+        function parseAmount(str) {
+            return parseFloat(String(str).replace(/,/g, ''));
+        }
+
         function selectAmount(amount, btn) {
             currentSelectedAmount = amount;
             document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             document.getElementById('customAmountInput').value = '';
-            document.getElementById('formAmount').value = amount;
+            document.getElementById('formAmount').value = formatNumber(amount);
             updateImpactFromAmount(amount);
             updateProgressSteps(1);
             saveFormToStorage();
@@ -1489,14 +1585,13 @@
             document.getElementById('customAmountInput').focus();
         }
         function updateImpactFromCustom(value) {
-            // Remove non-numeric characters except decimal
             const cleanValue = value.replace(/[^0-9.]/g, '');
             const amount = parseFloat(cleanValue);
-            
+
             if (cleanValue !== value) {
                 document.getElementById('customAmountInput').value = cleanValue;
             }
-            
+
             if (amount > 0) {
                 currentSelectedAmount = amount;
                 document.getElementById('formAmount').value = formatNumber(amount);
@@ -1507,52 +1602,36 @@
             }
         }
 
-        // NEW: Format number with thousand separators
-        function formatNumber(num) {
-            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-        }
-
-        // NEW: Auto-format amount field
-        document.addEventListener('DOMContentLoaded', function() {
-            const amountField = document.getElementById('formAmount');
-            if (amountField) {
-                amountField.addEventListener('input', function(e) {
-                    const cleanValue = e.target.value.replace(/[^0-9.]/g, '');
-                    const num = parseFloat(cleanValue) || 0;
-                    if (cleanValue && !isNaN(num)) {
-                        e.target.value = formatNumber(num);
-                        currentSelectedAmount = num;
-                        updateImpactFromAmount(num);
-                        saveFormToStorage();
-                    }
-                });
+        // Auto-format the amount fields
+        const formAmountField = document.getElementById('formAmount');
+        formAmountField.addEventListener('input', function (e) {
+            e.target.value = formatAmountString(e.target.value);
+            const num = parseAmount(e.target.value);
+            if (num > 0) {
+                currentSelectedAmount = num;
+                document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('active'));
+                updateImpactFromAmount(num);
+                saveFormToStorage();
             }
-            
-            const amountFieldIntl = document.getElementById('formAmountIntl');
-            if (amountFieldIntl) {
-                amountFieldIntl.addEventListener('input', function(e) {
-                    const cleanValue = e.target.value.replace(/[^0-9.]/g, '');
-                    if (cleanValue) {
-                        const num = parseFloat(cleanValue) || 0;
-                        e.target.value = formatNumber(num);
-                    }
-                });
-            }
+        });
+        document.getElementById('formAmountIntl').addEventListener('input', function (e) {
+            e.target.value = formatAmountString(e.target.value);
         });
 
         const impactTiers = [
-            { min: 0, max: 9, icon: '🌱', visual: '', description: 'Plants a seed of hope for a child', children: 1 },
-            { min: 10, max: 24, icon: '📚', visual: '📚', description: 'Provides school supplies for one child', children: 1 },
-            { min: 25, max: 49, icon: '🎒', visual: '', description: 'Provides a complete school kit for one child', children: 1 },
-            { min: 50, max: 99, icon: '🩺', visual: '', description: 'Funds a medical checkup for one child', children: 1 },
-            { min: 100, max: 249, icon: '🍎', visual: '', description: 'Supplies a family with a month of nutritional support', children: 3 },
-            { min: 250, max: 499, icon: '', visual: '💉', description: 'Provides vaccines for 5 children', children: 5 },
-            { min: 500, max: 999, icon: '👩⚕️', visual: '‍⚕️', description: 'Trains one healthcare worker for a month', children: 10 },
-            { min: 1000, max: Infinity, icon: '💧', visual: '💧', description: 'Helps build clean water access for a community', children: 50 }
+            { min: 0, icon: '🌱', visual: '🌱', description: 'Plants a seed of hope for a child', children: 1 },
+            { min: 10, icon: '📚', visual: '📚', description: 'Provides school supplies for one child', children: 1 },
+            { min: 25, icon: '🎒', visual: '🎒', description: 'Provides a complete school kit for one child', children: 1 },
+            { min: 50, icon: '🩺', visual: '🩺', description: 'Funds a medical checkup for one child', children: 1 },
+            { min: 100, icon: '🍎', visual: '🍎', description: 'Supplies a family with a month of nutritional support', children: 3 },
+            { min: 250, icon: '💉', visual: '💉', description: 'Provides vaccines for 5 children', children: 5 },
+            { min: 500, icon: '👩‍⚕️', visual: '👩‍⚕️', description: 'Trains one healthcare worker for a month', children: 10 },
+            { min: 1000, icon: '💧', visual: '💧', description: 'Helps build clean water access for a community', children: 50 }
         ];
 
         function updateImpactFromAmount(amount) {
-            const tier = impactTiers.find(t => amount >= t.min && amount <= t.max) || impactTiers[0];
+            // Highest tier whose minimum the amount reaches (handles decimals like 9.5 too)
+            const tier = [...impactTiers].reverse().find(t => amount >= t.min) || impactTiers[0];
             const freqLabel = currentFrequency === 'monthly' ? '/month' : '';
             document.getElementById('impactIcon').textContent = tier.icon;
             document.getElementById('impactVisual').textContent = tier.visual;
@@ -1578,8 +1657,26 @@
         }
         updateImpactFromAmount(25);
 
+        /* ---------- Selected cause (designation) ---------- */
+        const DEFAULT_CAUSE = "General fund (where it's needed most)";
+        function setCause(name, flash) {
+            document.getElementById('designationName').textContent = name;
+            document.getElementById('formCause').value = name;
+            document.getElementById('formCauseIntl').value = name;
+            document.getElementById('designationClear').hidden = (name === DEFAULT_CAUSE);
+            if (flash) {
+                const box = document.getElementById('donate-frequency');
+                box.classList.remove('highlight');
+                void box.offsetWidth;
+                box.classList.add('highlight');
+                setTimeout(() => box.classList.remove('highlight'), 1500);
+            }
+        }
+        function clearCause() { setCause(DEFAULT_CAUSE, false); }
+
+        /* ---------- Tribute fields ---------- */
         function toggleTribute(e) {
-            if (e.target.tagName !== 'INPUT') {
+            if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'LABEL') {
                 const checkbox = document.getElementById('tributeCheck');
                 checkbox.checked = !checkbox.checked;
                 toggleTributeFields();
@@ -1592,7 +1689,7 @@
         }
 
         function toggleTributeIntl(e) {
-            if (e.target.tagName !== 'INPUT') {
+            if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'LABEL') {
                 const checkbox = document.getElementById('tributeCheckIntl');
                 checkbox.checked = !checkbox.checked;
                 toggleTributeFieldsIntl();
@@ -1604,6 +1701,7 @@
             if (checkbox.checked) { fields.classList.add('show'); } else { fields.classList.remove('show'); }
         }
 
+        /* ---------- Scroll to top ---------- */
         const scrollTopBtn = document.getElementById('scrollTopBtn');
         window.addEventListener('scroll', () => {
             if (window.scrollY > 300) {
@@ -1616,7 +1714,7 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
 
-        // NEW: Progress Steps Update
+        /* ---------- Progress steps ---------- */
         function updateProgressSteps(step) {
             const steps = document.querySelectorAll('.progress-steps .step');
             steps.forEach((s, index) => {
@@ -1630,39 +1728,31 @@
             });
         }
 
-        // NEW: Real-time Form Validation
+        /* ---------- Real-time form validation ---------- */
         const validationRules = {
             name: {
-                validate: (value) => value.trim().length >= 2 && /^[a-zA-Z\s'-]+$/.test(value),
-                message: 'Please enter a valid name (at least 2 characters)'
+                validate: (value) => value.trim().length >= 2 && /^[\p{L}\p{M}\s'.-]+$/u.test(value.trim())
             },
             email: {
-                validate: (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value),
-                message: 'Please enter a valid email address'
+                validate: (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim())
             },
             phone: {
-                validate: (value) => /^[\d\s+\-()]{7,15}$/.test(value.replace(/\s/g, '')),
-                message: 'Please enter a valid phone number'
+                validate: (value) => /^\+?[\d\s\-()]{7,20}$/.test(value.trim()) && value.replace(/\D/g, '').length >= 7
             },
             amount: {
                 validate: (value) => {
-                    const cleanValue = value.toString().replace(/,/g, '');
-                    const num = parseFloat(cleanValue);
+                    const num = parseAmount(value);
                     return !isNaN(num) && num > 0;
-                },
-                message: 'Please enter a valid amount greater than 0'
+                }
             }
         };
 
-        // Auto-validate on blur
         document.querySelectorAll('[data-validate]').forEach(input => {
-            input.addEventListener('blur', function() {
+            input.addEventListener('blur', function () {
                 validateField(this);
                 updateProgressSteps(3);
-                saveFormToStorage();
             });
-            
-            input.addEventListener('input', function() {
+            input.addEventListener('input', function () {
                 if (this.classList.contains('invalid') || this.classList.contains('valid')) {
                     validateField(this);
                 }
@@ -1681,6 +1771,7 @@
 
             if (input.value.trim() === '') {
                 input.classList.remove('valid', 'invalid');
+                input.removeAttribute('aria-invalid');
                 if (iconEl) {
                     iconEl.classList.remove('show', 'valid', 'invalid');
                     iconEl.textContent = '';
@@ -1692,6 +1783,7 @@
             if (isValid) {
                 input.classList.remove('invalid');
                 input.classList.add('valid');
+                input.setAttribute('aria-invalid', 'false');
                 if (iconEl) {
                     iconEl.classList.add('show', 'valid');
                     iconEl.classList.remove('invalid');
@@ -1701,6 +1793,7 @@
             } else {
                 input.classList.remove('valid');
                 input.classList.add('invalid');
+                input.setAttribute('aria-invalid', 'true');
                 if (iconEl) {
                     iconEl.classList.add('show', 'invalid');
                     iconEl.classList.remove('valid');
@@ -1710,6 +1803,28 @@
             }
 
             return isValid;
+        }
+
+        // Payment method select feedback
+        const paymentSelect = document.getElementById('paymentMethod');
+        paymentSelect.addEventListener('change', function () {
+            this.classList.remove('invalid');
+            this.classList.add('valid');
+            updateProgressSteps(2);
+        });
+
+        function showEmptyRequiredErrors(form) {
+            // Empty required fields should still show their error message on submit
+            form.querySelectorAll('[data-validate]').forEach(input => {
+                if (input.value.trim() === '') {
+                    const type = input.getAttribute('data-validate');
+                    const suffix = input.id.includes('Intl') ? 'Intl' : '';
+                    const errorEl = document.getElementById(`${type}Error${suffix}`);
+                    input.classList.add('invalid');
+                    input.setAttribute('aria-invalid', 'true');
+                    if (errorEl) errorEl.classList.add('show');
+                }
+            });
         }
 
         function validateForm(formId) {
@@ -1722,26 +1837,28 @@
                     isValid = false;
                 }
             });
+            if (!isValid) showEmptyRequiredErrors(form);
 
-            // Check select
             const select = form.querySelector('select[required]');
             if (select && !select.value) {
                 isValid = false;
                 select.classList.add('invalid');
             }
 
-            // Check file
             const fileInput = form.querySelector('input[type="file"][required]');
             if (fileInput && !fileInput.files.length) {
                 isValid = false;
+                const display = form.querySelector('.file-name');
+                display.classList.add('error');
+                display.textContent = '⚠️ Please upload your transaction screenshot.';
             }
 
             return isValid;
         }
 
-        // NEW: Character counter for tribute message
+        /* ---------- Tribute character counter ---------- */
         document.querySelectorAll('textarea[name="tribute_message"]').forEach(textarea => {
-            textarea.addEventListener('input', function() {
+            textarea.addEventListener('input', function () {
                 const counter = this.nextElementSibling;
                 if (counter && counter.classList.contains('char-counter')) {
                     counter.textContent = `${this.value.length} / ${this.maxLength} characters`;
@@ -1749,206 +1866,183 @@
             });
         });
 
-        // NEW: Phone number auto-formatting
-        document.querySelectorAll('input[type="tel"]').forEach(input => {
-            input.addEventListener('input', function(e) {
-                let value = e.target.value.replace(/\D/g, '');
-                if (value.length > 12) value = value.slice(0, 12);
-                
-                // Format Sierra Leone numbers: XXX XXX XXXX
-                if (value.length >= 7) {
-                    value = value.slice(0, 3) + ' ' + value.slice(3, 6) + ' ' + value.slice(6);
-                } else if (value.length >= 4) {
-                    value = value.slice(0, 3) + ' ' + value.slice(3);
-                }
-                e.target.value = value;
-            });
+        /* ---------- Local phone auto-format (Sierra Leone form only) ---------- */
+        document.getElementById('donorPhone').addEventListener('input', function (e) {
+            const raw = e.target.value;
+            // Leave numbers that start with + (country code) untouched
+            if (raw.trim().startsWith('+')) {
+                e.target.value = '+' + raw.slice(1).replace(/[^\d\s]/g, '');
+                return;
+            }
+            let value = raw.replace(/\D/g, '');
+            if (value.length > 12) value = value.slice(0, 12);
+            if (value.length >= 7) {
+                value = value.slice(0, 3) + ' ' + value.slice(3, 6) + ' ' + value.slice(6);
+            } else if (value.length >= 4) {
+                value = value.slice(0, 3) + ' ' + value.slice(3);
+            }
+            e.target.value = value;
         });
 
-        // NEW: Form submission with loading state and success modal
-        function handleFormSubmit(formId, submitBtnId, isInternational = false) {
+        /* ---------- Reset after a successful send ---------- */
+        function resetDonationState(form) {
+            form.reset();
+            form.querySelectorAll('.form-input, .form-select').forEach(i => { i.classList.remove('valid', 'invalid'); i.removeAttribute('aria-invalid'); });
+            form.querySelectorAll('.validation-icon').forEach(i => { i.classList.remove('show', 'valid', 'invalid'); i.textContent = ''; });
+            form.querySelectorAll('.error-message').forEach(m => m.classList.remove('show'));
+            form.querySelectorAll('.file-name').forEach(f => { f.textContent = ''; f.classList.remove('error'); });
+            form.querySelectorAll('.char-counter').forEach(c => { c.textContent = '0 / 200 characters'; });
+            toggleTributeFields();
+            toggleTributeFieldsIntl();
+
+            // Back to the default amount
+            currentSelectedAmount = 25;
+            document.getElementById('formAmount').value = '25';
+            document.getElementById('customAmountInput').value = '';
+            document.querySelectorAll('.amount-btn').forEach(b => b.classList.toggle('active', b.getAttribute('data-amount') === '25'));
+            updateImpactFromAmount(25);
+            updateProgressSteps(1);
+        }
+
+        /* ---------- Form submission (really sends the form; success only if it worked) ---------- */
+        function generateReference() {
+            return 'DJF-' + Date.now().toString(36).toUpperCase() + '-' + Math.random().toString(36).slice(2, 6).toUpperCase();
+        }
+
+        function handleFormSubmit(formId, submitBtnId, isInternational) {
             const form = document.getElementById(formId);
             const submitBtn = document.getElementById(submitBtnId);
 
-            form.addEventListener('submit', function(e) {
+            form.addEventListener('submit', async function (e) {
                 e.preventDefault();
+                const status = form.querySelector('.form-status');
+                status.className = 'form-status';
+                status.textContent = '';
 
                 if (!validateForm(formId)) {
-                    // Scroll to first error
-                    const firstError = form.querySelector('.invalid');
+                    const firstError = form.querySelector('.invalid, .file-name.error');
                     if (firstError) {
                         firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                        firstError.focus();
+                        if (typeof firstError.focus === 'function') firstError.focus({ preventScroll: true });
                     }
                     return;
                 }
 
-                // Show loading state
+                const reference = generateReference();
+                form.querySelector('[name="reference"]').value = reference;
+
                 submitBtn.classList.add('loading');
                 submitBtn.disabled = true;
                 updateProgressSteps(4);
 
-                // Simulate submission (replace with actual form submission)
-                setTimeout(() => {
+                try {
+                    const res = await fetch(form.action, {
+                        method: 'POST',
+                        body: new FormData(form),
+                        headers: { 'Accept': 'application/json' }
+                    });
+                    if (!res.ok) throw new Error('Request failed');
+
+                    showSuccessModal(form, isInternational, reference);
+                    resetDonationState(form);
+                    saveFormToStorage();
+                } catch (err) {
+                    status.className = 'form-status error';
+                    status.textContent = 'We could not send your details just now. Please try again, or email your screenshot to info@destinyjohnfoundation.org.';
+                    updateProgressSteps(3);
+                } finally {
                     submitBtn.classList.remove('loading');
                     submitBtn.disabled = false;
-
-                    // Show success modal
-                    showSuccessModal(formId, isInternational);
-                    
-                    // Clear form storage
-                    localStorage.removeItem('donationFormData');
-                    
-                    // Reset form after a delay
-                    setTimeout(() => {
-                        form.reset();
-                        document.querySelectorAll('.form-input').forEach(i => i.classList.remove('valid', 'invalid'));
-                        document.querySelectorAll('.validation-icon').forEach(i => i.classList.remove('show', 'valid', 'invalid'));
-                        document.querySelectorAll('.error-message').forEach(e => e.classList.remove('show'));
-                        document.querySelectorAll('.file-name').forEach(f => f.textContent = '');
-                        updateImpactFromAmount(25);
-                        updateProgressSteps(1);
-                    }, 500);
-                }, 2000);
+                }
             });
         }
 
         handleFormSubmit('transactionForm', 'submitBtn', false);
         handleFormSubmit('internationalTransactionForm', 'submitBtnIntl', true);
 
-        // NEW: Success Modal Functions
-        function showSuccessModal(formId, isInternational) {
-            const form = document.getElementById(formId);
+        /* ---------- Success modal (focus managed) ---------- */
+        let lastFocusedElement = null;
+        function showSuccessModal(form, isInternational, reference) {
             const modal = document.getElementById('successModal');
-            
+
             const name = form.querySelector('[name="donor_name"]').value;
             const amount = form.querySelector('[name="amount"]').value;
             const method = isInternational ? 'International Transfer' : (form.querySelector('[name="payment_method"]')?.value || 'Mobile Money');
             const impact = form.querySelector('[name="impact"]').value;
-            const receiptNum = 'DJF-' + Date.now().toString(36).toUpperCase() + '-' + Math.random().toString(36).substr(2, 4).toUpperCase();
+            const cause = form.querySelector('[name="cause"]').value;
 
             document.getElementById('receiptName').textContent = name;
             document.getElementById('receiptAmount').textContent = isInternational ? amount : `Le ${amount}`;
             document.getElementById('receiptMethod').textContent = method;
+            document.getElementById('receiptCause').textContent = cause;
             document.getElementById('receiptImpact').textContent = impact;
-            document.getElementById('receiptNumber').textContent = receiptNum;
+            document.getElementById('receiptNumber').textContent = reference;
 
+            lastFocusedElement = document.activeElement;
             modal.classList.add('show');
             document.body.style.overflow = 'hidden';
+            document.getElementById('modalCloseBtn').focus();
         }
 
         function closeSuccessModal() {
             const modal = document.getElementById('successModal');
             modal.classList.remove('show');
             document.body.style.overflow = '';
+            if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') lastFocusedElement.focus();
         }
 
-        // Close modal on backdrop click
-        document.getElementById('successModal').addEventListener('click', function(e) {
+        document.getElementById('successModal').addEventListener('click', function (e) {
             if (e.target === this) closeSuccessModal();
         });
-
-        // Close modal on Escape key
-        document.addEventListener('keydown', function(e) {
+        document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape' && document.getElementById('successModal').classList.contains('show')) {
                 closeSuccessModal();
             }
         });
 
-        // NEW: Live Donor Ticker Animation
-        const donorMessages = [
-            'Sarah from London just donated £50 for healthcare',
-            'Michael from New York donated $100 for education',
-            'Amina from Freetown gave Le 250 for nutrition',
-            'The Johnson family donated $500 for clean water',
-            'James from Manchester sent £25 for school supplies',
-            'Fatima from Bo contributed Le 500 for vaccines',
-            'Anonymous donor gave $1000 for emergency relief',
-            'David from Toronto donated $75 for medical care',
-            'Mariama from Kenema gave Le 100 for a school kit',
-            'The Williams family donated £200 monthly'
-        ];
-        let tickerIndex = 0;
-        const tickerText = document.getElementById('tickerText');
-        
-        setInterval(() => {
-            tickerText.style.opacity = '0';
-            setTimeout(() => {
-                tickerIndex = (tickerIndex + 1) % donorMessages.length;
-                tickerText.textContent = donorMessages[tickerIndex];
-                tickerText.style.opacity = '1';
-            }, 500);
-        }, 5000);
-
-        // NEW: Form Data Persistence (localStorage)
+        /* ---------- Remember amount + frequency only (no personal details are stored) ---------- */
         function saveFormToStorage() {
-            const formData = {
-                amount: currentSelectedAmount,
-                frequency: currentFrequency,
-                paymentMethod: document.getElementById('paymentMethod')?.value || '',
-                donorName: document.getElementById('donorName')?.value || '',
-                donorEmail: document.getElementById('donorEmail')?.value || '',
-                donorPhone: document.getElementById('donorPhone')?.value || '',
-                timestamp: Date.now()
-            };
-            localStorage.setItem('donationFormData', JSON.stringify(formData));
+            try {
+                localStorage.setItem('djfDonationPrefs', JSON.stringify({
+                    amount: currentSelectedAmount,
+                    frequency: currentFrequency,
+                    timestamp: Date.now()
+                }));
+            } catch (err) { /* storage unavailable - ignore */ }
         }
 
         function loadFormFromStorage() {
-            const saved = localStorage.getItem('donationFormData');
-            if (!saved) return;
-
             try {
+                // Clear anything an older version of this page may have stored (could include personal details)
+                localStorage.removeItem('donationFormData');
+
+                const saved = localStorage.getItem('djfDonationPrefs');
+                if (!saved) return;
                 const data = JSON.parse(saved);
-                // Only restore if saved within last 24 hours
                 if (Date.now() - data.timestamp > 24 * 60 * 60 * 1000) {
-                    localStorage.removeItem('donationFormData');
+                    localStorage.removeItem('djfDonationPrefs');
                     return;
                 }
-
-                if (data.amount) {
+                if (data.amount > 0) {
                     currentSelectedAmount = data.amount;
                     document.getElementById('formAmount').value = formatNumber(data.amount);
                     document.querySelectorAll('.amount-btn').forEach(btn => {
-                        if (parseFloat(btn.getAttribute('data-amount')) === data.amount) {
-                            btn.classList.add('active');
-                        } else {
-                            btn.classList.remove('active');
-                        }
+                        btn.classList.toggle('active', parseFloat(btn.getAttribute('data-amount')) === data.amount);
                     });
                     updateImpactFromAmount(data.amount);
                 }
-
                 if (data.frequency && data.frequency !== currentFrequency) {
                     setFrequency(data.frequency);
                 }
-
-                if (data.paymentMethod) {
-                    document.getElementById('paymentMethod').value = data.paymentMethod;
-                }
-
-                if (data.donorName) document.getElementById('donorName').value = data.donorName;
-                if (data.donorEmail) document.getElementById('donorEmail').value = data.donorEmail;
-                if (data.donorPhone) document.getElementById('donorPhone').value = data.donorPhone;
-
-            } catch (e) {
-                console.error('Error loading form data:', e);
-            }
+            } catch (err) { /* ignore */ }
         }
+        loadFormFromStorage();
 
-        // Auto-save on input changes
-        document.querySelectorAll('.form-input, .form-select').forEach(input => {
-            input.addEventListener('input', saveFormToStorage);
-            input.addEventListener('change', saveFormToStorage);
-        });
-
-        // Load saved form data on page load
-        document.addEventListener('DOMContentLoaded', loadFormFromStorage);
-
-        // NEW: Smooth scroll for cause card donate buttons
+        /* ---------- Cause buttons: pick the cause, then glide to the donation box ---------- */
         document.querySelectorAll('.cause-btn').forEach(btn => {
-            btn.addEventListener('click', function(e) {
+            btn.addEventListener('click', function (e) {
                 e.preventDefault();
+                setCause(this.getAttribute('data-cause'), true);
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
                     target.scrollIntoView({ behavior: 'smooth', block: 'center' });
